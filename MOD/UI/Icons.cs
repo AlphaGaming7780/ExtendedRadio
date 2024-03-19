@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Colossal.UI;
@@ -16,7 +17,7 @@ static class Icons
 
 	internal static void LoadIconsFolder() {
 		foreach(string path in pathToIconToLoad) {
-			UIManager.defaultUISystem.AddHostLocation(IconsResourceKey, path);
+			UIManager.defaultUISystem.AddHostLocation(IconsResourceKey, path, false);
 		}
 	}
 

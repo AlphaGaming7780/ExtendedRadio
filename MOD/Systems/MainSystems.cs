@@ -23,7 +23,7 @@ public partial class MainSystem : GameSystemBase
 	private bool canLoad = true;
 
     private GameObject gameObject = new();
-    internal ExtendedRadioMono extendedRadioMono;
+    internal static ExtendedRadioMono extendedRadioMono;
  
 	protected override void OnCreate()
 	{
@@ -52,7 +52,8 @@ public partial class MainSystem : GameSystemBase
 				// UnityEngine.Debug.Log(EnvPath.kUserDataPath);
 
 				// extendedRadioMono.StartCoroutine(CustomRadios.SearchForCustomRadiosFolder(Mod.PathToParent));
-				extendedRadioMono.StartCoroutine(CustomRadios.SearchForCustomRadiosFolder(EnvPath.kLocalModsPath));
+				extendedRadioMono.StartCoroutine(CustomRadios.SearchForCustomRadiosFolder([EnvPath.kLocalModsPath, Mod.PathToPDXMods]));
+				// extendedRadioMono.StartCoroutine(RadioAddons.([EnvPath.kLocalModsPath, Mod.PathToPDXMods]));
 				// extendedRadioMono.StartCoroutine(CustomRadios.SearchForCustomRadiosFolder(EnvPath.k));
 
 

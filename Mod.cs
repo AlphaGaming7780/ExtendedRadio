@@ -23,6 +23,7 @@ namespace ExtendedRadio
 		public static string PathToData;
 		public static string ModsFolderCustomRadio;
 		public static string ModsFolderRadioAddons;
+		public static string PathToPDXMods;
 
 		private Harmony harmony;
 
@@ -41,6 +42,7 @@ namespace ExtendedRadio
 			PathToData = Path.Combine(EnvPath.kUserDataPath, "ModsData", "ExtendedRadio");
 			ModsFolderCustomRadio = Path.Combine(PathToData,"CustomRadios");
 			ModsFolderRadioAddons = Path.Combine(PathToData,"RadioAddons");
+			PathToPDXMods = Path.Combine(EnvPath.kUserDataPath, ".cache", "Mods", "mods_subscribed");
 
 			// if(!Directory.Exists(resources)) {
 			// 	Directory.CreateDirectory(resources);

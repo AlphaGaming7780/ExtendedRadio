@@ -63,9 +63,9 @@
 
 	<Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
 		<ItemGroup>
-		  <AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
+		  	<AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
 		</ItemGroup>
 		<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(AdditionalFilesDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
-	  </Target>
+	</Target>
 
 </Project>

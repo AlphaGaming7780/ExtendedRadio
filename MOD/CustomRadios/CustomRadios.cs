@@ -8,7 +8,8 @@ using System.Dynamic;
 using System.IO.Compression;
 using System.Collections;
 using ExtendedRadio.UI;
-using System.Diagnostics;
+using UnityEngine;
+using ExtendedRadio.Systems;
 
 namespace ExtendedRadio
 {
@@ -84,19 +85,20 @@ namespace ExtendedRadio
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
 		}
 
-		internal static IEnumerator SearchForCustomRadiosFolder(string ModsFolderPath) {
-			yield return null;
-			foreach(DirectoryInfo directory in new DirectoryInfo(ModsFolderPath).GetDirectories()) {
-				if(File.Exists($"{directory.FullName}\\CustomRadios.zip")) {
-					if(Directory.Exists($"{directory.FullName}\\CustomRadios")) Directory.Delete($"{directory.FullName}\\CustomRadios", true);
-					ZipFile.ExtractToDirectory($"{directory.FullName}\\CustomRadios", directory.FullName);
-					File.Delete($"{directory.FullName}\\CustomRadios.zip");
+		internal static IEnumerator SearchForCustomRadiosFolder(List<string> ModsFolderPaths) {
+			foreach(string ModsFolderPath in ModsFolderPaths) {
+				foreach(DirectoryInfo directory in new DirectoryInfo(ModsFolderPath).GetDirectories()) {
+					if(File.Exists($"{directory.FullName}\\CustomRadios.zip")) {
+						if(Directory.Exists($"{directory.FullName}\\CustomRadios")) Directory.Delete($"{directory.FullName}\\CustomRadios", true);
+						ZipFile.ExtractToDirectory($"{directory.FullName}\\CustomRadios", directory.FullName);
+						File.Delete($"{directory.FullName}\\CustomRadios.zip");
+					}
+					if(Directory.Exists($"{directory.FullName}\\CustomRadios")) RegisterCustomRadioDirectory($"{directory.FullName}\\CustomRadios");
+					Debug.Log(directory.Name);
+					yield return null;
 				}
-				if(Directory.Exists($"{directory.FullName}\\CustomRadios")) RegisterCustomRadioDirectory($"{directory.FullName}\\CustomRadios");
-				yield return null;
 			}
-
-			Icons.LoadIconsFolder();	
+			Icons.LoadIconsFolder();
 		}
 
 		/// <summary>This methode add you folder that contains your radio to the list of radio to load.</summary>

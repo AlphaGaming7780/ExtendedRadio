@@ -10,6 +10,8 @@ using System.Collections;
 using ExtendedRadio.UI;
 using UnityEngine;
 using ExtendedRadio.Systems;
+using Colossal.PSI.Common;
+using System.Linq;
 
 namespace ExtendedRadio
 {
@@ -86,7 +88,26 @@ namespace ExtendedRadio
 		}
 
 		internal static IEnumerator SearchForCustomRadiosFolder(List<string> ModsFolderPaths) {
+
+			int progress = 0;
+			int progressComplete = 1;
+
+			var notificationInfo = MainSystem.m_NotificationUISystem.AddOrUpdateNotification(
+				$"{nameof(ExtendedRadio)}.{nameof(CustomRadios)}.{nameof(SearchForCustomRadiosFolder)}", 
+				title: "ExtendedRadio: searching custom radio.",
+				progressState: ProgressState.Indeterminate, 
+				progress: 0
+			);
+
 			foreach(string ModsFolderPath in ModsFolderPaths) {
+				progressComplete += new DirectoryInfo(ModsFolderPath).GetDirectories().Count();
+			}
+
+			foreach(string ModsFolderPath in ModsFolderPaths) {
+
+				notificationInfo.text = $"ExtendedRadio: searching custom radio in {Path.GetDirectoryName(ModsFolderPath)}.";
+				notificationInfo.progressState = ProgressState.Progressing;
+
 				foreach(DirectoryInfo directory in new DirectoryInfo(ModsFolderPath).GetDirectories()) {
 					if(File.Exists($"{directory.FullName}\\CustomRadios.zip")) {
 						if(Directory.Exists($"{directory.FullName}\\CustomRadios")) Directory.Delete($"{directory.FullName}\\CustomRadios", true);
@@ -94,11 +115,24 @@ namespace ExtendedRadio
 						File.Delete($"{directory.FullName}\\CustomRadios.zip");
 					}
 					if(Directory.Exists($"{directory.FullName}\\CustomRadios")) RegisterCustomRadioDirectory($"{directory.FullName}\\CustomRadios");
-					Debug.Log(directory.Name);
+					progress++;
+					notificationInfo.progress = (int)(progress / (float)progressComplete*100);
 					yield return null;
 				}
 			}
+
+			notificationInfo.text = "ExtendedRadio: loading icons.";
+
 			Icons.LoadIconsFolder();
+
+			MainSystem.m_NotificationUISystem.RemoveNotification(
+				identifier: notificationInfo.id, 
+				delay: 3f, 
+				text: $"ExtendedRadio: Done, {radioDirectories.Count()} radio found.",
+				progressState: ProgressState.Complete, 
+				progress: 100
+			);
+
 		}
 
 		/// <summary>This methode add you folder that contains your radio to the list of radio to load.</summary>

@@ -65,7 +65,7 @@
 		<ItemGroup>
 		  	<AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
 		</ItemGroup>
-		<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(AdditionalFilesDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\$(AdditionalFilesDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
 	</Target>
 
 </Project>

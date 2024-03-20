@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Colossal.PSI.Environment;
 using System.IO;
+using Game.UI.Menu;
 
 namespace ExtendedRadio.Systems;
 
@@ -14,12 +15,14 @@ public partial class MainSystem : GameSystemBase
 
     private GameObject gameObject = new();
     internal static ExtendedRadioMono extendedRadioMono;
+	internal static NotificationUISystem m_NotificationUISystem;
  
 	protected override void OnCreate()
 	{
 		base.OnCreate();
 		Enabled = false;
         extendedRadioMono = gameObject.AddComponent<ExtendedRadioMono>();
+		m_NotificationUISystem = base.World.GetOrCreateSystemManaged<NotificationUISystem>();
 	}
 
 	protected override void OnUpdate() {}

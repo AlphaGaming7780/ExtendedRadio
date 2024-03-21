@@ -61,7 +61,7 @@
 		<None Include="$(ModTargetsFile)" Link="Properties\Mod.targets" />
 	</ItemGroup>
 
-	<Target Name="BuildUI" AfterTargets="AfterBuild">
+	<Target Name="BuildUI" BeforeTargets="AfterBuild">
 		<Exec Command="npm run build" WorkingDirectory="$(ProjectDir)/UI" />
 	</Target>
 

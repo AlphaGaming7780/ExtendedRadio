@@ -96,7 +96,8 @@ namespace ExtendedRadio
 				$"{nameof(ExtendedRadio)}.{nameof(CustomRadios)}.{nameof(SearchForCustomRadiosFolder)}", 
 				title: "ExtendedRadio: searching custom radio.",
 				progressState: ProgressState.Indeterminate, 
-				progress: 0
+				progress: 0,
+				thumbnail: $"{Icons.COUIBaseLocation}/Resources/DefaultIcon.svg"
 			);
 
 			foreach(string ModsFolderPath in ModsFolderPaths) {
@@ -105,7 +106,7 @@ namespace ExtendedRadio
 
 			foreach(string ModsFolderPath in ModsFolderPaths) {
 
-				notificationInfo.text = $"ExtendedRadio: searching custom radio in {Path.GetDirectoryName(ModsFolderPath)}.";
+				notificationInfo.text = $"Searching custom radio in {Path.GetDirectoryName(ModsFolderPath)}.";
 				notificationInfo.progressState = ProgressState.Progressing;
 
 				foreach(DirectoryInfo directory in new DirectoryInfo(ModsFolderPath).GetDirectories()) {
@@ -121,14 +122,14 @@ namespace ExtendedRadio
 				}
 			}
 
-			notificationInfo.text = "ExtendedRadio: loading icons.";
+			notificationInfo.text = "loading icons...";
 
 			Icons.LoadIconsFolder();
 
 			MainSystem.m_NotificationUISystem.RemoveNotification(
 				identifier: notificationInfo.id, 
 				delay: 3f, 
-				text: $"ExtendedRadio: Done, {radioDirectories.Count()} radio found.",
+				text: $"Done, {radioDirectories.Count()} radio found.",
 				progressState: ProgressState.Complete, 
 				progress: 100
 			);

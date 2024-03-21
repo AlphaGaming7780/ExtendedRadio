@@ -7,8 +7,8 @@ namespace ExtendedRadio.UI;
 
 static class Icons
 {
-	private static readonly List<string> pathToIconToLoad = [Mod.modPath];
-	static readonly string IconsResourceKey = "extendedradio"; //= $"{MyPluginInfo.PLUGIN_NAME.ToLower()}";
+	private static readonly List<string> pathToIconToLoad = [];
+	internal static readonly string IconsResourceKey = "extendedradio";
 	public static readonly string COUIBaseLocation = $"coui://{IconsResourceKey}";
 
 	internal static void AddNewIconsFolder(string pathToFolder) {

@@ -1,0 +1,31 @@
+.stationsMenu {
+	width: 325rem;
+	flex-direction: row;
+	--contentPaddingHorizontal: 24rem;
+}
+
+.networks {
+	width: 23%;
+	height: 100%;
+	overflow-y: auto;
+	border-right-style: solid;
+	border-right-width: var(--stroke2);
+	border-right-color: rgba($color: #000000, $alpha: 0.1);
+	flex-direction: column;
+	justify-content: flex-start;
+	border-bottom-style: none;
+	border-bottom-width: 0;
+	border-bottom-color: null;
+	// margin-top: 10rem;
+	// margin-bottom: 10rem;
+	padding-top: 10rem;
+	padding-bottom: 10rem;
+}
+
+.networkItem + .network-item {
+	margin-left: 0;
+}
+
+.stations {
+	--contentPaddingVertical: 0;
+}

@@ -223,9 +223,9 @@ namespace ExtendedRadio.Patches
 				ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("Setup.js"));
 
 				ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("ExtendedRadioSettings.js"));
-				if(Settings.customNetworkUI) {
-					ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("RadioNetworkFix.js"));
-				}
+				// if(Settings.customNetworkUI) {
+				// 	ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("RadioNetworkFix.js"));
+				// }
 			}
 		}
 	}

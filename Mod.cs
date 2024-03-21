@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.IO;
 using System.Linq;
 using Colossal.Logging;
 using Colossal.PSI.Environment;
@@ -65,11 +66,16 @@ namespace ExtendedRadio
 				log.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
 			}
 
+			UIManager.defaultUISystem.AddHostLocation(Icons.IconsResourceKey, modPath);
+
 		}
 
 		public void OnDispose()
 		{
 			log.Info(nameof(OnDispose));
+			harmony.UnpatchAll($"{nameof(ExtendedRadio)}.{nameof(Mod)}");
+			UIManager.defaultUISystem.RemoveHostLocation(Icons.IconsResourceKey, modPath);
+			Icons.UnLoadIconsFolder();
 		}
 	}
 

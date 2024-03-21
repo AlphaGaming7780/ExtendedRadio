@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using System.Linq;
+using Colossal.IO.AssetDatabase;
 using Colossal.Logging;
 using Colossal.PSI.Environment;
 using Colossal.UI;
@@ -17,6 +18,7 @@ namespace ExtendedRadio
 	{
 		public static ILog log = LogManager.GetLogger($"{nameof(ExtendedRadio)}.{nameof(Mod)}").SetShowsErrorsInUI(false);
 
+		internal static Setting m_Setting;
 		internal static string modPath;
 		static internal string resources; // = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "resources");
 		// public static readonly string CustomRadiosPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CustomRadios");
@@ -33,7 +35,15 @@ namespace ExtendedRadio
 		{
 			log.Info(nameof(OnLoad));
 
-			if (!GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) log.Error("Failed to get the ExecutableAsset.");
+			if (!GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {log.Error("Failed to get the ExecutableAsset."); return;}
+
+			m_Setting = new Setting(this);
+            m_Setting.RegisterInOptionsUI();
+            GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
+
+            AssetDatabase.global.LoadSettings("settings", m_Setting, new Setting(this));
+
+			// AssetDatabase.global.SaveSettings();
 
 			log.Info($"Current mod asset at {asset.path}");
 			FileInfo fileInfo = new(asset.path);

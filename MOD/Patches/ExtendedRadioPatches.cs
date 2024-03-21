@@ -102,17 +102,16 @@ namespace ExtendedRadio.Patches
 	[HarmonyPatch(typeof( RadioUISystem ), "OnCreate")]
 	class RadioUISystem_OnCreate {
 		static void Prefix(RadioUISystem __instance) {
-			Settings.LoadSettings();
-			AudioManager.instance.radio.skipAds = Settings.DisableAdsOnStartup;
+			AudioManager.instance.radio.skipAds = Mod.m_Setting.DisableAdsOnStartup;
 		}
 	}
 
 	[HarmonyPatch(typeof( RadioUISystem ), "SelectStation", typeof(string))]
 	class RadioUISystem_SelectStation {
 		static void Postfix(string name) {
-			if(Settings.SaveLastRadio) {
-				Settings.LastRadio = name;
-				Settings.SaveSettings();
+			if(Mod.m_Setting.SaveLastRadio) {
+				Mod.m_Setting.LastRadio = name;
+				Mod.m_Setting.ApplyAndSave();
 			}
 		}
 	}
@@ -214,19 +213,21 @@ namespace ExtendedRadio.Patches
 		}
 	}
 	
-	[HarmonyPatch( typeof( GamePanelUISystem ), "ShowPanel", typeof(GamePanel) )]
-	class GamePanelUISystem_TogglePanel 
-	{
-		static void Postfix( GamePanelUISystem __instance, GamePanel panel) {
-			if(panel is RadioPanel) { //panel.GetType().ToString() == "Game.UI.InGame.RadioPanel"
 
-				ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("Setup.js"));
+	// OLD TS UI
+	// [HarmonyPatch( typeof( GamePanelUISystem ), "ShowPanel", typeof(GamePanel) )]
+	// class GamePanelUISystem_TogglePanel 
+	// {
+	// 	static void Postfix( GamePanelUISystem __instance, GamePanel panel) {
+	// 		if(panel is RadioPanel) { //panel.GetType().ToString() == "Game.UI.InGame.RadioPanel"
 
-				ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("ExtendedRadioSettings.js"));
-				// if(Settings.customNetworkUI) {
-				// 	ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("RadioNetworkFix.js"));
-				// }
-			}
-		}
-	}
+	// 			ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("Setup.js"));
+
+	// 			ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("ExtendedRadioSettings.js"));
+	// 			if(Settings.customNetworkUI) {
+	// 				ExtendedRadioUI.extendedRadioUi.ChangeUiNextFrame(ExtendedRadioUI.GetStringFromEmbbededJSFile("RadioNetworkFix.js"));
+	// 			}
+	// 		}
+	// 	}
+	// }
 }

@@ -44,7 +44,9 @@ function ExtendedRadio_CreateSettingsButton() {
 	ExtendedRadio_settingsButton.appendChild(ExtendedRadio_settingsButtonImage)
 	
 	ExtendedRadio_radioPannelTop.insertBefore(ExtendedRadio_settingsButton, ExtendedRadio_space)
-	ExtendedRadio_radioPannelTop.removeChild(ExtendedRadio_space)
+	if(ExtendedRadio_radioPannelTop.contains(ExtendedRadio_space)) {
+		ExtendedRadio_radioPannelTop.removeChild(ExtendedRadio_space)
+	}
 }
 
 function CreateSettingsPanel() {
@@ -76,8 +78,8 @@ function CreateSettingsPanel() {
 	ExtendedRadio_CreateSettingsCatToggle("Global", "Load last radio on startup", "extended_radio_settings.SaveLastRadio")
 	ExtendedRadio_CreateSettingsCatButton("Global", "Reload Radio", "extended_radio.reloadradio")
 
-	ExtendedRadio_CreateSettingsCat("UI")
-	ExtendedRadio_CreateSettingsCatToggle("UI", "Custom network UI", "extended_radio_settings.customnetworkui")
+	// ExtendedRadio_CreateSettingsCat("UI")
+	// ExtendedRadio_CreateSettingsCatToggle("UI", "Custom network UI", "extended_radio_settings.customnetworkui")
 
 	ExtendedRadio_SetDefaultOpenSettingsPanel("Global")
 

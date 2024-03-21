@@ -1,13 +1,8 @@
-import { useValue } from "cs2/api";
-import { useLocalization } from "cs2/l10n";
 import { ModuleRegistryExtend } from "cs2/modding";
-import { Brush, Entity, tool } from "cs2/bindings"
-import { Dropdown, DropdownItem, DropdownToggle, FOCUS_AUTO, FOCUS_DISABLED } from "cs2/ui";
-import { createElement } from "react";
-import { entityEquals, entityKey } from "cs2/utils";
 
+var executeOnce : boolean = true;
 
-export const StationsMenu: ModuleRegistryExtend = (Component : any) => {	
+export const StationsMenu_ModuleRegistryExtend: ModuleRegistryExtend = (Component : any) => {	
 	return (props) => {
 		// translation handling. Translates using locale keys that are defined in C# or fallback string here.
 		// const { translate } = useLocalization();
@@ -18,13 +13,13 @@ export const StationsMenu: ModuleRegistryExtend = (Component : any) => {
 		// console.log(Component())
 
 		var stationsMenu : any = (
-            <Component {...otherProps}>
+			<Component {...otherProps}>
 				<div>HELLO WORLD</div>
 				{children}
-            </Component>
-        );
+			</Component>
+		);
 
-		console.log(stationsMenu)
+		// console.log(stationsMenu)
 
 		return stationsMenu
 	};

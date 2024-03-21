@@ -19,6 +19,7 @@ export const StationsMenu: ModuleRegistryExtend = (Component : any) => {
 
 		var stationsMenu : any = (
             <Component {...otherProps}>
+				<div>HELLO WORLD</div>
 				{children}
             </Component>
         );

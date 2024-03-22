@@ -15,7 +15,6 @@ This mod aims to add features and improve existing ones for the game's radio pla
 ### -> [Wiki](https://github.com/AlphaGaming7780/ExtendedRadio/wiki)
 
 ## Features
-
 - [Custom radios](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/Custom-Radio)
 - [Radio Add-ons](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/RadioAddons)
 - [API](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/API)
@@ -39,7 +38,11 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ExtendedRadio_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
-	<Screenshot Value="" />
+	<!-- <Screenshot Value="" /> -->
+	<Screenshot>
+		Properties/Screenshot/CustomRadiosAndUI.png
+		Properties/Screenshot/Settings.png
+	</Screenshot>
 	<!--Tag, can be set multiple times-->
 	<!-- <Tag Value="Code Mod" /> -->
 	<Tag>
@@ -50,7 +53,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="" />
 	<!--Version of the mod-->
-	<ModVersion Value="0.1.0" />
+	<ModVersion Value="1.0.0" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.0.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -59,11 +62,12 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
 # 1.0.0
-* Now can load custom radio without DLL.
-* PDX mods related changes.
- * Update the mod to support PDX mods.
- * Update the UI to use the official way.
- * Settings is now in the game settings.
+* Now can load custom radio without DLL
+* Update the wiki for the 1.0.0
+* PDX mods related changes
+ * Update the mod to support PDX mods
+ * Update the UI to use the official way
+ * Settings is now in the game settings
 	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtendedRadio" />

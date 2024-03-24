@@ -1,1 +1,6 @@
-﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <History>True|2024-03-24T21:48:16.2054047Z;True|2024-03-24T20:36:17.9356585+01:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

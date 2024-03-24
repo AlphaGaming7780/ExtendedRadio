@@ -41,29 +41,31 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Screenshot, can be set multiple times-->
 	<Screenshot Value="Properties/Screenshot/CustomRadiosAndUI.png" />
 	<Screenshot Value="Properties/Screenshot/Settings.png" />
-	
+  <Screenshot Value="Properties/ExtendedRadio_Thumbnail.png" />
+  
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.0.0" />
+	<ModVersion Value="1.1.1" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.0.*" />
+	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.0.0
-* Now can load custom radio without DLL
-* Update the wiki for the 1.0.0
-* PDX mods related changes
- * Update the mod to support PDX mods
- * Update the UI to use the official way
- * Settings is now in the game settings
-	</ChangeLog>
+# 1.1.1
+ * Fix a bug where radio in the `ModsData/ExtendedRadio` folder aren't loaded.
+
+# 1.1.0
+ * Update the mod for the new game version.
+ * Change how RadioMod are loadded.
+ * Update the wiki.
+  </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
-	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtendedRadio" />
+  <ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtendedRadio" />
+  <ExternalLink Type="discord" Url="https://discord.gg/qjcdx7Wy" />
 </Publish>

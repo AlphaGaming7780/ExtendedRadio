@@ -1,3 +1,10 @@
+# 1.1.1
+ * Fix a bug where radio in the `ModsData/ExtendedRadio` folder aren't loaded.
+
+# 1.1.0
+- Update the mod for the new game version.
+- Change how RadioMod are loadded.
+- Update the wiki.
 
 # 1.0.0
 - Now can load custom radio without DLL

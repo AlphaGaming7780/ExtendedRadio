@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net481</TargetFramework>
+		<TargetFramework>net472</TargetFramework>
 		<Configurations>Debug;Release</Configurations>
 		<langVersion>latest</langVersion>
 		

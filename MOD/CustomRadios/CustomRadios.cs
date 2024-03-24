@@ -122,14 +122,10 @@ namespace ExtendedRadio
 				}
 			}
 
-			notificationInfo.text = "loading icons...";
-
-			Icons.LoadIconsFolder();
-
 			MainSystem.m_NotificationUISystem.RemoveNotification(
 				identifier: notificationInfo.id, 
 				delay: 3f, 
-				text: $"Done, {radioDirectories.Count()} radio found.",
+				text: $"Done, {radioDirectories.Count()} radio folder found.",
 				progressState: ProgressState.Complete, 
 				progress: 100
 			);
@@ -139,9 +135,15 @@ namespace ExtendedRadio
 		/// <summary>This methode add you folder that contains your radio to the list of radio to load.</summary>
 		/// <param name="path">The global path to the folder that contains your custom radio</param>
 		public static void RegisterCustomRadioDirectory(string path) {
-			if(radioDirectories.Contains(path)) return;
+            if (radioDirectories.Contains(path)) return;
 			radioDirectories.Add(path);
 			Icons.AddNewIconsFolder(new DirectoryInfo(path).Parent.FullName);			
+		}
+
+		public static void UnRegisterCustomRadioDirectory(string path) {
+			radioDirectories.Remove(path);
+			Icons.RemoveNewIconsFolder(new DirectoryInfo(path).Parent.FullName);
+			ExtendedRadio.radio.Reload();
 		}
 
 		/// <summary>This methode add your Network to the game.</summary>

@@ -39,9 +39,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ExtendedRadio_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
+  <!--<Screenshot Value="Properties/ExtendedRadio_Thumbnail.png" />-->
 	<Screenshot Value="Properties/Screenshot/CustomRadiosAndUI.png" />
 	<Screenshot Value="Properties/Screenshot/Settings.png" />
-  <Screenshot Value="Properties/ExtendedRadio_Thumbnail.png" />
   
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />

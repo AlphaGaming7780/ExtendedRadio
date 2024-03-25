@@ -1,6 +1,7 @@
 # ExtendedRadio
 This mod aims to add features and improve existing ones for the game's radio player.
 
+### -> [Mod Link](https://mods.paradoxplaza.com/mods/75862/Windows)
 ### -> [Changelog](https://github.com/AlphaGaming7780/ExtendedRadio/blob/master/CHANGELOG.md)
 ### -> [Wiki](https://github.com/AlphaGaming7780/ExtendedRadio/wiki)
 

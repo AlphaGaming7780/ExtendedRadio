@@ -49,7 +49,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.1.1" />
+	<ModVersion Value="1.1.2" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -57,13 +57,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.1.1
- * Fix a bug where radio in the `ModsData/ExtendedRadio` folder aren't loaded.
-
-# 1.1.0
- * Update the mod for the new game version.
- * Change how RadioMod are loadded.
- * Update the wiki.
+# 1.1.2
+* Fixed a bug where the icon and local radio were not loading.
+* Optimization
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtendedRadio" />

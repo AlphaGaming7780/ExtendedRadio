@@ -1,5 +1,9 @@
+# 1.1.2
+* Fix a bug where Icon and local radio aren't loaded.
+* Optimization
+
 # 1.1.1
- * Fix a bug where radio in the `ModsData/ExtendedRadio` folder aren't loaded.
+* Fix a bug where radio in the `ModsData/ExtendedRadio` folder aren't loaded.
 
 # 1.1.0
 - Update the mod for the new game version.

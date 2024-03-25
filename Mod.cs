@@ -56,16 +56,11 @@ namespace ExtendedRadio
 			ModsFolderRadioAddons = Path.Combine(PathToData,"RadioAddons");
 			PathToPDXMods = Path.Combine(EnvPath.kUserDataPath, ".cache", "Mods", "mods_subscribed");
 
-			// if(!Directory.Exists(resources)) {
-			// 	Directory.CreateDirectory(resources);
-			// 	File.Move(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DefaultIcon.svg"), Path.Combine(resources , "DefaultIcon.svg"));
-			// }
-
 			if(Directory.Exists(ModsFolderRadioAddons)) {
 				RadioAddons.RegisterRadioAddonsDirectory(ModsFolderRadioAddons);
 			}
 
-			updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
+            updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 			updateSystem.UpdateAt<ExtendedRadioUI>(SystemUpdatePhase.UIUpdate);
 
 			harmony = new($"{nameof(ExtendedRadio)}.{nameof(Mod)}");
@@ -77,9 +72,11 @@ namespace ExtendedRadio
 				log.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
 			}
 
-			UIManager.defaultUISystem.AddHostLocation(Icons.IconsResourceKey, modPath);
+			Icons.AddNewIconsFolder(modPath);
+            if (Directory.Exists(ModsFolderCustomRadio)) CustomRadios.RegisterCustomRadioDirectory(ModsFolderCustomRadio);
 
-		}
+            Icons.LoadIconsFolder();
+        }
 
 		public void OnDispose()
 		{

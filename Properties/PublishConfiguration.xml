@@ -34,7 +34,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - krzychu124
 
 # Community
-Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities 2 Modding Discord](https://discord.gg/vd7HXnpPJf) or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
+Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
 	</LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ExtendedRadio_Thumbnail.png" />
@@ -67,5 +67,5 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtendedRadio" />
-  <ExternalLink Type="discord" Url="https://discord.gg/qjcdx7Wy" />
+  <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
 </Publish>

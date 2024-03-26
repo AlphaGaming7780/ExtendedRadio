@@ -9,6 +9,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 - [Custom radios](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/Custom-Radio)
 - [Radio Add-ons](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/RadioAddons)
+- [Radio Mod](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/RadioMod#radio-mod)
 - [API](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/API)
 
 ## Feature roadmap

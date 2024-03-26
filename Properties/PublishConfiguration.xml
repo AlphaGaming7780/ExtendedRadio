@@ -17,6 +17,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 ## Features
 - Custom radios
 - Radio Add-ons
+- Radio Mod
 - API
 
 ## Feature roadmap
@@ -35,7 +36,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
-	</LongDescription>
+  </LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ExtendedRadio_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
@@ -47,7 +48,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<Tag Value="Code Mod" />
 
 	<!--Link to the forum post where the mod can be discussed-->
-	<ForumLink Value="" />
+	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
 	<ModVersion Value="1.1.2" />
 	<!--Recommended version of the base game to use the mod-->

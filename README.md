@@ -20,10 +20,10 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ✔️ Custom Radios
 
 # Acknowledgment
-- [optimus-code](https://thunderstore.io/c/cities-skylines-ii/p/Cities2Modding/)
+- [optimus-code]()
 - [Captain-Of-Coit](https://github.com/Captain-Of-Coit)
 - [DragonOfMercy](https://github.com/dragonofmercy)
-- [CityRat](https://thunderstore.io/c/cities-skylines-ii/p/CityRat/)
+- [CityRat](https://mods.paradoxplaza.com/authors/CityRatPlays)
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities 2 Modding Discord](https://discord.gg/vd7HXnpPJf) or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).

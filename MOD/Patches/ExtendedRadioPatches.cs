@@ -20,75 +20,6 @@ using ExtendedRadio.UI;
 namespace ExtendedRadio.Patches
 {
 
-	// [HarmonyPatch(typeof(GameManager), "Awake")]
-	// internal class GameManager_Awake
-	// {	
-	// 	static internal readonly string resources = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "resources");
-	// 	public static readonly string CustomRadiosPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CustomRadios");
-	// 	static private readonly string PathToParent = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
-	// 	public static readonly string PathToMods = Path.Combine(PathToParent,"ExtendedRadio_mods");
-	// 	public static readonly string ModsFolderCustomRadio = Path.Combine(PathToMods,"CustomRadios");
-	// 	public static readonly string ModsFolderRadioAddons = Path.Combine(PathToMods,"RadioAddons");
-
-	// 	static void Postfix(GameManager __instance)
-	// 	{
-	// 		// Directory.CreateDirectory(CustomRadiosPath);
-	// 		// CustomRadios.RegisterCustomRadioDirectory(CustomRadiosPath);
-
-	// 		if(!Directory.Exists(resources)) {
-	// 			Directory.CreateDirectory(resources);
-	// 			File.Move(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DefaultIcon.svg"), Path.Combine(resources , "DefaultIcon.svg"));
-	// 		}
-
-	// 		CustomRadios.SearchForCustomRadiosFolder(PathToParent);
-
-	// 		// if(Directory.Exists(ModsFolderCustomRadio)) {
-	// 		// 	CustomRadios.RegisterCustomRadioDirectory(ModsFolderCustomRadio);
-	// 		// 	pathToIconToLoad.Add(PathToMods);
-	// 		// }
-
-	// 		if(Directory.Exists(ModsFolderRadioAddons)) {
-	// 			RadioAddons.RegisterRadioAddonsDirectory(ModsFolderRadioAddons);
-	// 		}
-	// 	}
-	// }
-
-	// [HarmonyPatch(typeof(GameManager), "InitializeThumbnails")]
-	// internal class GameManager_InitializeThumbnails
-	// {	
-	// 	internal static List<string> pathToIconToLoad = [Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)];
-	// 	static readonly string IconsResourceKey = ""; //= $"{MyPluginInfo.PLUGIN_NAME.ToLower()}";
-
-	// 	public static readonly string COUIBaseLocation = $"coui://{IconsResourceKey}";
-
-	// 	static void Prefix(GameManager __instance)
-	// 	{		
-
-	// 		var gameUIResourceHandler = (GameUIResourceHandler)GameManager.instance.userInterface.view.uiSystem.resourceHandler;
-			
-	// 		if (gameUIResourceHandler == null)
-	// 		{
-	// 			Debug.LogError("Failed retrieving GameManager's GameUIResourceHandler instance, exiting.");
-	// 			return;
-	// 		}
-			
-	// 		// gameUIResourceHandler.HostLocationsMap.Add(
-	// 		// 	IconsResourceKey, pathToIconToLoad
-	// 		// );
-
-	// 	}
-	// 	// internal static void AddNewIconsFolder(string pathToFolder) {
-	// 	// 	if(!pathToIconToLoad.Contains(pathToFolder)) pathToIconToLoad.Add(pathToFolder);
-	// 	// }
-	// }
-
-    // [HarmonyPatch(typeof(SystemOrder), "Initialize")]
-    // public static class SystemOrderPatch {
-    //     public static void Postfix(Game.UpdateSystem updateSystem) {
-    //         updateSystem.UpdateAt<ExtendedRadioUI>(Game.SystemUpdatePhase.UIUpdate);
-    //     }
-    // }
-
 	[HarmonyPatch(typeof( Radio ), "LoadRadio")]
 	class Radio_LoadRadio {
 
@@ -99,12 +30,12 @@ namespace ExtendedRadio.Patches
 		}
 	}
 
-	[HarmonyPatch(typeof( RadioUISystem ), "OnCreate")]
-	class RadioUISystem_OnCreate {
-		static void Prefix(RadioUISystem __instance) {
-			AudioManager.instance.radio.skipAds = Mod.m_Setting.DisableAdsOnStartup;
-		}
-	}
+	//[HarmonyPatch(typeof( RadioUISystem ), "OnCreate")]
+	//class RadioUISystem_OnCreate {
+	//	static void Prefix(RadioUISystem __instance) {
+	//		AudioManager.instance.radio.skipAds = Mod.m_Setting.DisableAdsOnStartup;
+	//	}
+	//}
 
 	[HarmonyPatch(typeof( RadioUISystem ), "SelectStation", typeof(string))]
 	class RadioUISystem_SelectStation {
@@ -113,10 +44,56 @@ namespace ExtendedRadio.Patches
 				Mod.m_Setting.LastRadio = name;
 				Mod.m_Setting.ApplyAndSave();
 			}
-		}
+			ExtendedRadio.RadioStationChanged(name);
+        }
 	}
 
-	[HarmonyPatch(typeof(AudioAsset), "LoadAsync")]
+    [HarmonyPatch(typeof(AudioManager), "SetVolume")]
+    class AudioManager_SetVolume
+    {
+        static void Postfix(string volumeProperty, float value)
+        {
+            if(volumeProperty == "RadioVolume") ExtendedRadio.RadioVolumeChanged(value);
+        }
+    }
+
+    [HarmonyPatch(typeof(RadioPlayer), "Pause")]
+    class RadioPlayer_Pause
+    {
+        static void Postfix()
+        {
+            ExtendedRadio.RadioPaused();
+        }
+    }
+
+    [HarmonyPatch(typeof(RadioPlayer), "Unpause")]
+    class RadioPlayer_Unpause
+    {
+        static void Postfix()
+        {
+            ExtendedRadio.RadioUnPaused();
+        }
+    }
+
+    [HarmonyPatch(typeof(Radio), "NextSong")]
+    class Radio_NextSong
+    {
+        static void Postfix()
+        {
+            ExtendedRadio.RadioNextSong();
+        }
+    }
+
+    [HarmonyPatch(typeof(Radio), "PreviousSong")]
+    class Radio_PreviousSong
+    {
+        static void Postfix()
+        {
+            ExtendedRadio.RadioPreviousSong();
+        }
+    }
+
+    [HarmonyPatch(typeof(AudioAsset), "LoadAsync")]
 	internal class AudioAssetLoadAsyncPatch
 	{
 		static bool Prefix(AudioAsset __instance, ref Task<AudioClip> __result)

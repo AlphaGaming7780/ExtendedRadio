@@ -65,7 +65,7 @@ public class LocaleEN(Setting setting) : IDictionarySource
 			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ReloadRadio)), $"Reload the radios, can maybe update your radio if you made change to it. Can also crash the game." },
 
 			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetSettings)), "Reset ExtendedRadio settings" },
-			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetSettings)), $"Reset the sttings of the mod to the default one." },
+			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetSettings)), $"Reset the settings of the mod to the default one." },
 			{ m_Setting.GetOptionWarningLocaleID(nameof(Setting.ResetSettings)), "Are you sur you want to reset the settings of ExtendedRadio?" },			
 		};
 	}

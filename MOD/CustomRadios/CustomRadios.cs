@@ -87,50 +87,50 @@ namespace ExtendedRadio
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
 		}
 
-		internal static IEnumerator SearchForCustomRadiosFolder(List<string> ModsFolderPaths) {
+		//internal static IEnumerator SearchForCustomRadiosFolder(List<string> ModsFolderPaths) {
 
-			int progress = 0;
-			int progressComplete = 1;
+		//	int progress = 0;
+		//	int progressComplete = 1;
 
-			var notificationInfo = MainSystem.m_NotificationUISystem.AddOrUpdateNotification(
-				$"{nameof(ExtendedRadio)}.{nameof(CustomRadios)}.{nameof(SearchForCustomRadiosFolder)}", 
-				title: "ExtendedRadio: searching custom radio.",
-				progressState: ProgressState.Indeterminate, 
-				progress: 0,
-				thumbnail: $"{Icons.COUIBaseLocation}/Resources/DefaultIcon.svg"
-			);
+		//	var notificationInfo = MainSystem.m_NotificationUISystem.AddOrUpdateNotification(
+		//		$"{nameof(ExtendedRadio)}.{nameof(CustomRadios)}.{nameof(SearchForCustomRadiosFolder)}", 
+		//		title: "ExtendedRadio: searching custom radio.",
+		//		progressState: ProgressState.Indeterminate, 
+		//		progress: 0,
+		//		thumbnail: $"{Icons.COUIBaseLocation}/Resources/DefaultIcon.svg"
+		//	);
 
-			foreach(string ModsFolderPath in ModsFolderPaths) {
-				progressComplete += new DirectoryInfo(ModsFolderPath).GetDirectories().Count();
-			}
+		//	foreach(string ModsFolderPath in ModsFolderPaths) {
+		//		progressComplete += new DirectoryInfo(ModsFolderPath).GetDirectories().Count();
+		//	}
 
-			foreach(string ModsFolderPath in ModsFolderPaths) {
+		//	foreach(string ModsFolderPath in ModsFolderPaths) {
 
-				notificationInfo.text = $"Searching custom radio in {Path.GetDirectoryName(ModsFolderPath)}.";
-				notificationInfo.progressState = ProgressState.Progressing;
+		//		notificationInfo.text = $"Searching custom radio in {Path.GetDirectoryName(ModsFolderPath)}.";
+		//		notificationInfo.progressState = ProgressState.Progressing;
 
-				foreach(DirectoryInfo directory in new DirectoryInfo(ModsFolderPath).GetDirectories()) {
-					if(File.Exists($"{directory.FullName}\\CustomRadios.zip")) {
-						if(Directory.Exists($"{directory.FullName}\\CustomRadios")) Directory.Delete($"{directory.FullName}\\CustomRadios", true);
-						ZipFile.ExtractToDirectory($"{directory.FullName}\\CustomRadios", directory.FullName);
-						File.Delete($"{directory.FullName}\\CustomRadios.zip");
-					}
-					if(Directory.Exists($"{directory.FullName}\\CustomRadios")) RegisterCustomRadioDirectory($"{directory.FullName}\\CustomRadios");
-					progress++;
-					notificationInfo.progress = (int)(progress / (float)progressComplete*100);
-					yield return null;
-				}
-			}
+		//		foreach(DirectoryInfo directory in new DirectoryInfo(ModsFolderPath).GetDirectories()) {
+		//			if(File.Exists($"{directory.FullName}\\CustomRadios.zip")) {
+		//				if(Directory.Exists($"{directory.FullName}\\CustomRadios")) Directory.Delete($"{directory.FullName}\\CustomRadios", true);
+		//				ZipFile.ExtractToDirectory($"{directory.FullName}\\CustomRadios", directory.FullName);
+		//				File.Delete($"{directory.FullName}\\CustomRadios.zip");
+		//			}
+		//			if(Directory.Exists($"{directory.FullName}\\CustomRadios")) RegisterCustomRadioDirectory($"{directory.FullName}\\CustomRadios");
+		//			progress++;
+		//			notificationInfo.progress = (int)(progress / (float)progressComplete*100);
+		//			yield return null;
+		//		}
+		//	}
 
-			MainSystem.m_NotificationUISystem.RemoveNotification(
-				identifier: notificationInfo.id, 
-				delay: 3f, 
-				text: $"Done, {radioDirectories.Count()} radio folder found.",
-				progressState: ProgressState.Complete, 
-				progress: 100
-			);
+		//	MainSystem.m_NotificationUISystem.RemoveNotification(
+		//		identifier: notificationInfo.id, 
+		//		delay: 3f, 
+		//		text: $"Done, {radioDirectories.Count()} radio folder found.",
+		//		progressState: ProgressState.Complete, 
+		//		progress: 100
+		//	);
 
-		}
+		//}
 
 		/// <summary>This methode add you folder that contains your radio to the list of radio to load.</summary>
 		/// <param name="path">The global path to the folder that contains your custom radio</param>

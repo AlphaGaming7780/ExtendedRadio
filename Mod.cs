@@ -39,7 +39,8 @@ namespace ExtendedRadio
 
 			m_Setting = new Setting(this);
             m_Setting.RegisterInOptionsUI();
-            GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
+			Localization.LoadLocalization();
+            //GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
 
             AssetDatabase.global.LoadSettings("settings", m_Setting, new Setting(this));
 

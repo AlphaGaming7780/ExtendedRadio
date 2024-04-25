@@ -41,37 +41,37 @@ public class Setting(IMod mod) : ModSetting(mod)
 	}
 }
 
-public class LocaleEN(Setting setting) : IDictionarySource
-{
-	private readonly Setting m_Setting = setting;
+//public class LocaleEN(Setting setting) : IDictionarySource
+//{
+//	private readonly Setting m_Setting = setting;
 
-    public IEnumerable<KeyValuePair<string, string>> ReadEntries(IList<IDictionaryEntryError> errors, Dictionary<string, int> indexCounts)
-	{
-		return new Dictionary<string, string>
-		{
-			{ m_Setting.GetSettingsLocaleID(), "ExtendedRadio" },
-			{ m_Setting.GetOptionTabLocaleID(Setting.kSection), "Main" },
+//	public IEnumerable<KeyValuePair<string, string>> ReadEntries(IList<IDictionaryEntryError> errors, Dictionary<string, int> indexCounts)
+//	{
+//		return new Dictionary<string, string>
+//		{
+//			{ m_Setting.GetSettingsLocaleID(), "ExtendedRadio" },
+//			{ m_Setting.GetOptionTabLocaleID(Setting.kSection), "Main" },
 
-			{ m_Setting.GetOptionGroupLocaleID(Setting.kQOLGroup), "Quality Of Life" },
-			{ m_Setting.GetOptionGroupLocaleID(Setting.kUtilityGroup), "Utility" },
+//			{ m_Setting.GetOptionGroupLocaleID(Setting.kQOLGroup), "Quality Of Life" },
+//			{ m_Setting.GetOptionGroupLocaleID(Setting.kUtilityGroup), "Utility" },
 
-			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.DisableAdsOnStartup)), "Disable ads on startup"},
-			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.DisableAdsOnStartup)), $"Disable the ads when you load into a game." },
+//			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.DisableAdsOnStartup)), "Disable ads on startup"},
+//			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.DisableAdsOnStartup)), $"Disable the ads when you load into a game." },
 
-			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.SaveLastRadio)), "Load last radio on startup"},
-			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.SaveLastRadio)), $"Select the last selected radio when you load into a game." },
-		
-			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.ReloadRadio)), "Reload radios"},
-			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ReloadRadio)), $"Reload the radios, can maybe update your radio if you made change to it. Can also crash the game." },
+//			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.SaveLastRadio)), "Load last radio on startup"},
+//			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.SaveLastRadio)), $"Select the last selected radio when you load into a game." },
 
-			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetSettings)), "Reset ExtendedRadio settings" },
-			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetSettings)), $"Reset the settings of the mod to the default one." },
-			{ m_Setting.GetOptionWarningLocaleID(nameof(Setting.ResetSettings)), "Are you sur you want to reset the settings of ExtendedRadio?" },			
-		};
-	}
+//			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.ReloadRadio)), "Reload radios"},
+//			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ReloadRadio)), $"Reload the radios, can maybe update your radio if you made change to it. Can also crash the game." },
 
-    public void Unload()
-	{
+//			{ m_Setting.GetOptionLabelLocaleID(nameof(Setting.ResetSettings)), "Reset ExtendedRadio settings" },
+//			{ m_Setting.GetOptionDescLocaleID(nameof(Setting.ResetSettings)), $"Reset the settings of the mod to the default one." },
+//			{ m_Setting.GetOptionWarningLocaleID(nameof(Setting.ResetSettings)), "Are you sur you want to reset the settings of ExtendedRadio?" },
+//		};
+//	}
 
-	}
-}
+//	public void Unload()
+//	{
+
+//	}
+//}

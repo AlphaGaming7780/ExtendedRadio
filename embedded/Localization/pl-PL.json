@@ -10,6 +10,6 @@
 	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Przeładuj radia",
 	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Przeładuj radia, możesz zaktualizować swoje radio, jeśli wprowadziłeś do niego zmiany. Może również spowodować zawieszenie się gry.",
 	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Zresetuj ustawienia ExtendedRadio",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Przywróć domyślne ustawienia moda.",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Przywraca domyślne ustawienia moda.",
 	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Czy na pewno chcesz zresetować ustawienia ExtendedRadio?"
 }

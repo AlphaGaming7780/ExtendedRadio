@@ -19,11 +19,26 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ✔️ Radio Add-ons (Add audio file in cutom radio).
 - ✔️ Custom Radios
 
-# Acknowledgment
+## Translation
+| Language				| Progress	| Participants |
+| --------------------- | ---------	| ------------ |
+| French				| 0%		| |
+| Chinese Simplified	| 0%		| |
+| Chinese Traditional	| 0%		| |
+| German				| 0%		| |
+| Italian				| 0%		| |
+| Japanese				| 0%		| |
+| Korean				| 0%		| |
+| Polish				| 100%		| Lisek |
+| Portuguese, Brazilian | 0%		| |
+| Russian				| 0%		| |
+| Spanish				| 0%		| |
+
+## Acknowledgment
 - [optimus-code]()
 - [Captain-Of-Coit](https://github.com/Captain-Of-Coit)
 - [DragonOfMercy](https://github.com/dragonofmercy)
 - [CityRat](https://mods.paradoxplaza.com/authors/CityRatPlays)
 
-# Community
+## Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities 2 Modding Discord](https://discord.gg/vd7HXnpPJf) or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).

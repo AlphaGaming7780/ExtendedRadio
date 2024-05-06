@@ -20,6 +20,9 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ✔️ Custom Radios
 
 ## Translation
+> [!WARNING]  
+> ⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSIBILITY FOR WHAT YOU ARE GOING TO READ. ⚠️
+
 | Language				| Progress	| Participants |
 | --------------------- | ---------	| ------------ |
 | French				| 0%		| |

@@ -28,7 +28,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ✔️ Custom Radios.
 
 ## Translation
-⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSABILITY FOR WHAT YOU ARE GOING TO READ⚠️
+⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
 - ❌French 0%
 - ❌Chinese Simplified 0%
 - ❌Chinese Traditional 0%
@@ -39,7 +39,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ✔️Polish 100% : Lisek
 - ❌Portuguese, Brazilian 0%
 - ❌Russian 0%
-- ❌Spanish 0%
+- ✔️Spanish 100% : elGendo87
 
 # Acknowledgment
 - optimus-code
@@ -62,7 +62,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.2.0" />
+	<ModVersion Value="1.2.2" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -70,8 +70,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.2.0
-* Add localization support.
+# 1.2.2
+* Add Spanish localization (I forgot to merge the PR with the localization).
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

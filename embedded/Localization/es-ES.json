@@ -1,15 +1,15 @@
 {
 	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "ExtendedRadio",
-	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Main",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Quality Of Life",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "Utilities",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Disable ads on startup",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Disable the ads when you load into a game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Load the last selected radio at startup",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Select the last selected radio when you load into a game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Reload radios",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Reload the radios, can maybe update your radio if you made change to it. Can also crash the game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Reset ExtendedRadio settings",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Reset the settings of the mod to the default one.",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Are you sur you want to reset the settings of ExtendedRadio?"
+	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Principal",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Calidad de vida",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "Utilidades",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Deshabilitar anuncios al iniciar",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Desactiva los anuncios al cargar un juego.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Cargar la última radio seleccionada al iniciar",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Selecciona la última radio escuchada cuando cargues un juego.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Recargar radios",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Recarga las radios, puede tal vez actualizar tu radio si haces un cambio. (Aviso: ¡Se puede bloquear el juego!)",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Restablecer ajustes de ExtendedRadio",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Restablece la configuración del mod a la predeterminada.",
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "¿Estás seguro de que quieres restablecer la configuración de ExtendedRadio?"
 }

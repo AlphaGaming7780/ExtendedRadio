@@ -29,7 +29,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 ## Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ❌French 0%
+- ✔️French 100% : aricoseco
 - ❌Chinese Simplified 0%
 - ❌Chinese Traditional 0%
 - ❌German 0%
@@ -62,7 +62,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.2.2" />
+	<ModVersion Value="1.2.3.2" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -70,8 +70,10 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.2.2
-* Add Spanish localization (I forgot to merge the PR with the localization).
+# 1.2.3.2 
+I forgot to merge the PR with the translation.
+* Fix a possible bug when disposing the radio.
+* Add French localization by aricoseco.
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

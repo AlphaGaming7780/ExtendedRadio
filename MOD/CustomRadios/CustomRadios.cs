@@ -143,7 +143,7 @@ namespace ExtendedRadio
 		public static void UnRegisterCustomRadioDirectory(string path) {
 			radioDirectories.Remove(path);
 			Icons.RemoveNewIconsFolder(new DirectoryInfo(path).Parent.FullName);
-			ExtendedRadio.radio.Reload();
+			ExtendedRadio.radio?.Reload();
 		}
 
 		/// <summary>This methode add your Network to the game.</summary>

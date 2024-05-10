@@ -87,8 +87,4 @@ namespace ExtendedRadio
 			Icons.UnLoadIconsFolder();
 		}
 	}
-
-    internal class ExtraLibUI
-    {
-    }
 }

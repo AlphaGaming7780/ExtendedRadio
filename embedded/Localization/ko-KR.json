@@ -1,15 +1,15 @@
 {
-	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "ExtendedRadio",
-	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Main",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Quality Of Life",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "Utilities",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Disable ads on startup",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Disable the ads when you load into a game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Load the last selected radio at startup",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Select the last selected radio when you load into a game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Reload radios",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Reload the radios, can maybe update your radio if you made change to it. Can also crash the game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Reset ExtendedRadio settings",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Reset the settings of the mod to the default one.",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Are you sur you want to reset the settings of ExtendedRadio?"
+	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "라디오 확장(ExtendedRadio)",
+	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "메인",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "삶의 개선",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "유틸리티",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "시작시 광고 비활성화",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "게임 로딩 후 광고를 비활성화합니다.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "시작시 최근 채널 불러옴",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "게임 로딩 후 최근 선택했던 라디오 채널을 불러옵니다.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "라디오 다시 불러오기",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "라디오 채널들을 다시 불러오며 여러분이 만든 채널들을 다시 불러 올 수 있습니다. 다만 게임이 깨질 수 있습니다.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "라디오 확장 모드 초기화",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "승인 시 라디오 확장 모드 설정을 초기화 합니다.",
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "라디오 확장 모드 설정을 초기화 하겠습니까?"
 }

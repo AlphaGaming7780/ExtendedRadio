@@ -1,15 +1,15 @@
 {
-	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "Расширенное радио",
+	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "ExtendedRadio",
 	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Главная",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Quality Of Life",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Основные настройки",
 	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "Функции",
 	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Отключить рекламу при запуске",
 	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Отключить рекламу, когда вы загружаетесь в игру.",
 	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Загрузка последнего выбранного радио при запуске",
 	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Выбрать последнее выбранное радио, когда вы загружаетесь в игру.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Перезагрузка радио",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Reload the radios, can maybe update your radio if you made change to it. Can also crash the game.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Сбросить настройки расширенного радио",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Перезагрузка радиостанций",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Перезагрузка радиостанций, возможно, обновит ваше радио, если вы внесли в него изменения. Также может привести к сбою игры.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Сбросить настройки ExtendedRadio",
 	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Сбросить настройки мода до стандартных.",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Are you sur you want to reset the settings of ExtendedRadio?"
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Вы уверены, что хотите сбросить настройки ExtendedRadio?"
 }

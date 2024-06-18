@@ -14,7 +14,7 @@ namespace ExtendedRadio
 						RadioAddon radioAddons = Decoder.Decode(File.ReadAllText(folder+"\\RadioAddon.json")).Make<RadioAddon>();
 						foreach(string audioFileFolder in Directory.GetDirectories(folder)) {
 							foreach(string audioAssetFile in Directory.GetFiles(audioFileFolder, "*.ogg")) {
-								ExtendedRadio.AddAudioToDataBase(radioAddons.RadioNetwork, radioAddons.RadioChannel, radioAddons.Program, CustomRadios.StringToSegmentType(radioAddons.SegmentType), MusicLoader.LoadAudioFile(audioAssetFile, CustomRadios.StringToSegmentType(radioAddons.SegmentType), radioAddons.RadioNetwork, radioAddons.RadioChannel));
+								ExtendedRadio.AddAudioToDataBase(radioAddons.RadioNetwork, radioAddons.RadioChannel, radioAddons.Program, CustomRadios.StringToSegmentType(radioAddons.SegmentType), MusicLoader.LoadAudioFile(audioAssetFile, CustomRadios.StringToSegmentType(radioAddons.SegmentType), radioAddons.Program, radioAddons.RadioNetwork, radioAddons.RadioChannel));
 							}
 						}
 					}

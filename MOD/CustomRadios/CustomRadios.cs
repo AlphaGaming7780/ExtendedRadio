@@ -43,17 +43,18 @@ namespace ExtendedRadio
 						} else {
 							network.name = new DirectoryInfo(radioNetwork).Name;
 							network.description = "A custom Network";
-							network.descriptionId = "A custom Network";
+							network.descriptionId = "CUSTOMNETWORK";
 							network.icon = File.Exists(Path.Combine(radioNetwork, "icon.svg")) ? $"{Icons.COUIBaseLocation}/CustomRadios/{new DirectoryInfo(radioNetwork).Name}/icon.svg" : $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg";
 							network.allowAds = true;
 						}
 
 						network.icon ??= $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg";
-						
-						network.nameId = network.name;
 
-						// network.name = new DirectoryInfo(radioNetwork).Name;
-						network.uiPriority = radioNetworkIndex++;
+						network.nameId = network.name;
+                        network.nameId = "TEST";
+
+                        // network.name = new DirectoryInfo(radioNetwork).Name;
+                        network.uiPriority = radioNetworkIndex++;
 
 						if(!m_Networks.ContainsKey(network.name)) {
 							customeNetworksName.Add(network.name);
@@ -70,7 +71,7 @@ namespace ExtendedRadio
 								radioChannel = JsonToRadio(radioStation, network.name);
 							}
 									
-							ExtendedRadio.AddAudioToDataBase(radioChannel);
+							//ExtendedRadio.AddAudioToDataBase(radioChannel);
 							customeRadioChannelsName.Add(radioChannel.name);
 							m_RadioChannels.Add(radioChannel.name, radioChannel.CreateRuntime(radioStation));
 							
@@ -167,7 +168,7 @@ namespace ExtendedRadio
 
 			if (customeRadioChannelsName.Contains(radioChannel.name)) return false;
 
-			ExtendedRadio.AddAudioToDataBase(radioChannel);
+			// ExtendedRadio.AddAudioToDataBase(radioChannel);
 			customeRadioChannelsName.Add(radioChannel.name);
 			m_RadioChannels.Add(radioChannel.name, radioChannel.CreateRuntime(path));
 
@@ -226,14 +227,17 @@ namespace ExtendedRadio
 							};
 						}
 
-						if(segment.tags.Length <= 0) {
-							segment.tags = [(segment.type.ToString() == "Playlist" ? "Music" : segment.type.ToString()), radioChannel.name, radioChannel.network];
-						}
-						
-						foreach(string audioAssetDirectory in Directory.GetDirectories( segmentDirectory )) {
+                        //segment.tags.AddRangeToArray([segment.type.ToString(), program.name, radioChannel.name, radioChannel.network]);
+                        segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
+
+                        //if(segment.tags.Length <= 0) {
+                        //	segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
+                        //}
+
+                        foreach (string audioAssetDirectory in Directory.GetDirectories( segmentDirectory )) {
 							foreach(string audioAssetFile in Directory.GetFiles(audioAssetDirectory, "*.ogg")) {
 								
-								segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, radioChannel.network, radioChannel.name));
+								segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, program.name, radioChannel.network, radioChannel.name));
 
 							}
 						}
@@ -280,35 +284,33 @@ namespace ExtendedRadio
 				};
 			}
 
-			Segment segment = new()
+            Program program = new()
+            {
+                name = "My Custom Program",
+                description = "My Custom Program",
+                icon = $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg",
+                startTime = "00:00",
+                endTime = "00:00",
+                loopProgram = true
+            };
+
+            Segment segment = new()
 			{
 				type = SegmentType.Playlist,
 				clipsCap = 0,
 				clips = [],
-				tags = ["Music", radioChannel.name]
-			};
+				tags = [SegmentType.Playlist.ToString(), program.name, radioChannel.name, radioChannel.network]
+            };
 
 			foreach(string audioAssetDirectory in Directory.GetDirectories( path )) {
 				foreach(string audioAssetFile in Directory.GetFiles(audioAssetDirectory, "*.ogg")) {
 
-					segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, radioChannel.network, radioChannel.name));
+					segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, program.name, radioChannel.network, radioChannel.name));
 
 				}
 			}
 
-			segment.clipsCap = segment.clips.Length;
-
-			Program program = new()
-			{
-				name = "My Custom Program",
-				description = "My Custom Program",
-				icon = $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg",
-				startTime = "00:00",
-				endTime = "00:00",
-				loopProgram = true,
-				segments = [segment]
-			};
-
+			program.segments = [segment];
 			radioChannel.programs = radioChannel.programs.AddToArray(program);
 
 

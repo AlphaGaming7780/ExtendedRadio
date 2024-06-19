@@ -14,33 +14,33 @@ using System;
 namespace ExtendedRadio.Patches
 {
 
-	[HarmonyPatch(typeof( Radio ), "LoadRadio")]
-	class Radio_LoadRadio {
+    [HarmonyPatch(typeof( Radio ), "LoadRadio")]
+    class Radio_LoadRadio {
 
-		static void Postfix( Radio __instance) {
+        static void Postfix( Radio __instance) {
 
-			ExtendedRadio.OnLoadRadio(__instance);
+            ExtendedRadio.OnLoadRadio(__instance);
 
-		}
-	}
-
-	//[HarmonyPatch(typeof( RadioUISystem ), "OnCreate")]
-	//class RadioUISystem_OnCreate {
-	//	static void Prefix(RadioUISystem __instance) {
-	//		AudioManager.instance.radio.skipAds = Mod.m_Setting.DisableAdsOnStartup;
-	//	}
-	//}
-
-	[HarmonyPatch(typeof( RadioUISystem ), "SelectStation", typeof(string))]
-	class RadioUISystem_SelectStation {
-		static void Postfix(string name) {
-			if(Mod.m_Setting.SaveLastRadio) {
-				Mod.m_Setting.LastRadio = name;
-				Mod.m_Setting.ApplyAndSave();
-			}
-			ExtendedRadio.RadioStationChanged(name);
         }
-	}
+    }
+
+    //[HarmonyPatch(typeof( RadioUISystem ), "OnCreate")]
+    //class RadioUISystem_OnCreate {
+    //	static void Prefix(RadioUISystem __instance) {
+    //		AudioManager.instance.radio.skipAds = Mod.m_Setting.DisableAdsOnStartup;
+    //	}
+    //}
+
+    [HarmonyPatch(typeof( RadioUISystem ), "SelectStation", typeof(string))]
+    class RadioUISystem_SelectStation {
+        static void Postfix(string name) {
+            if(Mod.m_Setting.SaveLastRadio) {
+                Mod.m_Setting.LastRadio = name;
+                Mod.m_Setting.ApplyAndSave();
+            }
+            ExtendedRadio.RadioStationChanged(name);
+        }
+    }
 
     [HarmonyPatch(typeof(AudioManager), "SetVolume")]
     class AudioManager_SetVolume
@@ -87,14 +87,14 @@ namespace ExtendedRadio.Patches
         }
     }
 
-    [HarmonyPatch(typeof(AudioAsset), "UpdateMetaTags")]
-    class AudioAsset_UpdateMetaTags
-    {
-        static void Postfix()
-        {
-            Debug.Log("FUCK");
-        }
-    }
+    //[HarmonyPatch(typeof(AudioAsset), "LoadAsync")]
+    //class AudioAsset_UpdateMetaTags
+    //{
+    //    static void Postfix(AudioAsset __instance)
+    //    {
+    //        Debug.Log($"UpdateMetaTags : {__instance.subPath}");
+    //    }
+    //}
 
     //   [HarmonyPatch(typeof(AudioAsset), "LoadAsync")]
     //internal class AudioAssetLoadAsyncPatch
@@ -131,26 +131,26 @@ namespace ExtendedRadio.Patches
     //}
 
 
-    [HarmonyPatch(typeof(Radio), "GetPlaylistClips")]
-	class Radio_GetPlaylistClips
-	{
-		static bool Prefix(Radio __instance, RuntimeSegment segment)
-		{
-            IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => segment.tags.All(new Func<string, bool>(asset.ContainsTag))));
-            List<AudioAsset> list = new List<AudioAsset>();
-            list.AddRange(assets);
-            System.Random rnd = new System.Random();
-            List<int> list2 = (from x in Enumerable.Range(0, list.Count)
-                               orderby rnd.Next()
-                               select x).Take(segment.clipsCap).ToList<int>();
-            AudioAsset[] array = new AudioAsset[segment.clipsCap];
-            Debug.Log($"ClipCap = {segment.clipsCap}, List lenght = {list.Count}, Array lenght = {array.Length}");
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = list[list2[i]];
-            }
-            segment.clips = array;
-			return false;
+    //[HarmonyPatch(typeof(Radio), "GetPlaylistClips")]
+    //class Radio_GetPlaylistClips
+    //{
+    //    static bool Prefix(Radio __instance, RuntimeSegment segment)
+    //    {
+            //IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => segment.tags.All(new Func<string, bool>(asset.ContainsTag))));
+            //List<AudioAsset> list = new List<AudioAsset>();
+            //list.AddRange(assets);
+            //System.Random rnd = new System.Random();
+            //List<int> list2 = (from x in Enumerable.Range(0, list.Count)
+            //                   orderby rnd.Next()
+            //                   select x).Take(segment.clipsCap).ToList<int>();
+            //AudioAsset[] array = new AudioAsset[segment.clipsCap];
+            //Debug.Log($"ClipCap = {segment.clipsCap}, List lenght = {list.Count}, Array lenght = {array.Length}");
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    array[i] = list[list2[i]];
+            //}
+            //segment.clips = array;
+            //return false;
 
             //if (CustomRadios.customeRadioChannelsName.Contains(__instance.currentChannel.name))
             //{
@@ -172,41 +172,41 @@ namespace ExtendedRadio.Patches
             //	return false;
             //}
             //return true;
-        }
-	}
+        //}
+    //}
 
-	//[HarmonyPatch( typeof( Radio ), "GetCommercialClips" )]
-	//class Radio_GetCommercialClips
-	//{
-	//       static bool Prefix( Radio __instance, RuntimeSegment segment)
-	//	{
-	//		if(CustomRadios.customeRadioChannelsName.Contains(__instance.currentChannel.name)) {
+    //[HarmonyPatch( typeof( Radio ), "GetCommercialClips" )]
+    //class Radio_GetCommercialClips
+    //{
+    //       static bool Prefix( Radio __instance, RuntimeSegment segment)
+    //	{
+    //		if(CustomRadios.customeRadioChannelsName.Contains(__instance.currentChannel.name)) {
 
 
-	//			Dictionary<string, RadioNetwork> m_Networks = Traverse.Create(__instance).Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
+    //			Dictionary<string, RadioNetwork> m_Networks = Traverse.Create(__instance).Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
 
-	//			if (!m_Networks.TryGetValue(__instance.currentChannel.network, out var value) || !value.allowAds)
-	//			{	
-	//				return false;
-	//			}
+    //			if (!m_Networks.TryGetValue(__instance.currentChannel.network, out var value) || !value.allowAds)
+    //			{	
+    //				return false;
+    //			}
 
-	//			IEnumerable<AudioAsset> assets = ExtendedRadio.GetAudioAssetsFromAudioDataBase(__instance, segment.type);
-	//			List<AudioAsset> list = [.. assets];
-	//			System.Random rnd = new();
-	//			List<int> list2 = (from x in Enumerable.Range(0, list.Count)
-	//							orderby rnd.Next()
-	//							select x).Take(segment.clipsCap).ToList();
-	//			AudioAsset[] array = new AudioAsset[segment.clipsCap];
-	//			for (int i = 0; i < array.Length; i++)
-	//			{
-	//				array[i] = list[list2[i]];
-	//			}
+    //			IEnumerable<AudioAsset> assets = ExtendedRadio.GetAudioAssetsFromAudioDataBase(__instance, segment.type);
+    //			List<AudioAsset> list = [.. assets];
+    //			System.Random rnd = new();
+    //			List<int> list2 = (from x in Enumerable.Range(0, list.Count)
+    //							orderby rnd.Next()
+    //							select x).Take(segment.clipsCap).ToList();
+    //			AudioAsset[] array = new AudioAsset[segment.clipsCap];
+    //			for (int i = 0; i < array.Length; i++)
+    //			{
+    //				array[i] = list[list2[i]];
+    //			}
 
-	//			segment.clips = array;
+    //			segment.clips = array;
 
-	//			return false;
-	//		}
-	//		return true;
-	//	}
-	//}
+    //			return false;
+    //		}
+    //		return true;
+    //	}
+    //}
 }

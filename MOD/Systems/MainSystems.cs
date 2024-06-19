@@ -1,37 +1,42 @@
-
 using Colossal.Serialization.Entities;
 using Game;
-using System.Collections.Generic;
 using UnityEngine;
-using Colossal.PSI.Environment;
-using System.IO;
-using Game.UI.Menu;
-using ExtendedRadio.UI;
-using Game.Audio;
 using Game.UI.InGame;
 using HarmonyLib;
-using Colossal.UI.Binding;
+using Game.Input;
 
 namespace ExtendedRadio.Systems;
 
 public partial class MainSystem : GameSystemBase
 {
-	//internal static NotificationUISystem m_NotificationUISystem;
+    private ProxyAction _pauseRadio;
+	private RadioUISystem _radioUISystem;
+	private Traverse _radioUISystemTraverse;
 
-	protected override void OnCreate()
+    protected override void OnCreate()
 	{
 		base.OnCreate();
 		Enabled = false;
-		//m_NotificationUISystem = base.World.GetOrCreateSystemManaged<NotificationUISystem>();
-	}
+		_radioUISystem = World.GetOrCreateSystemManaged<RadioUISystem>();
+        _pauseRadio = ExtendedRadioMod._setting.GetAction("PauseRadioBinding");
 
-	protected override void OnUpdate() { }
+		_radioUISystemTraverse = Traverse.Create(_radioUISystem);
+
+    }
+
+    protected override void OnUpdate() {
+		if (_pauseRadio.WasPerformedThisFrame())
+		{
+			Debug.Log("Pausing Radio");	
+			_radioUISystemTraverse.Method("SetPaused").GetValue(!ExtendedRadio.radio.paused);
+		}
+	}
 
 	protected override void OnGameLoadingComplete(Purpose purpose, GameMode mode)
 	{
 		if(purpose == Purpose.LoadGame && mode == GameMode.Game)
 		{
-			Traverse.Create(base.World.GetExistingSystemManaged<RadioUISystem>())?.Method("SetSkipAds", [typeof(bool)])?.GetValue(Mod.m_Setting.DisableAdsOnStartup);
+            _radioUISystemTraverse.Method("SetSkipAds", [typeof(bool)])?.GetValue(ExtendedRadioMod._setting.DisableAdsOnStartup);
         }
 	}
 }

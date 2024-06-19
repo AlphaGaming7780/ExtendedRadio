@@ -43,7 +43,7 @@ namespace ExtendedRadio
             }
             catch (Exception e)
             {
-                Mod.log.Warn(e);
+                ExtendedRadioMod.log.Warn(e);
 				return null;
             }
 

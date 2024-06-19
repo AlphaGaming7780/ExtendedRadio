@@ -34,9 +34,9 @@ namespace ExtendedRadio.Patches
     [HarmonyPatch(typeof( RadioUISystem ), "SelectStation", typeof(string))]
     class RadioUISystem_SelectStation {
         static void Postfix(string name) {
-            if(Mod.m_Setting.SaveLastRadio) {
-                Mod.m_Setting.LastRadio = name;
-                Mod.m_Setting.ApplyAndSave();
+            if(ExtendedRadioMod._setting.SaveLastRadio) {
+                ExtendedRadioMod._setting.LastRadio = name;
+                ExtendedRadioMod._setting.ApplyAndSave();
             }
             ExtendedRadio.RadioStationChanged(name);
         }

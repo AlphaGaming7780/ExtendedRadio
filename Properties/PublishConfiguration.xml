@@ -64,9 +64,6 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
 # 1.3.0
-## BREAKING CHANGES or KNOWN BUGS
-- (Will try to find a fix/workaround) Ads now required a brand name in the `Brand` field of the [AudioAsset JSON](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/Radio-Elements#audioasset).
-
 ## Improvement
 - Now use game database to load the OGG files.
 - Multiple optimisation using game code.
@@ -75,12 +72,14 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 ## Fixes
 - Fixes issue related to Economy 2.0 patch.
 
+## BREAKING CHANGES or KNOWN BUGS
+- Ads now required a brand name in the `Brand` field of the [AudioAsset JSON](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/Radio-Elements#audioasset). To fix this and avoid breaking the existing radio. I change the default value of this field to be a brand name, but if you set a JSON in your radio mod that already have a value for this field, your value will override the default value.
+
 ## Translations
 - Korean : TwotoolusFLY_LSh.st
 - German : Speedster McRainbow (RainbowSpeedy)
 - Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz)
 - Russian : Lek0ms
-
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

@@ -1,15 +1,15 @@
 {
-	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "ExtendedRadio",
-	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Principal",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Qualité de vie",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "Services Publics",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Désactiver les publicités au démarrage",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Désactive les publicités lorsque vous chargez dans une partie.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Charger la dernière radio sélectionnée au démarrage",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Sélectionner la dernière radio sélectionnée lorsque vous chargez dans une partie.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Recharger les radios",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Recharger les radios, peut mettre à jour votre radio si vous avez fait des changements. Peut également faire planter le jeu.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Réinitialiser les paramètres de ExtendedRadio",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Réinitialiser les paramètres par défaut du mod.",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Êtes-vous sûr de vouloir réinitialiser les paramètres de ExtendedRadio?"
+	"Options.SECTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod]": "ExtendedRadio",
+	"Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "Principal",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "Qualité de vie",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "Services Publics",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Désactiver les publicités au démarrage",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Désactive les publicités lorsque vous chargez dans une partie.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Charger la dernière radio sélectionnée au démarrage",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Sélectionner la dernière radio sélectionnée lorsque vous chargez dans une partie.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "Recharger les radios",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "Recharger les radios, peut mettre à jour votre radio si vous avez fait des changements. Peut également faire planter le jeu.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Réinitialiser les paramètres de ExtendedRadio",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Réinitialiser les paramètres par défaut du mod.",
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Êtes-vous sûr de vouloir réinitialiser les paramètres de ExtendedRadio?"
 }

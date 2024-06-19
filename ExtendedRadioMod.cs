@@ -14,11 +14,11 @@ using HarmonyLib;
 
 namespace ExtendedRadio
 {
-	public class Mod : IMod
+	public class ExtendedRadioMod : IMod
 	{
-		public static ILog log = LogManager.GetLogger($"{nameof(ExtendedRadio)}.{nameof(Mod)}").SetShowsErrorsInUI(false);
+		public static ILog log = LogManager.GetLogger($"{nameof(ExtendedRadioMod)}.{nameof(ExtendedRadio)}").SetShowsErrorsInUI(false);
 
-		internal static Setting m_Setting;
+		internal static Setting _setting;
 		internal static string modPath;
 		static internal string resources; // = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "resources");
 		// public static readonly string CustomRadiosPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CustomRadios");
@@ -35,14 +35,14 @@ namespace ExtendedRadio
 		{
 			log.Info(nameof(OnLoad));
 
-			if (!GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {log.Error("Failed to get the ExecutableAsset."); return;}
+            if (!GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {log.Error("Failed to get the ExecutableAsset."); return;}
 
-			m_Setting = new Setting(this);
-            m_Setting.RegisterInOptionsUI();
+			_setting = new Setting(this);
+            _setting.RegisterInOptionsUI();
 			Localization.LoadLocalization();
             //GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
 
-            AssetDatabase.global.LoadSettings("settings", m_Setting, new Setting(this));
+            AssetDatabase.global.LoadSettings("settings", _setting, new Setting(this));
 
 			// AssetDatabase.global.SaveSettings();
 
@@ -51,7 +51,7 @@ namespace ExtendedRadio
 			modPath = fileInfo.Directory.FullName;
 			resources = Path.Combine(modPath, "resources");
 			PathToParent = fileInfo.Directory.Parent.FullName;
-			PathToSettings = Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio");
+			PathToSettings = Path.Combine(EnvPath.kUserDataPath, "ModsSettings", "ExtendedRadio");
 			PathToData = Path.Combine(EnvPath.kUserDataPath, "ModsData", "ExtendedRadio");
 			ModsFolderCustomRadio = Path.Combine(PathToData,"CustomRadios");
 			ModsFolderRadioAddons = Path.Combine(PathToData,"RadioAddons");
@@ -64,8 +64,8 @@ namespace ExtendedRadio
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 			updateSystem.UpdateAt<ExtendedRadioUI>(SystemUpdatePhase.UIUpdate);
 
-			harmony = new($"{nameof(ExtendedRadio)}.{nameof(Mod)}");
-			harmony.PatchAll(typeof(Mod).Assembly);
+			harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
+			harmony.PatchAll(typeof(ExtendedRadioMod).Assembly);
 			var patchedMethods = harmony.GetPatchedMethods().ToArray();
 			log.Info($"Plugin ExtraDetailingTools made patches! Patched methods: " + patchedMethods.Length);
 			foreach (var patchedMethod in patchedMethods)
@@ -82,9 +82,10 @@ namespace ExtendedRadio
 		public void OnDispose()
 		{
 			log.Info(nameof(OnDispose));
-			harmony.UnpatchAll($"{nameof(ExtendedRadio)}.{nameof(Mod)}");
+			harmony.UnpatchAll($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			UIManager.defaultUISystem.RemoveHostLocation(Icons.IconsResourceKey, modPath);
 			Icons.UnLoadIconsFolder();
-		}
+            if (Directory.Exists(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"))) Directory.Delete(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"), true);
+        }
 	}
 }

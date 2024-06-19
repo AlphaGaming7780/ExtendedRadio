@@ -19,25 +19,25 @@ namespace ExtendedRadio.UI
 
 			base.OnCreate();
 			
-			AddBinding(DisableAdsOnStartup = new GetterValueBinding<bool>("extended_radio_settings", "DisableAdsOnStartup", () => Mod.m_Setting.DisableAdsOnStartup /*Settings.DisableAdsOnStartup*/));
+			AddBinding(DisableAdsOnStartup = new GetterValueBinding<bool>("extended_radio_settings", "DisableAdsOnStartup", () => ExtendedRadioMod._setting.DisableAdsOnStartup /*Settings.DisableAdsOnStartup*/));
 			AddBinding(new TriggerBinding<bool>("extended_radio_settings", "DisableAdsOnStartup", new Action<bool>(UpdateSettings_disableAdsOnStartup)));
 
-			AddBinding(SaveLastRadio = new GetterValueBinding<bool>("extended_radio_settings", "SaveLastRadio", () => Mod.m_Setting.SaveLastRadio /* Settings.SaveLastRadio*/));
+			AddBinding(SaveLastRadio = new GetterValueBinding<bool>("extended_radio_settings", "SaveLastRadio", () => ExtendedRadioMod._setting.SaveLastRadio /* Settings.SaveLastRadio*/));
 			AddBinding(new TriggerBinding<bool>("extended_radio_settings", "SaveLastRadio", new Action<bool>(UpdateSettings_saveLastRadio)));
 
 			AddBinding(new TriggerBinding("extended_radio", "reloadradio", new Action(ReloadRadio)));
         }
 
 		private void UpdateSettings_disableAdsOnStartup(bool newValue) {
-			Mod.m_Setting.DisableAdsOnStartup = newValue;
-			Mod.m_Setting.ApplyAndSave();
+			ExtendedRadioMod._setting.DisableAdsOnStartup = newValue;
+			ExtendedRadioMod._setting.ApplyAndSave();
 			DisableAdsOnStartup.Update();
 		}
 
 		private void UpdateSettings_saveLastRadio(bool newValue) {
-			Mod.m_Setting.SaveLastRadio = newValue;
-			if(newValue) Mod.m_Setting.LastRadio = ExtendedRadio.radio.currentChannel.name;
-			Mod.m_Setting.ApplyAndSave();
+			ExtendedRadioMod._setting.SaveLastRadio = newValue;
+			if(newValue) ExtendedRadioMod._setting.LastRadio = ExtendedRadio.radio.currentChannel.name;
+			ExtendedRadioMod._setting.ApplyAndSave();
 			SaveLastRadio.Update();
 		}
 

@@ -75,7 +75,7 @@ namespace ExtendedRadio
 							customeRadioChannelsName.Add(radioChannel.name);
 							m_RadioChannels.Add(radioChannel.name, radioChannel.CreateRuntime(radioStation));
 							
-							if(Mod.m_Setting.SaveLastRadio && Mod.m_Setting.LastRadio == radioChannel.name) {
+							if(ExtendedRadioMod._setting.SaveLastRadio && ExtendedRadioMod._setting.LastRadio == radioChannel.name) {
 								ExtendedRadio.radio.currentChannel = m_RadioChannels[radioChannel.name];
 							}							
 						}

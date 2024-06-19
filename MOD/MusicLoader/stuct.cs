@@ -12,7 +12,7 @@ namespace ExtendedRadio
 		public string Album = "";
 		public string Artist = "";
 		public string Type = "";
-		public string Brand = "";
+		public string Brand = "Pilotee";
 		//public string RadioStation = null;
 		//public string RadioChannel = null;
 		public string PSAType = "";

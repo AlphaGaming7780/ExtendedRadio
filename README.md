@@ -21,21 +21,18 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 ## Translation
 > [!WARNING]  
-> ⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSIBILITY FOR WHAT YOU ARE GOING TO READ. ⚠️
-
-| Language				| Progress	| Participants |
-| --------------------- | ---------	| ------------ |
-| French				| 0%		| |
-| Chinese Simplified	| 0%		| |
-| Chinese Traditional	| 0%		| |
-| German				| 0%		| |
-| Italian				| 0%		| |
-| Japanese				| 0%		| |
-| Korean				| 0%		| |
-| Polish				| 100%		| Lisek |
-| Portuguese, Brazilian | 0%		| |
-| Russian				| 0%		| |
-| Spanish				| 0%		| |
+> ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
+- ✔️French 100% : aricoseco
+- ❌Chinese Simplified 0%
+- ❌Chinese Traditional 0%
+- ✔️German 100% : Speedster McRainbow (RainbowSpeedy)
+- ❌Italian 0%
+- ❌Japanese 0%
+- ✔️Korean 100% : TwotoolusFLY_LSh.st
+- ✔️Polish 100% : Lisek
+- ✔️Portuguese, Brazilian 100% : Miguel Pereira Campos (mpcamposz)
+- ✔️Russian 100% : Lek0ms
+- ✔️Spanish 100% : elGendo87
 
 ## Acknowledgment
 - [optimus-code]()

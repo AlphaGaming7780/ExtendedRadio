@@ -16,7 +16,6 @@ public partial class MainSystem : GameSystemBase
     protected override void OnCreate()
 	{
 		base.OnCreate();
-		Enabled = false;
 		_radioUISystem = World.GetOrCreateSystemManaged<RadioUISystem>();
         _pauseRadio = ExtendedRadioMod._setting.GetAction("PauseRadioBinding");
 
@@ -25,11 +24,11 @@ public partial class MainSystem : GameSystemBase
     }
 
     protected override void OnUpdate() {
-		if (_pauseRadio.WasPerformedThisFrame())
-		{
-			Debug.Log("Pausing Radio");	
-			_radioUISystemTraverse.Method("SetPaused").GetValue(!ExtendedRadio.radio.paused);
-		}
+		//if (_pauseRadio.WasPerformedThisFrame())
+		//{
+		//	Debug.Log("Pausing Radio");	
+		//	_radioUISystemTraverse.Method("SetPaused").GetValue(!ExtendedRadio.radio.paused);
+		//}
 	}
 
 	protected override void OnGameLoadingComplete(Purpose purpose, GameMode mode)

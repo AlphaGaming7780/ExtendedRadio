@@ -23,7 +23,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 ## Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
 - ✔️French 100% : aricoseco
-- ❌Chinese Simplified 0%
+- ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS)
 - ❌Chinese Traditional 0%
 - ✔️German 100% : Speedster McRainbow (RainbowSpeedy)
 - ❌Italian 0%
@@ -81,6 +81,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 - German : Speedster McRainbow (RainbowSpeedy)
 - Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz)
 - Russian : Lek0ms
+- Chinese Simplified : RilkeXS(无手文) (RilkeXS)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

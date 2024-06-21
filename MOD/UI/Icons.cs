@@ -1,38 +1,36 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using Colossal.UI;
 
 namespace ExtendedRadio.UI;
 
 static class Icons
 {
-	private static readonly List<string> pathToIconToLoad = [];
-	internal static readonly string IconsResourceKey = "extendedradio";
-	public static readonly string COUIBaseLocation = $"coui://{IconsResourceKey}";
-	private static bool iconLoaded = false;
+	private static readonly List<string> _pathToIconToLoad = [];
+	public const string kIconsResourceKey = "extendedradio";
+	public static readonly string COUIBaseLocation = $"coui://{kIconsResourceKey}";
+	private static bool _iconLoaded = false;
 
 	internal static void AddNewIconsFolder(string pathToFolder) {
-		if(!pathToIconToLoad.Contains(pathToFolder)) pathToIconToLoad.Add(pathToFolder);
-		if(iconLoaded) UIManager.defaultUISystem.AddHostLocation(IconsResourceKey, pathToFolder, false);
+		if(!_pathToIconToLoad.Contains(pathToFolder)) _pathToIconToLoad.Add(pathToFolder);
+		if(_iconLoaded) UIManager.defaultUISystem.AddHostLocation(kIconsResourceKey, pathToFolder, false);
     }
 
 	internal static void RemoveNewIconsFolder(string pathToFolder) {
-		pathToIconToLoad.Remove(pathToFolder);
-		if(iconLoaded) UIManager.defaultUISystem.RemoveHostLocation(IconsResourceKey, pathToFolder);
+		_pathToIconToLoad.Remove(pathToFolder);
+		if(_iconLoaded) UIManager.defaultUISystem.RemoveHostLocation(kIconsResourceKey, pathToFolder);
 	}
 
 	internal static void LoadIconsFolder() {
-		iconLoaded = true;
-		foreach(string path in pathToIconToLoad) {
-			UIManager.defaultUISystem.AddHostLocation(IconsResourceKey, path, false);
+		_iconLoaded = true;
+		foreach(string path in _pathToIconToLoad) {
+			UIManager.defaultUISystem.AddHostLocation(kIconsResourceKey, path, false);
 		}
 	}
 
 	internal static void UnLoadIconsFolder() {
-		iconLoaded = false;
-		foreach(string path in pathToIconToLoad) {
-			UIManager.defaultUISystem.RemoveHostLocation(IconsResourceKey, path);
+		_iconLoaded = false;
+		foreach(string path in _pathToIconToLoad) {
+			UIManager.defaultUISystem.RemoveHostLocation(kIconsResourceKey, path);
 		}
 	}
 }

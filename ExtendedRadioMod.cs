@@ -38,13 +38,11 @@ namespace ExtendedRadio
             if (!GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {log.Error("Failed to get the ExecutableAsset."); return;}
 
 			_setting = new Setting(this);
+			_setting.RegisterKeyBindings();
             _setting.RegisterInOptionsUI();
-			Localization.LoadLocalization();
-            //GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
-
             AssetDatabase.global.LoadSettings("settings", _setting, new Setting(this));
-
-			// AssetDatabase.global.SaveSettings();
+            
+			Localization.LoadLocalization();
 
 			log.Info($"Current mod asset at {asset.path}");
 			FileInfo fileInfo = new(asset.path);
@@ -57,9 +55,11 @@ namespace ExtendedRadio
 			ModsFolderRadioAddons = Path.Combine(PathToData,"RadioAddons");
 			PathToPDXMods = Path.Combine(EnvPath.kUserDataPath, ".cache", "Mods", "mods_subscribed");
 
-			if(Directory.Exists(ModsFolderRadioAddons)) {
-				RadioAddons.RegisterRadioAddonsDirectory(ModsFolderRadioAddons);
-			}
+            if (Directory.Exists(ModsFolderCustomRadio)) CustomRadios.RegisterCustomRadioDirectory(ModsFolderCustomRadio);
+            if (Directory.Exists(ModsFolderRadioAddons)) RadioAddons.RegisterRadioAddonsDirectory(ModsFolderRadioAddons);
+
+            Icons.AddNewIconsFolder(modPath);
+            Icons.LoadIconsFolder();
 
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 			updateSystem.UpdateAt<ExtendedRadioUI>(SystemUpdatePhase.UIUpdate);
@@ -67,23 +67,15 @@ namespace ExtendedRadio
 			harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			harmony.PatchAll(typeof(ExtendedRadioMod).Assembly);
 			var patchedMethods = harmony.GetPatchedMethods().ToArray();
-			log.Info($"Plugin ExtraDetailingTools made patches! Patched methods: " + patchedMethods.Length);
-			foreach (var patchedMethod in patchedMethods)
-			{
-				log.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
-			}
-
-			Icons.AddNewIconsFolder(modPath);
-            if (Directory.Exists(ModsFolderCustomRadio)) CustomRadios.RegisterCustomRadioDirectory(ModsFolderCustomRadio);
-
-            Icons.LoadIconsFolder();
+			log.Info($"Plugin ExtendedRadio made patches! Patched methods: " + patchedMethods.Length);
+			foreach (var patchedMethod in patchedMethods) log.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
         }
 
 		public void OnDispose()
 		{
 			log.Info(nameof(OnDispose));
 			harmony.UnpatchAll($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
-			UIManager.defaultUISystem.RemoveHostLocation(Icons.IconsResourceKey, modPath);
+			UIManager.defaultUISystem.RemoveHostLocation(Icons.kIconsResourceKey, modPath);
 			Icons.UnLoadIconsFolder();
             if (Directory.Exists(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"))) Directory.Delete(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"), true);
         }

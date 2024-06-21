@@ -9,7 +9,7 @@ const register: ModRegistrar = (moduleRegistry) => {
     moduleRegistry.extend('game-ui/game/components/radio/radio-panel/stations-menu/stations-menu.module.scss', StationsMenuStyle);
     moduleRegistry.extend('game-ui/game/components/radio/radio-panel/station-detail/station-detail.module.scss', StationDetailStyle);
 
-    // moduleRegistry.extend('game-ui/game/components/radio/radio-panel/stations-menu/stations-menu.tsx', 'StationsMenu', StationsMenu_ModuleRegistryExtend);
+    //moduleRegistry.extend('game-ui/game/components/radio/radio-panel/stations-menu/stations-menu.tsx', 'StationsMenu', StationsMenu_ModuleRegistryExtend);
 
     moduleRegistry.append('Menu', HelloWorldComponent);
 }

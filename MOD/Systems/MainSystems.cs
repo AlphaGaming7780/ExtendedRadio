@@ -4,32 +4,45 @@ using UnityEngine;
 using Game.UI.InGame;
 using HarmonyLib;
 using Game.Input;
+using Game.Prefabs;
+using Game.Settings;
 
 namespace ExtendedRadio.Systems;
 
 public partial class MainSystem : GameSystemBase
 {
-    private ProxyAction _pauseRadio;
 	private RadioUISystem _radioUISystem;
 	private Traverse _radioUISystemTraverse;
+
+    private ProxyAction _pauseRadioBinding;
+    private ProxyAction _muteRadioBinding;
+    private ProxyAction _nextSongRadioBinding;
+    private ProxyAction _prevSongRadioBinding;
+    private ProxyAction _volumeUpRadioBinding;
+    private ProxyAction _volumeDownRadioBinding;
 
     protected override void OnCreate()
 	{
 		base.OnCreate();
 		_radioUISystem = World.GetOrCreateSystemManaged<RadioUISystem>();
-        _pauseRadio = ExtendedRadioMod._setting.GetAction("PauseRadioBinding");
+        _radioUISystemTraverse = Traverse.Create(_radioUISystem);
 
-		_radioUISystemTraverse = Traverse.Create(_radioUISystem);
-
+        _pauseRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.PauseRadioBinding));
+        _muteRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.MuteRadioBinding));
+        _nextSongRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.NextSongRadioBinding));
+        _prevSongRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.PrevSongRadioBinding));
+        _volumeUpRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.VolumeUpRadioBinding));
+        _volumeDownRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.VolumeDownRadioBinding));
     }
 
     protected override void OnUpdate() {
-		//if (_pauseRadio.WasPerformedThisFrame())
-		//{
-		//	Debug.Log("Pausing Radio");	
-		//	_radioUISystemTraverse.Method("SetPaused").GetValue(!ExtendedRadio.radio.paused);
-		//}
-	}
+		if (_pauseRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetPaused", [typeof(bool)]).GetValue(!ExtendedRadio.radio.paused);
+        if (_muteRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetMuted", [typeof(bool)]).GetValue(!ExtendedRadio.radio.muted);
+        if (_nextSongRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) ExtendedRadio.radio.NextSong();
+        if (_prevSongRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) ExtendedRadio.radio.PreviousSong();
+        if (_volumeUpRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetVolume", [typeof(float)]).GetValue(SharedSettings.instance.audio.radioVolume + 0.05f);
+        if (_volumeDownRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetVolume", [typeof(float)]).GetValue(SharedSettings.instance.audio.radioVolume - 0.05f);
+    }
 
 	protected override void OnGameLoadingComplete(Purpose purpose, GameMode mode)
 	{

@@ -41,19 +41,6 @@ namespace ExtendedRadio
 
         }
 
-		static internal void AddAudioToDataBase(string network, string radioChannel, string program, SegmentType segmentType, List<AudioAsset> audioAssets) {
-			audioDataBase[network][radioChannel][program][segmentType].AddRange(audioAssets);
-		}
-
-		static internal void AddAudioToDataBase(string network, string radioChannel, string program, SegmentType segmentType, AudioAsset audioAssets) {
-			audioDataBase[network][radioChannel][program][segmentType].Add(audioAssets);
-		}
-
-		static internal List<AudioAsset> GetAudioAssetsFromAudioDataBase(Radio radio, SegmentType type) {
-
-			return audioDataBase[radio.currentChannel.network][radio.currentChannel.name][radio.currentChannel.currentProgram.name][type];
-		}
-
 		internal static System.IO.Stream GetEmbedded(string embeddedPath) {
 			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ExtendedRadio.embedded."+embeddedPath);
         }

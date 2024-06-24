@@ -1,8 +1,9 @@
 using Colossal.IO.AssetDatabase;
 using Game.Input;
 using Game.Modding;
-using Game.Prefabs;
 using Game.Settings;
+using System.Collections.Generic;
+using static Game.Audio.Radio.Radio;
 
 namespace ExtendedRadio;
 
@@ -29,6 +30,25 @@ public class Setting(IMod mod) : ModSetting(mod)
     [SettingsUIConfirmation]
     [SettingsUISection(kMainSection, kUtilityGroup)]
     public bool ResetSettings { set {SetDefaults();} }
+
+
+
+    public const string kMixNetworkSection = "MixNetwork";
+    public const string kMixNetworkGroup = "MixNetwork";
+    [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
+    public bool MixNetworkEnabled { get; set; } = true;
+
+    [SettingsUISection(kMixNetworkSection)]
+    [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkClearQueue))]
+    public bool MixNetworkClearQueue { get; set; } = true;
+    public bool DisableCondition_MixNetworkClearQueue => !MixNetworkEnabled;
+
+    [SettingsUISection(kMixNetworkSection)]
+    [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkFinishCurrentClip))]
+    public bool MixNetworkFinishCurrentClip { get; set; } = true;
+    public bool DisableCondition_MixNetworkFinishCurrentClip => !MixNetworkEnabled || !MixNetworkClearQueue;
+
+    public Dictionary<SegmentType, List<string>> EnabledTags = [];
 
 
     public const string kKeybindsSection = "Keybinds";

@@ -10,6 +10,12 @@ using UnityEngine.Networking;
 using Game.UI.InGame;
 using Game.Audio;
 using System;
+using Colossal.Randomization;
+using Game.City;
+using Game.Prefabs;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Jobs;
 
 namespace ExtendedRadio.Patches
 {
@@ -131,82 +137,84 @@ namespace ExtendedRadio.Patches
     //}
 
 
-    //[HarmonyPatch(typeof(Radio), "GetPlaylistClips")]
-    //class Radio_GetPlaylistClips
-    //{
-    //    static bool Prefix(Radio __instance, RuntimeSegment segment)
-    //    {
-            //IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => segment.tags.All(new Func<string, bool>(asset.ContainsTag))));
-            //List<AudioAsset> list = new List<AudioAsset>();
-            //list.AddRange(assets);
-            //System.Random rnd = new System.Random();
-            //List<int> list2 = (from x in Enumerable.Range(0, list.Count)
-            //                   orderby rnd.Next()
-            //                   select x).Take(segment.clipsCap).ToList<int>();
-            //AudioAsset[] array = new AudioAsset[segment.clipsCap];
-            //Debug.Log($"ClipCap = {segment.clipsCap}, List lenght = {list.Count}, Array lenght = {array.Length}");
-            //for (int i = 0; i < array.Length; i++)
-            //{
-            //    array[i] = list[list2[i]];
-            //}
-            //segment.clips = array;
-            //return false;
+    [HarmonyPatch(typeof(Radio), "GetPlaylistClips")]
+    class Radio_GetPlaylistClips
+    {
+        static bool Prefix(Radio __instance, RuntimeSegment segment)
+        {
+            if(__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
+            IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag))));
+            List<AudioAsset> list = [.. assets];
+            segment.clipsCap = assets.Count() > 10 ? 10 : assets.Count();
+            System.Random rnd = new();
+            List<int> list2 = (from x in Enumerable.Range(0, list.Count)
+                               orderby rnd.Next()
+                               select x).Take(segment.clipsCap).ToList<int>();
+            AudioAsset[] array = new AudioAsset[segment.clipsCap];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = list[list2[i]];
+            }
+            segment.clips = array;
+            return false;
+        }
+    }
 
-            //if (CustomRadios.customeRadioChannelsName.Contains(__instance.currentChannel.name))
-            //{
+    [HarmonyPatch(typeof(Radio), "GetCommercialClips")]
+    class Radio_GetCommercialClips
+    {
+        static bool Prefix(Radio __instance, RuntimeSegment segment)
+        {
+            if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
+            Dictionary<string, RadioNetwork>  m_Networks = ExtendedRadio.radioTravers.Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
+            segment.clips = [];
+            if (m_Networks.TryGetValue(__instance.currentChannel.network, out RadioNetwork radioNetwork) && radioNetwork.allowAds && MixNetwork.s_enabledTags.ContainsKey(segment.type))
+            {
+                WeightedRandom<AudioAsset> weightedRandom = [];
+                Dictionary<string, List<AudioAsset>> dictionary = [];
+                bool check(AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag));
+                IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets(SearchFilter<AudioAsset>.ByCondition(check));
+                Debug.Log(audioAssetList.Count());
+                foreach (AudioAsset audioAsset in audioAssetList)
+                {
+                    string metaTag = audioAsset.GetMetaTag(AudioAsset.Metatag.Brand);
+                    if (metaTag != null)
+                    {
+                        if (!dictionary.TryGetValue(metaTag, out List<AudioAsset> list))
+                        {
+                            list = [];
+                            dictionary.Add(metaTag, list);
+                        }
+                        list.Add(audioAsset);
+                    }
+                    else
+                    {
+                        ExtendedRadioMod.log.ErrorFormat("Asset {0} ({1}) does not contain a brand metatag (for Commercial segment)", audioAsset.guid, audioAsset.GetMetaTag(AudioAsset.Metatag.Title) ?? "<No title>");
+                    }
+                }
+                NativeList<BrandPopularitySystem.BrandPopularity> brandPopularity = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<BrandPopularitySystem>().ReadBrandPopularity(out JobHandle jobHandle);
+                jobHandle.Complete();
+                for (int i = 0; i < brandPopularity.Length; i++)
+                {
+                    if (World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<PrefabSystem>().TryGetPrefab<BrandPrefab>(brandPopularity[i].m_BrandPrefab, out BrandPrefab brandPrefab) && dictionary.TryGetValue(brandPrefab.name, out List<AudioAsset> key))
+                    {
+                        foreach (AudioAsset asset in key) Debug.Log(asset.name);
+                        weightedRandom.AddRange(key, brandPopularity[i].m_Popularity);
+                    }
+                }
+                List<AudioAsset> list2 = [];
+                for (int j = 0; j < segment.clipsCap; j++)
+                {
+                    AudioAsset audioAsset2 = weightedRandom.NextAndRemove();
+                    if (audioAsset2 != null)
+                    {
+                        list2.Add(audioAsset2);
+                    }
+                }
+                segment.clips = list2;
+            }
 
-            //	IEnumerable<AudioAsset> assets = ExtendedRadio.GetAudioAssetsFromAudioDataBase(__instance, segment.type);
-            //	List<AudioAsset> list = [.. assets];
-            //	System.Random rnd = new();
-            //	List<int> list2 = (from x in Enumerable.Range(0, list.Count)
-            //					   orderby rnd.Next()
-            //					   select x).Take(segment.clipsCap).ToList();
-            //	AudioAsset[] array = new AudioAsset[segment.clipsCap];
-            //	for (int i = 0; i < array.Length; i++)
-            //	{
-            //		array[i] = list[list2[i]];
-            //	}
-
-            //	segment.clips = array;
-
-            //	return false;
-            //}
-            //return true;
-        //}
-    //}
-
-    //[HarmonyPatch( typeof( Radio ), "GetCommercialClips" )]
-    //class Radio_GetCommercialClips
-    //{
-    //       static bool Prefix( Radio __instance, RuntimeSegment segment)
-    //	{
-    //		if(CustomRadios.customeRadioChannelsName.Contains(__instance.currentChannel.name)) {
-
-
-    //			Dictionary<string, RadioNetwork> m_Networks = Traverse.Create(__instance).Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
-
-    //			if (!m_Networks.TryGetValue(__instance.currentChannel.network, out var value) || !value.allowAds)
-    //			{	
-    //				return false;
-    //			}
-
-    //			IEnumerable<AudioAsset> assets = ExtendedRadio.GetAudioAssetsFromAudioDataBase(__instance, segment.type);
-    //			List<AudioAsset> list = [.. assets];
-    //			System.Random rnd = new();
-    //			List<int> list2 = (from x in Enumerable.Range(0, list.Count)
-    //							orderby rnd.Next()
-    //							select x).Take(segment.clipsCap).ToList();
-    //			AudioAsset[] array = new AudioAsset[segment.clipsCap];
-    //			for (int i = 0; i < array.Length; i++)
-    //			{
-    //				array[i] = list[list2[i]];
-    //			}
-
-    //			segment.clips = array;
-
-    //			return false;
-    //		}
-    //		return true;
-    //	}
-    //}
+            return false;
+        }
+    }
 }

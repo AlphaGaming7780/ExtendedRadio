@@ -34,8 +34,10 @@ namespace ExtendedRadio
 			radio = __instance;
 			radioTravers = Traverse.Create(__instance);
 
+            if (ExtendedRadioMod._setting.MixNetworkEnabled) MixNetwork.CreateMixNetwork();
 			CustomRadios.LoadCustomRadios();
 			RadioAddons.LoadRadioAddons();
+            if (ExtendedRadioMod._setting.MixNetworkEnabled) MixNetwork.UpdateRadioTags();
 
 			OnRadioLoaded?.Invoke();
 

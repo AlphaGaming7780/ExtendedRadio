@@ -62,7 +62,7 @@ namespace ExtendedRadio
             Icons.LoadIconsFolder();
 
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
-			updateSystem.UpdateAt<ExtendedRadioUI>(SystemUpdatePhase.UIUpdate);
+			updateSystem.UpdateAt<MixNetwork>(SystemUpdatePhase.UIUpdate);
 
 			harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			harmony.PatchAll(typeof(ExtendedRadioMod).Assembly);

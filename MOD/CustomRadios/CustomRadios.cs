@@ -12,9 +12,11 @@ using UnityEngine;
 using ExtendedRadio.Systems;
 using Colossal.PSI.Common;
 using System.Linq;
+using System;
 
 namespace ExtendedRadio
 {
+
 	/// <summary>This is the main class for the CustomRadios feature.</summary>
 	public class CustomRadios
 	{
@@ -42,19 +44,15 @@ namespace ExtendedRadio
 							network = JsonToRadioNetwork(radioNetwork);
 						} else {
 							network.name = new DirectoryInfo(radioNetwork).Name;
+							network.nameId = null;
 							network.description = "A custom Network";
-							network.descriptionId = "CUSTOMNETWORK";
-							network.icon = File.Exists(Path.Combine(radioNetwork, "icon.svg")) ? $"{Icons.COUIBaseLocation}/CustomRadios/{new DirectoryInfo(radioNetwork).Name}/icon.svg" : $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg";
+							network.descriptionId = null;
+							network.icon = File.Exists(Path.Combine(radioNetwork, "icon.svg")) ? $"{Icons.COUIBaseLocation}/CustomRadios/{new DirectoryInfo(radioNetwork).Name}/icon.svg" : Icons.DefaultRadioIcon;
 							network.allowAds = true;
 						}
+						network.icon ??= Icons.DefaultRadioIcon;
 
-						network.icon ??= $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg";
-
-						network.nameId = network.name;
-                        network.nameId = "TEST";
-
-                        // network.name = new DirectoryInfo(radioNetwork).Name;
-                        network.uiPriority = radioNetworkIndex++;
+						network.uiPriority = radioNetworkIndex++;
 
 						if(!m_Networks.ContainsKey(network.name)) {
 							customeNetworksName.Add(network.name);
@@ -73,20 +71,22 @@ namespace ExtendedRadio
 									
 							//ExtendedRadio.AddAudioToDataBase(radioChannel);
 							customeRadioChannelsName.Add(radioChannel.name);
-							m_RadioChannels.Add(radioChannel.name, radioChannel.CreateRuntime(radioStation));
-							
-							if(ExtendedRadioMod._setting.SaveLastRadio && ExtendedRadioMod._setting.LastRadio == radioChannel.name) {
-								ExtendedRadio.radio.currentChannel = m_RadioChannels[radioChannel.name];
-							}							
+							m_RadioChannels.Add(radioChannel.name, radioChannel.CreateRuntime(radioStation));					
 						}
 					}
 				}
 			}
 
-			ExtendedRadio.radioTravers.Field("m_Networks").SetValue(m_Networks);
+            ExtendedRadio.radioTravers.Field("m_Networks").SetValue(m_Networks);
 			ExtendedRadio.radioTravers.Field("m_RadioChannels").SetValue(m_RadioChannels);
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
-		}
+
+            if (ExtendedRadioMod._setting.SaveLastRadio && m_RadioChannels.TryGetValue(ExtendedRadioMod._setting.LastRadio, out RuntimeRadioChannel channel))
+            {
+                ExtendedRadio.radio.currentChannel = channel;
+            }
+
+        }
 
 		//internal static IEnumerator SearchForCustomRadiosFolder(List<string> ModsFolderPaths) {
 
@@ -136,7 +136,7 @@ namespace ExtendedRadio
 		/// <summary>This methode add you folder that contains your radio to the list of radio to load.</summary>
 		/// <param name="path">The global path to the folder that contains your custom radio</param>
 		public static void RegisterCustomRadioDirectory(string path) {
-            if (radioDirectories.Contains(path)) return;
+			if (radioDirectories.Contains(path)) return;
 			radioDirectories.Add(path);
 			Icons.AddNewIconsFolder(new DirectoryInfo(path).Parent.FullName);			
 		}
@@ -205,7 +205,7 @@ namespace ExtendedRadio
 						program = new() {
 							name = new DirectoryInfo(radioNetwork).Name,
 							description = new DirectoryInfo(radioNetwork).Name,
-							icon = $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg",
+							icon = Icons.DefaultRadioIcon,
 							startTime = "00:00",
 							endTime = "00:00",
 							loopProgram = true,
@@ -227,14 +227,14 @@ namespace ExtendedRadio
 							};
 						}
 
-                        //segment.tags.AddRangeToArray([segment.type.ToString(), program.name, radioChannel.name, radioChannel.network]);
-                        segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
+						//segment.tags.AddRangeToArray([segment.type.ToString(), program.name, radioChannel.name, radioChannel.network]);
+						segment.tags = FormatTags(segment.type, program.name, radioChannel.name, radioChannel.network);
 
-                        //if(segment.tags.Length <= 0) {
-                        //	segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
-                        //}
+						//if(segment.tags.Length <= 0) {
+						//	segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
+						//}
 
-                        foreach (string audioAssetDirectory in Directory.GetDirectories( segmentDirectory )) {
+						foreach (string audioAssetDirectory in Directory.GetDirectories( segmentDirectory )) {
 							foreach(string audioAssetFile in Directory.GetFiles(audioAssetDirectory, "*.ogg")) {
 								
 								segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, program.name, radioChannel.network, radioChannel.name));
@@ -264,7 +264,7 @@ namespace ExtendedRadio
 
 				string radioName = new DirectoryInfo(path).Name;
 
-				string iconPath = $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg";
+				string iconPath = Icons.DefaultRadioIcon;
 
 				if(File.Exists(path+"\\icon.svg")) {
 					iconPath = $"{Icons.COUIBaseLocation}/CustomRadios/{ new DirectoryInfo(path).Parent.Name}/{radioName}/icon.svg";
@@ -284,23 +284,23 @@ namespace ExtendedRadio
 				};
 			}
 
-            Program program = new()
-            {
-                name = "My Custom Program",
-                description = "My Custom Program",
-                icon = $"{Icons.COUIBaseLocation}/resources/DefaultIcon.svg",
-                startTime = "00:00",
-                endTime = "00:00",
-                loopProgram = true
-            };
+			Program program = new()
+			{
+				name = "My Custom Program",
+				description = "My Custom Program",
+				icon = Icons.DefaultRadioIcon,
+				startTime = "00:00",
+				endTime = "00:00",
+				loopProgram = true
+			};
 
-            Segment segment = new()
+			Segment segment = new()
 			{
 				type = SegmentType.Playlist,
 				clipsCap = 0,
 				clips = [],
-				tags = [SegmentType.Playlist.ToString(), program.name, radioChannel.name, radioChannel.network]
-            };
+				tags = FormatTags(SegmentType.Playlist, program.name, radioChannel.name, radioChannel.network)
+			};
 
 			foreach(string audioAssetDirectory in Directory.GetDirectories( path )) {
 				foreach(string audioAssetFile in Directory.GetFiles(audioAssetDirectory, "*.ogg")) {
@@ -358,20 +358,66 @@ namespace ExtendedRadio
 
 		}
 
+		public static string FormatTagSegmentType(SegmentType segmentType)
+		{
+			return $"type:{SegmentTypeToTypeTag(segmentType)}";
+        }
+
+        public static string FormatTagRadioProgram(string radioProgram)
+        {
+			return $"radio program:{radioProgram}";
+        }
+
+        public static string FormatTagRadioChannel(string radioChannel)
+		{
+			return $"radio channel:{radioChannel}";
+
+        }
+
+        public static string FormatTagRadioNetwork(string radioNetwork)
+        {
+			return $"radio network:{radioNetwork}";
+        }
+
+        public static string[] FormatTags(SegmentType segmentType, string channelName)
+        {
+			return FormatTags(segmentType, null, channelName, null);
+        }
+
+        public static string[] FormatTags(SegmentType segmentType, string radioProgram, string radioChannel, string radioNetwork)
+		{
+			return [FormatTagSegmentType(segmentType), FormatTagRadioProgram(radioProgram), FormatTagRadioChannel(radioChannel), FormatTagRadioNetwork(radioNetwork)];
+		}
+
 		/// <summary>Convert a string to a SegmentType.</summary>
 		/// <param name="s">The string.</param>
 		/// <returns>The SegmentType.</returns>
 		public static SegmentType StringToSegmentType(string s) {
-            return s switch
+			return s switch
+			{
+				"Playlist" => SegmentType.Playlist,
+				"Talkshow" => SegmentType.Talkshow,
+				"PSA" => SegmentType.PSA,
+				"Weather" => SegmentType.Weather,
+				"News" => SegmentType.News,
+				"Commercial" => SegmentType.Commercial,
+				"Emergency" => SegmentType.Emergency,
+				_ => SegmentType.Playlist,
+			};
+		}
+
+		public static string SegmentTypeToTypeTag(SegmentType segmentType)
+		{
+            return segmentType switch
             {
-                "Playlist" => SegmentType.Playlist,
-                "Talkshow" => SegmentType.Talkshow,
-                "PSA" => SegmentType.PSA,
-                "Weather" => SegmentType.Weather,
-                "News" => SegmentType.News,
-                "Commercial" => SegmentType.Commercial,
-                "Emergency" => SegmentType.Emergency,
-                _ => SegmentType.Playlist,
+                SegmentType.Playlist => "Music",
+                SegmentType.Talkshow => SegmentType.Talkshow.ToString(), // "",
+                SegmentType.PSA => "Public Service Announcements",
+                SegmentType.Weather => SegmentType.Weather.ToString(),
+                SegmentType.News => SegmentType.News.ToString(), //"News",
+                SegmentType.Commercial => SegmentType.Commercial.ToString(), //"Commercial",
+                SegmentType.Emergency => SegmentType.Emergency.ToString(),
+				_ => "ERROR SegmentTypeToTypeTag(SegmentType segmentType)"
             };
         }
 	}

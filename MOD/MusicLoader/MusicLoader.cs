@@ -12,7 +12,8 @@ using static Game.Audio.Radio.Radio;
 namespace ExtendedRadio
 {
 	public class MusicLoader
-	{   
+	{
+		private static List<string> s_brandsName = null;
 		public static AudioAsset LoadAudioFile(string audioFilePath, SegmentType segmentType, string programName, string networkName, string radioChannelName) {
 
 			JsonAudioAsset jsAudioAsset;
@@ -88,7 +89,7 @@ namespace ExtendedRadio
 
 
             audioAsset.AddTags(jsAudioAsset.tags);
-			audioAsset.AddTags([segmentType.ToString(), programName, radioChannelName, networkName]);
+			audioAsset.AddTags(CustomRadios.FormatTags(segmentType, programName, radioChannelName, networkName));
 
 			return audioAsset;
 		}

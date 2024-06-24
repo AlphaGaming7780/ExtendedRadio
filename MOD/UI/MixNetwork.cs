@@ -251,7 +251,6 @@ namespace ExtendedRadio
 
                     foreach (RuntimeSegment runtimeSegment in runtimeProgram.segments)
                     {
-                        if(runtimeSegment.type != SegmentType.Playlist) continue;
                         RadioTag networkTag = new(channel.network, CustomRadios.FormatTagRadioNetwork(channel.network), runtimeSegment.type);
                         RadioTag channelTag = new(channel.name, CustomRadios.FormatTagRadioChannel(channel.name), runtimeSegment.type);
                         RadioTag programTag = new(runtimeProgram.name, CustomRadios.FormatTagRadioProgram(runtimeProgram.name), runtimeSegment.type);

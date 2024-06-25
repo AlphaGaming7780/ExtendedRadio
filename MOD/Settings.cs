@@ -38,12 +38,12 @@ public class Setting(IMod mod) : ModSetting(mod)
     [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
     public bool MixNetworkEnabled { get; set; } = true;
 
-    [SettingsUISection(kMixNetworkSection)]
+    [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
     [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkClearQueue))]
     public bool MixNetworkClearQueue { get; set; } = true;
     public bool DisableCondition_MixNetworkClearQueue => !MixNetworkEnabled;
 
-    [SettingsUISection(kMixNetworkSection)]
+    [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
     [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkFinishCurrentClip))]
     public bool MixNetworkFinishCurrentClip { get; set; } = true;
     public bool DisableCondition_MixNetworkFinishCurrentClip => !MixNetworkEnabled || !MixNetworkClearQueue;

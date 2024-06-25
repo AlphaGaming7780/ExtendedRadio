@@ -16,7 +16,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 ## Features
 - Custom radios
-- Mix Network (Only Music for now)
+- Mix Network
 - Keybinds
 - Radio Add-ons
 - Radio Mod
@@ -69,7 +69,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 # 1.3.0
 ## New features
 - Keybinds to control the radio, check the settings.
-- Mix Network (Only Music is working for now)
+- Mix Network
 
 ## Improvement
 - Now use game database to load the OGG files.

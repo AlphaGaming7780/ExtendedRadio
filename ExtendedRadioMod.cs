@@ -16,7 +16,7 @@ namespace ExtendedRadio
 {
 	public class ExtendedRadioMod : IMod
 	{
-		public static ILog log = LogManager.GetLogger($"{nameof(ExtendedRadioMod)}.{nameof(ExtendedRadio)}").SetShowsErrorsInUI(false);
+		public static ILog log = LogManager.GetLogger($"{nameof(ExtendedRadio)}").SetShowsErrorsInUI(false);
 
 		internal static Setting _setting;
 		internal static string modPath;

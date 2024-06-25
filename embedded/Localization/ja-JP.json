@@ -1,15 +1,15 @@
 {
-	"Options.SECTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod]": "ExtendedRadio",
-	"Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "Main",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "Quality Of Life",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "ユーティリティ",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "スタート時に広告を無効化する",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "ゲームをロードした時に広告を無効化します",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "スタート時に最後に選択していたラジオを読み込む",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "ゲームをロードした際に最後に選択していたラジオ局が再生されます",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "ラジオをリロード",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "ラジオを再読み込みします。ラジオに変更が加えられていた場合、変更後の状態になります。ゲームをクラッシュさせる場合があります。",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "ExtendedRadioの設定をリセット",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "このMODの設定をデフォルト状態にリセットします。",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "本当にExtendedRadioの設定をリセットしますか?"
+	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "ExtendedRadio",
+	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Main",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Quality Of Life",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "ユーティリティ",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "スタート時に広告を無効化する",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "ゲームをロードした時に広告を無効化します",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "スタート時に最後に選択していたラジオを読み込む",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "ゲームをロードした際に最後に選択していたラジオ局が再生されます",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "ラジオをリロード",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "ラジオを再読み込みします。ラジオに変更が加えられていた場合、変更後の状態になります。ゲームをクラッシュさせる場合があります。",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "ExtendedRadioの設定をリセット",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "このMODの設定をデフォルト状態にリセットします。",
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "本当にExtendedRadioの設定をリセットしますか?"
 }

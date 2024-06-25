@@ -77,7 +77,9 @@ namespace ExtendedRadio
 			harmony.UnpatchAll($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			UIManager.defaultUISystem.RemoveHostLocation(Icons.kIconsResourceKey, modPath);
 			Icons.UnLoadIconsFolder();
-            if (Directory.Exists(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"))) Directory.Delete(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"), true);
+            DirectoryInfo directoryInfo = new(Path.Combine(EnvPath.kUserDataPath, "ModSettings"));
+            if (Directory.Exists(Path.Combine(directoryInfo.FullName, "ExtendedRadio"))) Directory.Delete(Path.Combine(EnvPath.kUserDataPath, "ModSettings", "ExtendedRadio"), true);
+			if(directoryInfo.Exists && directoryInfo.GetDirectories().Count() == 0 && directoryInfo.GetFiles().Count() == 0) directoryInfo.Delete();
         }
 	}
 }

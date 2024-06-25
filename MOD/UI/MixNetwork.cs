@@ -179,6 +179,8 @@ namespace ExtendedRadio
             s_networks = ExtendedRadio.radioTravers.Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
             s_radioChannels = ExtendedRadio.radioTravers.Field("m_RadioChannels").GetValue<Dictionary<string, RuntimeRadioChannel>>();
 
+            foreach (RadioNetwork network in s_networks.Values) network.uiPriority++;
+
             RadioNetwork mixNetwork = new()
             {
                 name = MixNetworkName,
@@ -187,7 +189,7 @@ namespace ExtendedRadio
                 descriptionId = null,
                 icon = Icons.MixNetworkIcon,
                 allowAds = true,
-                uiPriority = s_networks.Count,
+                uiPriority = 0,//s_networks.Count,
             };
 
             Program mixProgram = new()

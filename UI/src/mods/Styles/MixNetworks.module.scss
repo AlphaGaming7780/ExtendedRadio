@@ -1,0 +1,14 @@
+.checkBox {
+    background-color: var(--menuControl1);
+    border-top-color: var(--menuControlBorder);
+    border-bottom-color: var(--menuControlBorder);
+    border-left-color: var(--menuControlBorder);
+    border-right-color: var(--menuControlBorder);
+}
+
+.toggle {
+    --iconColor: rgba(80, 76, 83, 1) ;//var(--menuControlBorder);
+    width: var(--toggleSize);
+    height: var(--toggleSize);
+    margin-left: var(--foldoutPadding);
+}

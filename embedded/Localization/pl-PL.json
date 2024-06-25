@@ -1,15 +1,15 @@
 {
-	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "ExtendedRadio",
-	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "Główne",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "Jakość życia",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "Narzędzia",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Wyłącz reklamy przy uruchamianiu",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "Wyłącz reklamy podczas wczytywania gry.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Wczytaj ostatnio wybrane radio przy uruchamianiu",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "Wybierz ostatnio wybrane radio podczas wczytywania gry.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Przeładuj radia",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "Przeładuj radia, możesz zaktualizować swoje radio, jeśli wprowadziłeś do niego zmiany. Może również spowodować zawieszenie się gry.",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Zresetuj ustawienia ExtendedRadio",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Przywraca domyślne ustawienia moda.",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "Czy na pewno chcesz zresetować ustawienia ExtendedRadio?"
+	"Options.SECTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod]": "ExtendedRadio",
+	"Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "Główne",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "Jakość życia",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "Narzędzia",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Wyłącz reklamy przy uruchamianiu",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Wyłącz reklamy podczas wczytywania gry.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Wczytaj ostatnio wybrane radio przy uruchamianiu",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Wybierz ostatnio wybrane radio podczas wczytywania gry.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "Przeładuj radia",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "Przeładuj radia, możesz zaktualizować swoje radio, jeśli wprowadziłeś do niego zmiany. Może również spowodować zawieszenie się gry.",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Zresetuj ustawienia ExtendedRadio",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Przywraca domyślne ustawienia moda.",
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Czy na pewno chcesz zresetować ustawienia ExtendedRadio?"
 }

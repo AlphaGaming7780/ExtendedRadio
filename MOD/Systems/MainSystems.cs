@@ -1,37 +1,54 @@
-
 using Colossal.Serialization.Entities;
 using Game;
-using System.Collections.Generic;
 using UnityEngine;
-using Colossal.PSI.Environment;
-using System.IO;
-using Game.UI.Menu;
-using ExtendedRadio.UI;
-using Game.Audio;
 using Game.UI.InGame;
 using HarmonyLib;
-using Colossal.UI.Binding;
+using Game.Input;
+using Game.Prefabs;
+using Game.Settings;
 
 namespace ExtendedRadio.Systems;
 
 public partial class MainSystem : GameSystemBase
 {
-	//internal static NotificationUISystem m_NotificationUISystem;
+	private RadioUISystem _radioUISystem;
+	private Traverse _radioUISystemTraverse;
 
-	protected override void OnCreate()
+    private ProxyAction _pauseRadioBinding;
+    private ProxyAction _muteRadioBinding;
+    private ProxyAction _nextSongRadioBinding;
+    private ProxyAction _prevSongRadioBinding;
+    private ProxyAction _volumeUpRadioBinding;
+    private ProxyAction _volumeDownRadioBinding;
+
+    protected override void OnCreate()
 	{
 		base.OnCreate();
-		Enabled = false;
-		//m_NotificationUISystem = base.World.GetOrCreateSystemManaged<NotificationUISystem>();
-	}
+		_radioUISystem = World.GetOrCreateSystemManaged<RadioUISystem>();
+        _radioUISystemTraverse = Traverse.Create(_radioUISystem);
 
-	protected override void OnUpdate() { }
+        _pauseRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.PauseRadioBinding));
+        _muteRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.MuteRadioBinding));
+        _nextSongRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.NextSongRadioBinding));
+        _prevSongRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.PrevSongRadioBinding));
+        _volumeUpRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.VolumeUpRadioBinding));
+        _volumeDownRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.VolumeDownRadioBinding));
+    }
+
+    protected override void OnUpdate() {
+		if (_pauseRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetPaused", [typeof(bool)]).GetValue(!ExtendedRadio.radio.paused);
+        if (_muteRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetMuted", [typeof(bool)]).GetValue(!ExtendedRadio.radio.muted);
+        if (_nextSongRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) ExtendedRadio.radio.NextSong();
+        if (_prevSongRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) ExtendedRadio.radio.PreviousSong();
+        if (_volumeUpRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetVolume", [typeof(float)]).GetValue(SharedSettings.instance.audio.radioVolume + 0.05f);
+        if (_volumeDownRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetVolume", [typeof(float)]).GetValue(SharedSettings.instance.audio.radioVolume - 0.05f);
+    }
 
 	protected override void OnGameLoadingComplete(Purpose purpose, GameMode mode)
 	{
 		if(purpose == Purpose.LoadGame && mode == GameMode.Game)
 		{
-			Traverse.Create(base.World.GetExistingSystemManaged<RadioUISystem>())?.Method("SetSkipAds", [typeof(bool)])?.GetValue(Mod.m_Setting.DisableAdsOnStartup);
+            _radioUISystemTraverse.Method("SetSkipAds", [typeof(bool)])?.GetValue(ExtendedRadioMod._setting.DisableAdsOnStartup);
         }
 	}
 }

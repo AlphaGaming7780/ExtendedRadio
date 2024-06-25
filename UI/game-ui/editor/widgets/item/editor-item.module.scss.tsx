@@ -1,0 +1,40 @@
+import { getModule } from "cs2/modding"
+
+const path$ = "game-ui/editor/widgets/item/editor-item.module.scss"
+
+export const EditorItemSCSS = {
+	pickerMinHeight: getModule(path$, "classes").pickerMinHeight,
+	editorItemBase: getModule(path$, "classes").editorItemBase,
+	centered: getModule(path$, "classes").centered,
+	editorItem: getModule(path$, "classes").editorItem,
+	row: getModule(path$, "classes").row,
+	label: getModule(path$, "classes").label,
+	control: getModule(path$, "classes").control,
+	children: getModule(path$, "classes").children,
+	toggle: getModule(path$, "classes").toggle,
+	input: getModule(path$, "classes").input,
+	pickerToggle: getModule(path$, "classes").pickerToggle,
+	dropdownToggle: getModule(path$, "classes").dropdownToggle,
+	directoryButton: getModule(path$, "classes").directoryButton,
+	directoryIcon: getModule(path$, "classes").directoryIcon,
+	vectorLabel: getModule(path$, "classes").vectorLabel,
+	vectorInput: getModule(path$, "classes").vectorInput,
+	sliderContainer: getModule(path$, "classes").sliderContainer,
+	slider: getModule(path$, "classes").slider,
+	sliderInput: getModule(path$, "classes").sliderInput,
+	picker: getModule(path$, "classes").picker,
+	pickerPopup: getModule(path$, "classes").pickerPopup,
+	swatch: getModule(path$, "classes").swatch,
+	alpha: getModule(path$, "classes").alpha,
+	groupChildren: getModule(path$, "classes").groupChildren,
+	expandableHeader: getModule(path$, "classes").expandableHeader,
+	headerLabel: getModule(path$, "classes").headerLabel,
+	headerSummary: getModule(path$, "classes").headerSummary,
+	expandableChildren: getModule(path$, "classes").expandableChildren,
+	colorPickerContainer: getModule(path$, "classes").colorPickerContainer,
+	detailsBlock: getModule(path$, "classes").detailsBlock,
+	errorLabel: getModule(path$, "classes").errorLabel,
+	errorBorder: getModule(path$, "classes").errorBorder,
+	labelRight: getModule(path$, "classes").labelRight,
+}
+

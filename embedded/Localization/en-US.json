@@ -16,7 +16,6 @@
   "Options.WARNING[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "Are you sur you want to reset the settings of ExtendedRadio?",
 
 
-  // Mix Network
 
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.MixNetwork]": "Mix Network",
 
@@ -30,7 +29,6 @@
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Finish the current clip to instant play the new queue.",
 
 
-  //KeyBinding
 
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "Keybinds",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.RadioControls]": "Radio Controls",

@@ -29,7 +29,7 @@ public class Localization
 
                 GameManager.instance.localizationManager.AddSource(localeID, new MemorySource(localization));
             }
-        } catch (Exception ex) { Mod.log.Error(ex); }
+        } catch (Exception ex) { ExtendedRadioMod.log.Error(ex); }
 	}
 }
 

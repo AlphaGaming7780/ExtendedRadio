@@ -1,15 +1,15 @@
 {
-	"Options.SECTION[ExtendedRadio.ExtendedRadio.Mod]": "电台拓展",
-	"Options.TAB[ExtendedRadio.ExtendedRadio.Mod.Main]": "主要",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.QOL]": "生活质量",
-	"Options.GROUP[ExtendedRadio.ExtendedRadio.Mod.Utility]": "工具",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "启动时禁用广告",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.DisableAdsOnStartup]": "当您进入游戏时禁用电台广告。",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "进入存档时加载最后选中的音乐",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.SaveLastRadio]": "进入存档时加载上一次退出游戏时的电台音乐。",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "重新加载电台",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ReloadRadio]": "重新加载电台。如果您添加/删除了电台，此功能会更新您的电台内容。注意：此功能可能会导致游戏闪退。",
-	"Options.OPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "重置电台拓展模组的设置",
-	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "将电台拓展模组的设置重置为默认值。",
-	"Options.WARNING[ExtendedRadio.ExtendedRadio.Mod.Setting.ResetSettings]": "您确定要重置电台拓展的设置吗？"
+	"Options.SECTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod]": "电台拓展",
+	"Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "主要",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "生活质量",
+	"Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "工具",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "启动时禁用广告",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "当您进入游戏时禁用电台广告。",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "进入存档时加载最后选中的音乐",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "进入存档时加载上一次退出游戏时的电台音乐。",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "重新加载电台",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "重新加载电台。如果您添加/删除了电台，此功能会更新您的电台内容。注意：此功能可能会导致游戏闪退。",
+	"Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "重置电台拓展模组的设置",
+	"Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "将电台拓展模组的设置重置为默认值。",
+	"Options.WARNING[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "您确定要重置电台拓展的设置吗？"
 }

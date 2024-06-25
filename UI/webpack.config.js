@@ -12,7 +12,7 @@ if (!CSII_USERDATAPATH) {
 }
 
 const OUTPUT_DIR = `..\\bin\\UI`;
-// const OUTPUT_DIR = `${CSII_USERDATAPATH}\\Mods\\${MOD.id}`;
+//const OUTPUT_DIR = `${CSII_USERDATAPATH}\\Mods\\${MOD.id}`;
 
 const banner = `
  * Cities: Skylines II UI Module
@@ -38,6 +38,7 @@ module.exports = {
     "cs2/bindings": "cs2/bindings",
     "cs2/l10n": "cs2/l10n",
     "cs2/ui": "cs2/ui",
+    "cs2/input": "cs2/input",
     "cs2/utils": "cs2/utils",
     "cohtml/cohtml": "cohtml/cohtml",
   },
@@ -80,6 +81,9 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     modules: ["node_modules", path.join(__dirname, "src")],
+    alias: {
+      "mod.json": path.resolve(__dirname, "mod.json"),
+    },
   },
   output: {
     path: path.resolve(__dirname, OUTPUT_DIR),

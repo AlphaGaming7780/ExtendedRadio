@@ -19,7 +19,7 @@
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Clear the clips queue to make a new one from you selection.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Finish the current clip.",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Finish the current clip to instant play the new queue.",
-  "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "Keybinds",
+  "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "Sterowanie",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.RadioControls]": "Radio Controls",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.PauseRadioBinding]": "Radio pause key",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod/PauseRadioBinding/binding]": "Radio pause binding",

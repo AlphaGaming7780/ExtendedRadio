@@ -51,8 +51,11 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<Thumbnail Value="Properties/ExtendedRadio_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
   <!--<Screenshot Value="Properties/ExtendedRadio_Thumbnail.png" />-->
-	<Screenshot Value="Properties/Screenshot/CustomRadiosAndUI.png" />
-	<Screenshot Value="Properties/Screenshot/Settings.png" />
+  <Screenshot Value="Properties/Screenshot/CustomRadiosAndUI.png" />
+  <Screenshot Value="Properties/Screenshot/MixNetwork.png" />
+  <Screenshot Value="Properties/Screenshot/SettingsMain.png" />
+  <Screenshot Value="Properties/Screenshot/SettingsMixNetwork.png" />
+  <Screenshot Value="Properties/Screenshot/SettingsKeybinds.png" />
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
@@ -73,9 +76,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 
 ## Improvement
 - Now use game database to load the OGG files.
-- Multiple optimisation using game code.
+- Multiple optimization using game code.
 - Update Wiki to follow the new change.
-- Ads can now have a brand name in the `Brand` field of the [AudioAsset JSON](https://github.com/AlphaGaming7780/ExtendedRadio/wiki/Radio-Elements#audioasset). I change the default value of this field to be a brand name, but if you set a JSON in your radio mod that already have a value for this field, your value will override the default value.
+- Full support for `Brand`, `PSAType`, `AlertType`, `NewsType` and `WeatherType` for the `AudioAsset`.
 
 ## Fixes
 - Fixes issue related to Economy 2.0 patch.

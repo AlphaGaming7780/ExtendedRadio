@@ -12,7 +12,7 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "ExtendedRadioの設定をリセット",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "このMODの設定をデフォルト状態にリセットします。",
   "Options.WARNING[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ResetSettings]": "本当にExtendedRadioの設定をリセットしますか?",
-  "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.MixNetwork]": "Mix Network",
+  "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.MixNetwork]": "ミックスネットワーク",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "ミックスネットワークを有効化",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "ミックスネットワーク機能を有効にします。ラジオをリロードすることを忘れないでください。",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "クリップのキューを消去。",

@@ -81,7 +81,7 @@ namespace ExtendedRadio
 			ExtendedRadio.radioTravers.Field("m_RadioChannels").SetValue(m_RadioChannels);
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
 
-            if (ExtendedRadioMod._setting.SaveLastRadio && m_RadioChannels.TryGetValue(ExtendedRadioMod._setting.LastRadio, out RuntimeRadioChannel channel))
+            if (ExtendedRadioMod.s_setting.SaveLastRadio && m_RadioChannels.TryGetValue(ExtendedRadioMod.s_setting.LastRadio, out RuntimeRadioChannel channel))
             {
                 ExtendedRadio.radio.currentChannel = channel;
             }

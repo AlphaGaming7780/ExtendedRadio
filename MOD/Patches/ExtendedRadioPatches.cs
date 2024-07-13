@@ -37,10 +37,10 @@ namespace ExtendedRadio.Patches
         {
             static void Postfix(string name)
             {
-                if (ExtendedRadioMod._setting.SaveLastRadio)
+                if (ExtendedRadioMod.s_setting.SaveLastRadio)
                 {
-                    ExtendedRadioMod._setting.LastRadio = name;
-                    ExtendedRadioMod._setting.ApplyAndSave();
+                    ExtendedRadioMod.s_setting.LastRadio = name;
+                    ExtendedRadioMod.s_setting.ApplyAndSave();
                 }
                 ExtendedRadio.RadioStationChanged(name);
             }

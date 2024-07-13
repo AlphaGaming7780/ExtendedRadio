@@ -27,12 +27,12 @@ public partial class MainSystem : GameSystemBase
 		_radioUISystem = World.GetOrCreateSystemManaged<RadioUISystem>();
         _radioUISystemTraverse = Traverse.Create(_radioUISystem);
 
-        _pauseRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.PauseRadioBinding));
-        _muteRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.MuteRadioBinding));
-        _nextSongRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.NextSongRadioBinding));
-        _prevSongRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.PrevSongRadioBinding));
-        _volumeUpRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.VolumeUpRadioBinding));
-        _volumeDownRadioBinding = ExtendedRadioMod._setting.GetAction(nameof(ExtendedRadioMod._setting.VolumeDownRadioBinding));
+        _pauseRadioBinding = ExtendedRadioMod.s_setting.GetAction(nameof(ExtendedRadioMod.s_setting.PauseRadioBinding));
+        _muteRadioBinding = ExtendedRadioMod.s_setting.GetAction(nameof(ExtendedRadioMod.s_setting.MuteRadioBinding));
+        _nextSongRadioBinding = ExtendedRadioMod.s_setting.GetAction(nameof(ExtendedRadioMod.s_setting.NextSongRadioBinding));
+        _prevSongRadioBinding = ExtendedRadioMod.s_setting.GetAction(nameof(ExtendedRadioMod.s_setting.PrevSongRadioBinding));
+        _volumeUpRadioBinding = ExtendedRadioMod.s_setting.GetAction(nameof(ExtendedRadioMod.s_setting.VolumeUpRadioBinding));
+        _volumeDownRadioBinding = ExtendedRadioMod.s_setting.GetAction(nameof(ExtendedRadioMod.s_setting.VolumeDownRadioBinding));
     }
 
     protected override void OnUpdate() {
@@ -48,7 +48,7 @@ public partial class MainSystem : GameSystemBase
 	{
 		if(purpose == Purpose.LoadGame && mode == GameMode.Game)
 		{
-            _radioUISystemTraverse.Method("SetSkipAds", [typeof(bool)])?.GetValue(ExtendedRadioMod._setting.DisableAdsOnStartup);
+            _radioUISystemTraverse.Method("SetSkipAds", [typeof(bool)])?.GetValue(ExtendedRadioMod.s_setting.DisableAdsOnStartup);
         }
 	}
 }

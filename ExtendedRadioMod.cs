@@ -18,7 +18,7 @@ namespace ExtendedRadio
 	{
 		public static ILog log = LogManager.GetLogger($"{nameof(ExtendedRadio)}").SetShowsErrorsInUI(false);
 
-		internal static Setting _setting;
+		internal static Setting s_setting;
 		internal static string modPath;
 		static internal string resources; // = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "resources");
 		// public static readonly string CustomRadiosPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CustomRadios");
@@ -37,10 +37,10 @@ namespace ExtendedRadio
 
             if (!GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {log.Error("Failed to get the ExecutableAsset."); return;}
 
-			_setting = new Setting(this);
-			_setting.RegisterKeyBindings();
-            _setting.RegisterInOptionsUI();
-            AssetDatabase.global.LoadSettings("settings", _setting, new Setting(this));
+			s_setting = new Setting(this);
+			s_setting.RegisterKeyBindings();
+            s_setting.RegisterInOptionsUI();
+            AssetDatabase.global.LoadSettings("settings", s_setting, new Setting(this));
             
 			Localization.LoadLocalization();
 
@@ -64,7 +64,7 @@ namespace ExtendedRadio
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 			updateSystem.UpdateAt<MixNetwork>(SystemUpdatePhase.UIUpdate);
 
-			harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
+            harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			harmony.PatchAll(typeof(ExtendedRadioMod).Assembly);
 			var patchedMethods = harmony.GetPatchedMethods().ToArray();
 			log.Info($"Plugin ExtendedRadio made patches! Patched methods: " + patchedMethods.Length);

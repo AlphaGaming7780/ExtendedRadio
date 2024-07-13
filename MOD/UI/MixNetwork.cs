@@ -110,7 +110,7 @@ namespace ExtendedRadio
 
         private static Dictionary<string, RadioNetwork> s_networks = [];
         private static Dictionary<string, RuntimeRadioChannel> s_radioChannels = [];
-        internal static Dictionary<SegmentType, List<string>> s_enabledTags = ExtendedRadioMod._setting.EnabledTags;
+        internal static Dictionary<SegmentType, List<string>> s_enabledTags = ExtendedRadioMod.s_setting.EnabledTags;
         private static readonly List<RadioTag> s_radiosTags = [];
 
         protected override void OnCreate()
@@ -159,9 +159,9 @@ namespace ExtendedRadio
             VB_enabledTags.Update(s_enabledTags);
             VB_enabledTags.TriggerUpdate();
 
-            if(ExtendedRadioMod._setting.MixNetworkClearQueue)
+            if(ExtendedRadioMod.s_setting.MixNetworkClearQueue)
             {
-                if (ExtendedRadio.radio.currentClip.m_Emergency == Entity.Null && ExtendedRadioMod._setting.MixNetworkFinishCurrentClip)
+                if (ExtendedRadio.radio.currentClip.m_Emergency == Entity.Null && ExtendedRadioMod.s_setting.MixNetworkFinishCurrentClip)
                 {
                     ExtendedRadio.radioTravers.Method("FinishCurrentClip").GetValue();
                 }
@@ -170,8 +170,8 @@ namespace ExtendedRadio
                 ExtendedRadio.radioTravers.Field("m_ReplayIndex").SetValue(0);
             }
 
-            ExtendedRadioMod._setting.EnabledTags = s_enabledTags;
-            ExtendedRadioMod._setting.ApplyAndSave();
+            ExtendedRadioMod.s_setting.EnabledTags = s_enabledTags;
+            ExtendedRadioMod.s_setting.ApplyAndSave();
         }
 
         internal static void CreateMixNetwork()

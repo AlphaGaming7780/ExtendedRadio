@@ -16,7 +16,7 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "Włącz stacje Mix",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "Włącz funkcję umożliwiającą miksowanie radia. Nie zapomnij kliknąć, przeładuj radia.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Wyczyść kolejkę utworów.",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Clear the clips queue to make a new one from your selection.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Wyczyść kolejkę utworów, aby utworzyć nową, wybraną przez ciebie.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Dokończ bieżący utwór.",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Dokończ bieżący utwór, aby odtworzyć nową kolejkę.",
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "Sterowanie",

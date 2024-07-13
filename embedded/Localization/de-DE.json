@@ -16,7 +16,7 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "Aktivierung von Mische Radiostationen",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "Aktivierung von Mische Radiostationen-Funktion. Vergiss nicht, die Radioprogramme neu zu laden.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Löscht Lieder Warteschlange.",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Löscht Lieder Warteschlange, um eine neue Auswahl zu treffen.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Clear the clips queue to make a new one from your selection.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Beendet das aktuelle Lied.",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "Beendet das aktuelle Lied, um die neue Auswahl abzuspielen.",
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "Tastenbelegung",

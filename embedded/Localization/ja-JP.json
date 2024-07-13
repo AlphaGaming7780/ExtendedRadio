@@ -16,7 +16,7 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "ミックスネットワークを有効化",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "ミックスネットワーク機能を有効にします。ラジオをリロードすることを忘れないでください。",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "クリップのキューを消去。",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "選択したクリップから新しいクリップを作成するためにクリップキューを消去します。",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Clear the clips queue to make a new one from your selection.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "現在のクリップを終了",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "新しいキューが即座に再生されるように、現在のクリップを終了させます。",
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "キー",

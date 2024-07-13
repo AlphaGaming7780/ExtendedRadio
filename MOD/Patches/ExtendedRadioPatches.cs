@@ -15,6 +15,8 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Game.Triggers;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ExtendedRadio.Patches
 {
@@ -91,84 +93,15 @@ namespace ExtendedRadio.Patches
             }
         }
 
-        //[HarmonyPatch(typeof(Radio), "SetupOrSkipSegment")]
-        //class Radio_SetupOrSkipSegment
-        //{
-        //    static bool Prefix(Radio __instance, ref bool __result)
-        //    {
-        //        try
-        //        {
-        //            RuntimeRadioChannel currentChannel = __instance.currentChannel;
-        //            if ((currentChannel?.currentProgram) == null)
-        //            {
-        //                __result = false;
-        //                return false;
-        //            }
-        //            RuntimeProgram currentProgram = __instance.currentChannel.currentProgram;
-        //            for (; ; )
-        //            {
-        //                RuntimeSegment currentSegment = currentProgram.currentSegment;
-        //                if (currentSegment == null)
-        //                {
-        //                    break;
-        //                }
-        //                if (Traverse.Create(__instance).Field("m_OnDemandClips").GetValue<Dictionary<SegmentType, OnDemandClips>>().TryGetValue(currentSegment.type, out OnDemandClips onDemandClips))
-        //                {
-        //                    onDemandClips(currentSegment);
-        //                }
-        //                Debug.Log(currentSegment.type);
-        //                if (currentSegment.clips.Count != 0)
-        //                {
-        //                    __result = true;
-        //                    return false;
-        //                }
-        //                if (!currentProgram.GoToNextSegment())
-        //                {
-        //                    __result = false;
-        //                    return false;
-        //                }
-        //            }
-        //            __result = false;
-        //            return false;
-        //        }
-        //        catch (Exception e) { Debug.LogError(e.Message); Debug.LogError(e.StackTrace); }
-        //        return true;
-        //    }
-        //}
-
-        //   [HarmonyPatch(typeof(AudioAsset), "LoadAsync")]
-        //internal class AudioAssetLoadAsyncPatch
-        //{
-        //	static bool Prefix(AudioAsset __instance, ref Task<AudioClip> __result)
-        //	{	
-        //		if(!CustomRadios.customeRadioChannelsName.Contains(__instance.GetMetaTag(AudioAsset.Metatag.RadioChannel))) return true;
-
-        //		__result = LoadAudioFile(__instance);
-        //		return false;
-        //	}
-
-        //	private static async Task<AudioClip> LoadAudioFile(AudioAsset audioAsset)
-        //	{
-        //		Traverse audioAssetTravers = Traverse.Create(audioAsset);
-
-        //		if(audioAssetTravers.Field("m_Instance").GetValue() == null)
-        //		{
-        //			string sPath = MusicLoader.GetClipPathFromAudiAsset(audioAsset);
-        //			using UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("file://" + sPath, MusicLoader.GetClipFormatFromAudiAsset(audioAsset));
-        //			((DownloadHandlerAudioClip) www.downloadHandler).streamAudio = true;
-        //			await www.SendWebRequest();
-        //			AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
-        //			www.Dispose();
-
-        //			clip.name = sPath;
-        //			clip.hideFlags = HideFlags.DontSave;
-
-        //			audioAssetTravers.Field("m_Instance").SetValue(clip);
-        //		}
-
-        //		return (AudioClip) audioAssetTravers.Field("m_Instance").GetValue();
-        //	}
-        //}
+        [HarmonyPatch(typeof(AudioAsset), "LoadAsync")]
+        internal class AudioAssetLoadAsyncPatch
+        {
+            static bool Prefix(AudioAsset __instance, ref Task<AudioClip> __result, bool useCached = true, AudioType audioType = AudioType.OGGVORBIS)
+            {
+                __result = __instance.LoadAsyncFile(useCached, MusicLoader.GetClipFormatFromFileExtension(Path.GetExtension(__instance.path)));
+                return false;
+            }
+        }
 
 
         [HarmonyPatch(typeof(Radio), "GetPlaylistClips")]
@@ -208,7 +141,6 @@ namespace ExtendedRadio.Patches
                     Dictionary<string, List<AudioAsset>> dictionary = [];
                     bool check(AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag));
                     IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets(SearchFilter<AudioAsset>.ByCondition(check));
-                    Debug.Log(audioAssetList.Count());
                     segment.clipsCap = audioAssetList.Count() > 1 ? 1 : audioAssetList.Count();
                     foreach (AudioAsset audioAsset in audioAssetList)
                     {
@@ -237,7 +169,7 @@ namespace ExtendedRadio.Patches
                             {
                                 weightedRandom.AddRange(key, brandPopularity[i].m_Popularity);
                             }
-                            catch (Exception ex) { Debug.Log(ex.Message); }
+                            catch {}
                         }
                     }
                     List<AudioAsset> list2 = [];

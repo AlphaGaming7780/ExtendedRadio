@@ -40,7 +40,7 @@ namespace ExtendedRadio
 				jsAudioAsset = new();
 			}
 
-            AudioAsset audioAsset = new();
+            AudioAsset audioAsset;
             AssetDataPath assetDataPath = AssetDataPath.Create(audioFilePath, EscapeStrategy.None);
             try
             {

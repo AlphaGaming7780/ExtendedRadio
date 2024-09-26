@@ -16,7 +16,7 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "开启混合网络",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkEnabled]": "启用混合网络功能，不要忘记重新加载电台！",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "清除剪辑队列。",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "Clear the clips queue to make a new one from your selection.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkClearQueue]": "清除片段队列以从您的选择中创建一个新的片段",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "结束当前片段。",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.MixNetworkFinishCurrentClip]": "完成当前片段以即时播放新队列。",
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Keybinds]": "热键",

@@ -1,10 +1,5 @@
 ﻿using Colossal.UI.Binding;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Game.Audio.Radio.Radio;
 
 namespace ExtendedRadio.Extension;
 

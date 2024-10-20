@@ -66,8 +66,9 @@ public class Setting(IMod mod) : ModSetting(mod)
     [SettingsUIKeyboardBinding(BindingKeyboard.PageUp, actionName: nameof(NextSongRadioBinding), alt: true)]
     public ProxyBinding NextSongRadioBinding { get; set; }
 
+    // I wish the INSERT key was in
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(UnityEngine.InputSystem.Key.Insert, actionName: nameof(PrevSongRadioBinding), alt: true)]
+    [SettingsUIKeyboardBinding(BindingKeyboard.None, actionName: nameof(PrevSongRadioBinding), alt: true)]
     public ProxyBinding PrevSongRadioBinding { get; set; }
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]

@@ -24,17 +24,17 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 ## Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ⚠️French 36% : aricoseco
-- ⚠️Chinese Simplified 37% : RilkeXS(无手文) (RilkeXS)
-- ❌Chinese Traditional 0%
-- ⚠️German 35% : Speedster McRainbow (RainbowSpeedy)
-- ❌Italian 0%
-- ⚠️Japanese 35%: つちのこ (main1108)
-- ⚠️Korean 37% : TwotoolusFLY_LSh.st
-- ⚠️Polish 36% : Lisek
-- ⚠️Portuguese, Brazilian 37% : Miguel Pereira Campos (mpcamposz)
+- ✔️French 100% : aricoseco, Morgan Touverey Quilling (mtouverey), khallmark
+- ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS), jslxxgyy, GuaGua_ua
+- ⚠️Chinese Traditional 3% : KAI (kai0211)
+- ✔️German 100% : Speedster McRainbow (RainbowSpeedy), Ben0884 (Ben84), Lorenz Fiedrich (GuysLetsPlay)
+- ⚠️Italian 80% : Carmelo B. (b.carmelo.92)
+- ⚠️Japanese 93% : つちのこ (main1108)
+- ✔️Korean 100% : TwotoolusFLY_LSh.st
+- ✔️Polish 100% : Lisek, karmel68
+- ⚠️Portuguese, Brazilian 94% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
 - ⚠️Russian 36% : Lek0ms
-- ⚠️Spanish 36% : elGendo87
+- ✔️Spanish 100% : elGendo87
 
 # Acknowledgment
 - optimus-code
@@ -61,7 +61,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.3.0" />
+	<ModVersion Value="1.3.1" /> <!--NEW VERSION-->
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -69,27 +69,29 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.3.0
+# 1.3.1
 ## New features
-- Keybinds to control the radio, check the settings.
-- Mix Network
+- ExtendedRadio can now load other file type, but I disabled that for now.
 
 ## Improvement
-- Now use game database to load the OGG files.
-- Multiple optimization using game code.
+- Multiple optimization.
 - Update Wiki to follow the new change.
-- Full support for `Brand`, `PSAType`, `AlertType`, `NewsType` and `WeatherType` for the `AudioAsset`.
 
 ## Fixes
-- Fixes issue related to Economy 2.0 patch.
+- this one `AudioManager: Error on game load, disabling system... System.ArgumentNullException: Value cannot be null.
+Parameter name: key`.
 
-## Translations
-- Korean : TwotoolusFLY_LSh.st
-- German : Speedster McRainbow (RainbowSpeedy)
-- Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz)
-- Russian : Lek0ms
-- Chinese Simplified : RilkeXS(无手文) (RilkeXS)
+## Translations update
+- French : Morgan Touverey Quilling (mtouverey), khallmark
+- Chinese Simplified : RilkeXS(无手文) (RilkeXS), jslxxgyy, GuaGua_ua
+- Chinese Traditional : KAI (kai0211)
+- German : Ben0884 (Ben84), Lorenz Fiedrich (GuysLetsPlay)
+- Italian : Carmelo B. (b.carmelo.92)
 - Japanese : つちのこ (main1108)
+- Korean : TwotoolusFLY_LSh.st
+- Polish : Lisek, karmel68
+- Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
+- Spanish : elGendo87
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

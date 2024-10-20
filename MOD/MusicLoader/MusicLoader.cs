@@ -13,7 +13,21 @@ namespace ExtendedRadio
 {
 	public class MusicLoader
 	{
-		public static AudioAsset LoadAudioFile(string audioFilePath, SegmentType segmentType, string programName, string networkName, string radioChannelName) {
+		public static AudioAsset[] LoadAudioFiles(string directory, SegmentType segmentType, string programName, string radioChannelName, string radioNetworkName)
+		{
+			AudioAsset[] audioAssets = [];
+            DefaultAssetFactory.instance.GetAssetMimes(typeof(AudioAsset), out IReadOnlyList<string> formats);
+            foreach (string format in formats) {
+                foreach (string audioAssetFile in Directory.GetFiles(directory, $"*{format}"))
+                {
+                    audioAssets = audioAssets.AddToArray(LoadAudioFile(audioAssetFile, segmentType, programName, radioChannelName, radioNetworkName));
+                }
+            }
+
+			return audioAssets;
+        }
+
+		public static AudioAsset LoadAudioFile(string audioFilePath, SegmentType segmentType, string programName, string radioChannelName, string networkName) {
 
 			JsonAudioAsset jsAudioAsset;
 
@@ -26,7 +40,7 @@ namespace ExtendedRadio
 				jsAudioAsset = new();
 			}
 
-            AudioAsset audioAsset = new();
+            AudioAsset audioAsset;
             AssetDataPath assetDataPath = AssetDataPath.Create(audioFilePath, EscapeStrategy.None);
             try
             {
@@ -54,9 +68,9 @@ namespace ExtendedRadio
                 Dictionary<Metatag, string> m_Metatags = [];
                 Traverse audioAssetTravers = Traverse.Create(audioAsset);
                 Track track = new(writeStream, audioAsset.database.GetMeta(audioAsset.guid).mimeType, null);
-                AddMetaTag(audioAsset, m_Metatags, Metatag.Title, jsAudioAsset.Title ?? track.Title);
-                AddMetaTag(audioAsset, m_Metatags, Metatag.Album, jsAudioAsset.Album ?? track.Album);
-                AddMetaTag(audioAsset, m_Metatags, Metatag.Artist, jsAudioAsset.Artist ?? track.Artist);
+                AddMetaTag(audioAsset, m_Metatags, Metatag.Title, string.IsNullOrEmpty(jsAudioAsset.Title) ? track.Title : jsAudioAsset.Title);
+                AddMetaTag(audioAsset, m_Metatags, Metatag.Album, string.IsNullOrEmpty(jsAudioAsset.Album) ? track.Album : jsAudioAsset.Album);
+                AddMetaTag(audioAsset, m_Metatags, Metatag.Artist, string.IsNullOrEmpty(jsAudioAsset.Artist) ? track.Artist : jsAudioAsset.Artist);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Type, track, "TYPE", jsAudioAsset.Type ?? (segmentType.ToString() == "Playlist" ? "Music" : segmentType.ToString()));
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Brand, track, "BRAND", jsAudioAsset.Brand);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.RadioStation, track, "RADIO STATION", networkName);
@@ -117,7 +131,7 @@ namespace ExtendedRadio
 
 		internal static void AddMetaTag(AudioAsset audioAsset, Dictionary<Metatag, string> m_Metatags, Metatag tag, Track trackMeta, string oggTag, string value = null)
 		{
-			string extendedTag = value ?? GetExtendedTag(trackMeta, oggTag);
+			string extendedTag = string.IsNullOrEmpty(value) ? GetExtendedTag(trackMeta, oggTag) : value;
 			if (!string.IsNullOrEmpty(extendedTag))
 			{
 				audioAsset.AddTag(oggTag.ToLower() + ":" + extendedTag);
@@ -146,29 +160,29 @@ namespace ExtendedRadio
 		//	return "";
 		//}
 
-		//internal static AudioType GetClipFormatFromAudiAsset(AudioAsset audioAsset) {
-
-		//	foreach(string s in audioAsset.tags) {
-		//		if(s.Contains("AudioFileFormat=")) {
-
-		//			return s.Remove(0, "AudioFileFormat=".Length) switch //s["AudioFileFormat=".Length..]
-		//			{
-		//				"ACC" => AudioType.ACC,
-		//				"AIFF" => AudioType.AIFF,
-		//				"IT" => AudioType.IT,
-		//				"MOD" => AudioType.MOD,
-		//				"MPEG" => AudioType.MPEG,
-		//				"S3M" => AudioType.S3M,
-		//				"WAV" => AudioType.WAV,
-		//				"XM" => AudioType.XM,
-		//				"XMA" => AudioType.XMA,
-		//				"VAG" => AudioType.VAG,
-		//				"AUDIOQUEUE" => AudioType.AUDIOQUEUE,
-		//				_ => AudioType.OGGVORBIS,
-		//			};
-		//		}
-		//	}
-		//	return AudioType.OGGVORBIS;
-		//}
-    }
+		internal static AudioType GetClipFormatFromFileExtension(string fileExtension)
+		{
+            // https://docs.unity3d.com/ScriptReference/AudioType.html
+			fileExtension = fileExtension.TrimStart('.');
+            return fileExtension.ToUpper() switch
+			{
+				"OGG" => AudioType.OGGVORBIS,
+				"OGA" => AudioType.OGGVORBIS,
+                "ACC" => AudioType.ACC, //NOT SUPPORTED
+				"MP4" => AudioType.ACC, //NOT SUPPORTED
+				"M4A" => AudioType.ACC, //NOT SUPPORTED
+                "AIFF" => AudioType.AIFF, //WAV BUT FOR APPLE PC
+				"IT" => AudioType.IT, //IDK
+				"MOD" => AudioType.MOD,
+				"MP3" => AudioType.MPEG,
+				"S3M" => AudioType.S3M,
+				"WAV" => AudioType.WAV,
+				"XM" => AudioType.XM,
+				"XMA" => AudioType.XMA, //XBOX 360
+				"VAG" => AudioType.VAG, // PLAYSTATION
+				"AUDIOQUEUE" => AudioType.AUDIOQUEUE,
+				_ => AudioType.UNKNOWN,
+			};
+		}
+	}
 }

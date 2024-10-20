@@ -72,7 +72,7 @@ namespace ExtendedRadio
 			ExtendedRadio.radioTravers.Field("m_RadioChannels").SetValue(m_RadioChannels);
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
 
-            if (ExtendedRadioMod.s_setting.SaveLastRadio && m_RadioChannels.TryGetValue(ExtendedRadioMod.s_setting.LastRadio, out RuntimeRadioChannel channel))
+            if (ExtendedRadioMod.s_setting.SaveLastRadio && ExtendedRadioMod.s_setting.LastRadio != null && m_RadioChannels.TryGetValue(ExtendedRadioMod.s_setting.LastRadio, out RuntimeRadioChannel channel))
             {
                 ExtendedRadio.radio.currentChannel = channel;
             }
@@ -221,17 +221,14 @@ namespace ExtendedRadio
 						//segment.tags.AddRangeToArray([segment.type.ToString(), program.name, radioChannel.name, radioChannel.network]);
 						segment.tags = FormatTags(segment.type, program.name, radioChannel.name, radioChannel.network);
 
-						//if(segment.tags.Length <= 0) {
-						//	segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
-						//}
+                        //if(segment.tags.Length <= 0) {
+                        //	segment.tags = [segment.type.ToString(), program.name, radioChannel.name, radioChannel.network];
+                        //}
 
-						foreach (string audioAssetDirectory in Directory.GetDirectories( segmentDirectory )) {
-							foreach(string audioAssetFile in Directory.GetFiles(audioAssetDirectory, "*.ogg")) {
-								
-								segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, program.name, radioChannel.network, radioChannel.name));
-
-							}
-						}
+                        foreach (string audioAssetDirectory in Directory.GetDirectories(segmentDirectory))
+                        {
+                            segment.clips = segment.clips.AddRangeToArray(MusicLoader.LoadAudioFiles(audioAssetDirectory, segment.type, program.name, radioChannel.name, radioChannel.network));
+                        }
 
 						if(!File.Exists(segmentDirectory+"\\Segment.json")) segment.clipsCap = segment.clips.Length;
 
@@ -294,12 +291,8 @@ namespace ExtendedRadio
 			};
 
 			foreach(string audioAssetDirectory in Directory.GetDirectories( path )) {
-				foreach(string audioAssetFile in Directory.GetFiles(audioAssetDirectory, "*.ogg")) {
-
-					segment.clips = segment.clips.AddToArray(MusicLoader.LoadAudioFile(audioAssetFile, segment.type, program.name, radioChannel.network, radioChannel.name));
-
-				}
-			}
+                segment.clips = segment.clips.AddRangeToArray(MusicLoader.LoadAudioFiles(audioAssetDirectory, segment.type, program.name, radioChannel.name, radioChannel.network));
+            }
 
 			program.segments = [segment];
 			radioChannel.programs = radioChannel.programs.AddToArray(program);

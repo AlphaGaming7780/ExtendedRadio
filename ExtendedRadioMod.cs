@@ -64,7 +64,7 @@ namespace ExtendedRadio
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 			updateSystem.UpdateAt<MixNetwork>(SystemUpdatePhase.UIUpdate);
 
-			// Disabled for now, still need to figure out performance impact, maybe...
+			// Disabled for now, still need to figure out performance impact, maybe..., but it work.
 			//DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".mp3", false);
 			//DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".flac", false);
 

@@ -2,17 +2,8 @@ using System.IO;
 using System.Collections.Generic;
 using Colossal.Json;
 using static Game.Audio.Radio.Radio;
-using ExtendedRadio.Patches;
 using HarmonyLib;
-using System.Dynamic;
-using System.IO.Compression;
-using System.Collections;
 using ExtendedRadio.UI;
-using UnityEngine;
-using ExtendedRadio.Systems;
-using Colossal.PSI.Common;
-using System.Linq;
-using System;
 
 namespace ExtendedRadio
 {

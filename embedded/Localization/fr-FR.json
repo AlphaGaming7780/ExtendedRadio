@@ -1,5 +1,5 @@
 {
-  "Options.SECTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod]": "Extended Radio",
+  "Options.SECTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod]": "ExtendedRadio",
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "Principal",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "Qualité de vie",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Désactiver les publicités au démarrage",

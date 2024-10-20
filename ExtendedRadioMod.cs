@@ -64,8 +64,9 @@ namespace ExtendedRadio
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 			updateSystem.UpdateAt<MixNetwork>(SystemUpdatePhase.UIUpdate);
 
-			DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".mp3", false);
-			DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".flac", false);
+			// Disabled for now, still need to figure out performance impact, maybe...
+			//DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".mp3", false);
+			//DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".flac", false);
 
 			harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			harmony.PatchAll(typeof(ExtendedRadioMod).Assembly);

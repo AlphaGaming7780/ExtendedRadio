@@ -55,15 +55,15 @@ public class Setting(IMod mod) : ModSetting(mod)
     public const string kRadioControlsGroup = "RadioControls";
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(UnityEngine.InputSystem.Key.Home, actionName: nameof(PauseRadioBinding), alt: true)]
+    [SettingsUIKeyboardBinding(BindingKeyboard.Home, actionName: nameof(PauseRadioBinding), alt: true)]
     public ProxyBinding PauseRadioBinding { get; set; }
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(UnityEngine.InputSystem.Key.End, actionName: nameof(MuteRadioBinding), alt: true)]
+    [SettingsUIKeyboardBinding(BindingKeyboard.End, actionName: nameof(MuteRadioBinding), alt: true)]
     public ProxyBinding MuteRadioBinding { get; set; }
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(UnityEngine.InputSystem.Key.PageUp, actionName: nameof(NextSongRadioBinding), alt: true)]
+    [SettingsUIKeyboardBinding(BindingKeyboard.PageUp, actionName: nameof(NextSongRadioBinding), alt: true)]
     public ProxyBinding NextSongRadioBinding { get; set; }
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
@@ -71,11 +71,11 @@ public class Setting(IMod mod) : ModSetting(mod)
     public ProxyBinding PrevSongRadioBinding { get; set; }
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(UnityEngine.InputSystem.Key.Delete, actionName: nameof(VolumeDownRadioBinding), alt: true)]
+    [SettingsUIKeyboardBinding(BindingKeyboard.Delete, actionName: nameof(VolumeDownRadioBinding), alt: true)]
     public ProxyBinding VolumeDownRadioBinding { get; set; }
 
     [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(UnityEngine.InputSystem.Key.PageDown, actionName: nameof(VolumeUpRadioBinding), alt: true)]
+    [SettingsUIKeyboardBinding(BindingKeyboard.PageDown, actionName: nameof(VolumeUpRadioBinding), alt: true)]
     public ProxyBinding VolumeUpRadioBinding { get; set; }
 
     public string LastRadio = null;

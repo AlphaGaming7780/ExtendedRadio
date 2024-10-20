@@ -177,7 +177,7 @@ namespace ExtendedRadio.Patches
             static bool Prefix(Radio __instance, RuntimeSegment segment)
             {
                 if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
-                IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag))));
+                IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags.ContainsKey(segment.type) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag))));
                 List<AudioAsset> list = [.. assets];
                 segment.clipsCap = assets.Count() > 10 ? 10 : assets.Count();
                 System.Random rnd = new();

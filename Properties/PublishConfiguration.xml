@@ -32,6 +32,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ⚠️Japanese 93% : つちのこ (main1108)
 - ✔️Korean 100% : TwotoolusFLY_LSh.st
 - ✔️Polish 100% : Lisek, karmel68
+- ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
 - ⚠️Portuguese, Brazilian 94% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
 - ⚠️Russian 36% : Lek0ms
 - ✔️Spanish 100% : elGendo87
@@ -61,7 +62,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.3.0" />
+	<ModVersion Value="1.4.0" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -69,8 +70,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.3.1
+# 1.4.0
 ## New features
+- Added a support for [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
 - ExtendedRadio can now load other file type, but I disabled that for now.
 
 ## Improvement
@@ -78,8 +80,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 - Update Wiki to follow the new change.
 
 ## Fixes
-- this one `AudioManager: Error on game load, disabling system... System.ArgumentNullException: Value cannot be null.
-Parameter name: key`.
+- this : `AudioManager: Error on game load, disabling system... System.ArgumentNullException: Value cannot be null. Parameter name: key`. Thanks to Natebert for the log files.
 
 ## Translations update
 - French : Morgan Touverey Quilling (mtouverey), khallmark
@@ -90,6 +91,7 @@ Parameter name: key`.
 - Japanese : つちのこ (main1108)
 - Korean : TwotoolusFLY_LSh.st
 - Polish : Lisek, karmel68
+- Portuguese -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
 - Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
 - Spanish : elGendo87
   </ChangeLog>

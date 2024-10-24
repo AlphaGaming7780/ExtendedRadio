@@ -47,21 +47,19 @@ export const StationDetailExtend: ModuleRegistryExtend = (Component: any) => {
 				}
 			}
 
-			return <FoldoutItemHeader
-				icon={
-					Checkbox(
-						{
-							theme: StatisticsCheckboxSCSS,
-							disabled: parentChecked,
-							onChange: onCheckBoxChange,
-							checked: parentChecked || Selected(radioTag),
-							className: MixNetworkSCSS.checkBox
-						}
-					)
-				}>
-				<div className={StatisticsItemSCSS.label} style={{ color: "rgba(80, 76, 83, 1)" }}>
-					{radioTag.Name}
-				</div>
+			return <FoldoutItemHeader>
+				<span className={MixNetworkSCSS.FoldoutItemHeaderSpan}>
+					<Checkbox {...{
+						theme: StatisticsCheckboxSCSS,
+						disabled: parentChecked,
+						onChange: onCheckBoxChange,
+						checked: parentChecked || Selected(radioTag),
+						className: MixNetworkSCSS.checkBox
+					}} />
+					<div className={StatisticsItemSCSS.label} style={{ color: "rgba(80, 76, 83, 1)" }}>
+						{radioTag.Name}
+					</div>
+				</span>
 			</FoldoutItemHeader>
 		}
 

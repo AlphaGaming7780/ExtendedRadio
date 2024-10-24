@@ -76,16 +76,16 @@ declare module "cs2/bindings" {
   }
   export interface Chirp {
   	entity: Entity;
-  	sender: {
-  		link: ChirpLink;
-  		avatar: string | null;
-  		randomIndex: number;
-  	};
+  	sender: ChirpSender;
   	date: number;
   	messageId: string;
   	links: ChirpLink[];
   	likes: number;
   	liked: boolean;
+  }
+  export interface ChirpSender {
+  	entity: Entity;
+  	link: ChirpLink;
   }
   export interface ChirpLink {
   	name: Name;
@@ -554,13 +554,15 @@ declare module "cs2/bindings" {
   	value: string | null;
   	args: Record<string, LocElement> | null;
   }
-  export type NumericProperty = NumberProperty | Number2Property;
+  export type NumericProperty = NumberProperty | Number2Property | NumberRangeProperty;
   const NUMBER_PROPERTY = "Game.UI.Common.NumberProperty";
   export interface NumberProperty {
   	labelId: string;
   	unit: Unit;
   	value: number;
   	signed: boolean;
+  	icon?: string;
+  	valueIcon?: string;
   }
   const NUMBER2_PROPERTY = "Game.UI.Common.Number2Property";
   export interface Number2Property {
@@ -568,11 +570,24 @@ declare module "cs2/bindings" {
   	unit: Unit;
   	value: Number2;
   	signed: boolean;
+  	icon?: string;
+  	valueIcon?: string;
+  }
+  export interface NumberRangeProperty {
+  	labelId: string;
+  	unit: Unit;
+  	minValue: number;
+  	maxValue: number;
+  	signed: boolean;
+  	icon?: string;
+  	valueIcon?: string;
   }
   const STRING_PROPERTY = "Game.UI.Common.StringProperty";
   export interface StringProperty {
   	labelId: string;
   	valueId: string;
+  	icon?: string;
+  	valueIcon?: string;
   }
   export type Properties = {
   	[NUMBER_PROPERTY]: NumberProperty;
@@ -654,14 +669,200 @@ declare module "cs2/bindings" {
   	Health = "Health"
   }
   export interface LeisureProviderEffect {
-  	type: string;
+  	providers: LeisureProvider[];
+  }
+  export interface LeisureProvider {
+  	type: LeisureType;
   	efficiency: number;
+  }
+  export enum LeisureType {
+  	Meals = "Meals",
+  	Entertainment = "Entertainment",
+  	Commercial = "Commercial",
+  	CityIndoors = "CityIndoors",
+  	Travel = "Travel",
+  	CityPark = "CityPark",
+  	CityBeach = "CityBeach",
+  	Attractions = "Attractions",
+  	Relaxation = "Relaxation",
+  	Sightseeing = "Sightseeing"
   }
   export interface AdjustHappinessEffect {
   	targets: string[];
   	wellbeingEffect: number;
   	healthEffect: number;
   }
+  export enum UISound {
+  	selectItem = "select-item",
+  	dragSlider = "drag-slider",
+  	hoverItem = "hover-item",
+  	expandPanel = "expand-panel",
+  	grabSlider = "grabSlider",
+  	selectDropdown = "select-dropdown",
+  	selectToggle = "select-toggle",
+  	focusInputField = "focus-input-field",
+  	signatureBuildingEvent = "signature-building-event",
+  	bulldoze = "bulldoze",
+  	bulldozeEnd = "bulldoze-end",
+  	relocateBuilding = "relocate-building",
+  	mapTilePurchaseMode = "map-tile-purchase-mode",
+  	mapTilePurchaseModeEnd = "map-tile-purchase-mode-end",
+  	xpEvent = "xp-event",
+  	milestoneEvent = "milestone-event",
+  	economy = "economy",
+  	chirpEvent = "chirp-event",
+  	likeChirp = "like-chirp",
+  	chirper = "chirper",
+  	purchase = "purchase",
+  	enableBuilding = "enable-building",
+  	disableBuilding = "disable-building",
+  	pauseSimulation = "pause-simulation",
+  	resumeSimulation = "resume-simulation",
+  	simulationSpeed1 = "simulation-speed-1",
+  	simulationSpeed2 = "simulation-speed-2",
+  	simulationSpeed3 = "simulation-speed-3",
+  	togglePolicy = "toggle-policy",
+  	takeLoan = "take-loan",
+  	removeItem = "remove-item",
+  	toggleInfoMode = "toggle-info-mode",
+  	takePhoto = "take-photo",
+  	tutorialTriggerCompleteEvent = "tutorial-trigger-complete-event",
+  	selectRadioNetwork = "select-radio-network",
+  	selectRadioStation = "select-radio-station",
+  	generateRandomName = "generate-random-name",
+  	decreaseElevation = "decrease-elevation",
+  	increaseElevation = "increase-elevation",
+  	selectPreviousItem = "select-previous-item",
+  	selectNextItem = "select-next-item",
+  	openPanel = "open-panel",
+  	closePanel = "close-panel",
+  	openMenu = "open-menu",
+  	closeMenu = "close-menu"
+  }
+  const FOCUS_DISABLED: unique symbol;
+  const FOCUS_AUTO: unique symbol;
+  export type FocusKey = typeof FOCUS_DISABLED | typeof FOCUS_AUTO | UniqueFocusKey;
+  export type UniqueFocusKey = FocusSymbol | string | number;
+  export class FocusSymbol {
+  	readonly debugName: string;
+  	readonly r: number;
+  	constructor(debugName: string);
+  	toString(): string;
+  }
+  export type Action = () => void | boolean;
+  export type Action1D = (value: number) => void | boolean;
+  export interface InputActionsDefinition {
+  	"Move Horizontal": Action1D;
+  	"Change Slider Value": Action1D;
+  	"Change Tool Option": Action1D;
+  	"Change Value": Action1D;
+  	"Change Line Schedule": Action1D;
+  	"Move Vertical": Action1D;
+  	"Switch Radio Station": Action1D;
+  	"Scroll Vertical": Action1D;
+  	"Scroll Assets": Action1D;
+  	"Select": Action;
+  	"Purchase Dev Tree Node": Action;
+  	"Select Chirp Sender": Action;
+  	"Save Game": Action;
+  	"Expand Group": Action;
+  	"Collapse Group": Action;
+  	"Select Route": Action;
+  	"Remove Operating District": Action;
+  	"Upgrades Menu": Action;
+  	"Purchase Map Tile": Action;
+  	"Unfollow Citizen": Action;
+  	"Like Chirp": Action;
+  	"Unlike Chirp": Action;
+  	"Enable Info Mode": Action;
+  	"Disable Info Mode": Action;
+  	"Toggle Tool Color Picker": Action;
+  	"Cinematic Mode": Action;
+  	"Photo Mode": Action;
+  	"Focus Citizen": Action;
+  	"Unfocus Citizen": Action;
+  	"Close": Action;
+  	"Back": Action;
+  	"Leave Underground Mode": Action;
+  	"Leave Info View": Action;
+  	"Leave Map Tile View": Action;
+  	"Switch Tab": Action1D;
+  	"Switch Option Section": Action1D;
+  	"Switch DLC": Action1D;
+  	"Switch Ordering": Action1D;
+  	"Switch Radio Network": Action1D;
+  	"Change Time Scale": Action1D;
+  	"Switch Page": Action1D;
+  	"Default Tool": Action;
+  	"Tool Options": Action;
+  	"Switch Toolmode": Action;
+  	"Toggle Snapping": Action;
+  	"Capture Keyframe": Action;
+  	"Reset Property": Action;
+  	"Toggle Property": Action;
+  	"Previous Tutorial Phase": Action;
+  	"Continue Tutorial": Action;
+  	"Finish Tutorial": Action;
+  	"Close Tutorial": Action;
+  	"Focus Tutorial List": Action;
+  	"Start Next Tutorial": Action;
+  	"Pause Simulation": Action;
+  	"Resume Simulation": Action;
+  	"Switch Speed": Action;
+  	"Speed 1": Action;
+  	"Speed 2": Action;
+  	"Speed 3": Action;
+  	"Bulldozer": Action;
+  	"Exit Underground Mode": Action;
+  	"Enter Underground Mode": Action;
+  	"Increase Elevation": Action;
+  	"Decrease Elevation": Action;
+  	"Change Elevation": Action1D;
+  	"Advisor": Action;
+  	"Quicksave": Action;
+  	"Quickload": Action;
+  	"Focus Selected Object": Action;
+  	"Hide UI": Action;
+  	"Map Tile Purchase Panel": Action;
+  	"Info View": Action;
+  	"Progression Panel": Action;
+  	"Economy Panel": Action;
+  	"City Information Panel": Action;
+  	"Statistic Panel": Action;
+  	"Transportation Overview Panel": Action;
+  	"Notification Panel": Action;
+  	"Chirper Panel": Action;
+  	"Lifepath Panel": Action;
+  	"Event Journal Panel": Action;
+  	"Radio Panel": Action;
+  	"Photo Mode Panel": Action;
+  	"Take Photo": Action;
+  	"Relocate Selected Object": Action;
+  	"Toggle Selected Object Active": Action;
+  	"Delete Selected Object": Action;
+  	"Toggle Selected Object Emptying": Action;
+  	"Toggle Selected Lot Edit": Action;
+  	"Toggle Follow Selected Citizen": Action;
+  	"Pause Menu": Action;
+  	"Load Game": Action;
+  	"Start Game": Action;
+  	"Save Options": Action;
+  	"Switch User": Action;
+  	"Unset Binding": Action;
+  	"Reset Binding": Action;
+  	"Switch Savegame Location": Action1D;
+  	"Show Advanced": Action;
+  	"Hide Advanced": Action;
+  	"Select Directory": Action;
+  	"Search Options": Action;
+  	"Clear Search": Action;
+  	"Debug UI": Action;
+  	"Debug Prefab Tool": Action;
+  	"Debug Change Field": Action1D;
+  	"Debug Multiplier": Action1D;
+  }
+  export type InputAction = keyof InputActionsDefinition;
+  export type InputActionName = InputAction | string;
   export enum WidgetType {
   	Column = "Game.UI.Widgets.Column",
   	Row = "Game.UI.Widgets.Row",
@@ -705,8 +906,10 @@ declare module "cs2/bindings" {
   	Bounds2InputField = "Game.UI.Widgets.Bounds2InputField",
   	Bounds3InputField = "Game.UI.Widgets.Bounds3InputField",
   	Bezier4x3Field = "Game.UI.Widgets.Bezier4x3Field",
+  	RangedSliderField = "Game.UI.Widgets.RangedSliderField",
   	StringInputField = "Game.UI.Widgets.StringInputField",
   	ColorField = "Game.UI.Widgets.ColorField",
+  	GradientSliderField = "Game.UI.Widgets.GradientSliderField",
   	AnimationCurveField = "Game.UI.Widgets.AnimationCurveField",
   	EnumField = "Game.UI.Widgets.EnumField",
   	FlagsField = "Game.UI.Widgets.FlagsField",
@@ -718,6 +921,10 @@ declare module "cs2/bindings" {
   }
   export type PathSegment = string | number;
   export type Path = PathSegment[];
+  export interface BaseWidget {
+  	disabled?: boolean;
+  	hidden?: boolean;
+  }
   export interface WidgetIdentifier {
   	group: string;
   	path: Path;
@@ -744,19 +951,21 @@ declare module "cs2/bindings" {
   export interface Group extends Named, TooltipTarget {
   	tooltipPos?: TooltipPos;
   }
-  export interface Field<T> extends Named, TooltipTarget, WidgetTutorialTarget {
+  export interface Field<T> extends BaseWidget, Named, TooltipTarget, WidgetTutorialTarget {
   	value: T;
-  	disabled?: boolean;
-  	hidden?: boolean;
+  }
+  export interface MinMaxField<T> extends Field<T> {
+  	min?: T;
+  	max?: T;
   }
   export type ToggleField = Field<boolean>;
-  export interface IntInputField extends Field<number> {
+  export interface IntInputFieldBase<T> extends Field<T> {
   	min?: number;
   	max?: number;
   	step?: number;
   	stepMultiplier?: number;
   }
-  export interface IntSliderField extends Field<number> {
+  export interface IntSliderFieldBase<T> extends Field<T> {
   	min: number;
   	max: number;
   	step?: number;
@@ -764,15 +973,18 @@ declare module "cs2/bindings" {
   	unit?: string | null;
   	scaleDragVolume?: boolean;
   	updateOnDragEnd: boolean;
+  }
+  export type IntInputField = IntInputFieldBase<number>;
+  export interface IntSliderField extends IntSliderFieldBase<number> {
   	separateThousands?: boolean;
   	signed?: boolean;
   }
-  export interface FloatInputField extends Field<number> {
-  	min?: number;
-  	max?: number;
+  export interface FloatInputFieldBase<T> extends MinMaxField<T> {
   	fractionDigits?: number;
   	step?: number;
   	stepMultiplier?: number;
+  }
+  export interface FloatInputField extends FloatInputFieldBase<number> {
   }
   export interface FloatSliderFieldBase<T> extends Field<T> {
   	min: number;
@@ -1130,6 +1342,7 @@ declare module "cs2/bindings" {
   	toolOptionsElevationIncrease: string;
   	toolOptionsElevationStep: string;
   	toolOptionsModes: string;
+  	toolOptionsVegatationAge: string;
   	toolOptionsModesComplexCurve: string;
   	toolOptionsModesContinuous: string;
   	toolOptionsModesGrid: string;
@@ -1157,7 +1370,18 @@ declare module "cs2/bindings" {
   	selectedInfoPanelDelete: string;
   	pauseMenuButton: string;
   	upgradeGrid: string;
+  	assetGrid: string;
   	actionHints: string;
+  	assetImportButton: string;
+  	editorInfoViewsPanel: string;
+  	resetTODButton: string;
+  	simulationPlayButton: string;
+  	tutorialsToggle: string;
+  	workspaceTitleBar: string;
+  	selectProjectRoot: string;
+  	selectAssets: string;
+  	selectTemplate: string;
+  	importButton: string;
   }
   export interface Infoview {
   	entity: Entity;
@@ -1366,15 +1590,11 @@ declare module "cs2/bindings" {
   export interface FollowedCitizen {
   	entity: Entity;
   	name: Name;
-  	avatar: string | null;
-  	randomIndex: number;
   	age: string;
   }
   export interface LifePathDetails {
   	entity: Entity;
   	name: Name;
-  	avatar: string | null;
-  	randomIndex: number;
   	birthDay: number;
   	age: string;
   	education: string;
@@ -1434,9 +1654,11 @@ declare module "cs2/bindings" {
   }
   export enum MapTileStatus {
   	None = 0,
-  	NoSelection = 1,
-  	InsufficientFunds = 2,
-  	InsufficientPermits = 4
+  	NoCurrentlyAvailable = 1,
+  	NoAvailable = 2,
+  	NoSelection = 4,
+  	InsufficientFunds = 8,
+  	InsufficientPermits = 16
   }
   const group$1 = "photoMode";
   function resetCamera(): void;
@@ -1721,17 +1943,8 @@ declare module "cs2/bindings" {
   	title: string;
   	info: string | null;
   }
-  const FOCUS_DISABLED: unique symbol;
-  const FOCUS_AUTO: unique symbol;
-  export type FocusKey = typeof FOCUS_DISABLED | typeof FOCUS_AUTO | UniqueFocusKey;
-  export type UniqueFocusKey = FocusSymbol | string | number;
-  export class FocusSymbol {
-  	readonly debugName: string;
-  	readonly r: number;
-  	constructor(debugName: string);
-  	toString(): string;
-  }
   const selectedEntity$: ValueBinding<Entity>;
+  const selectedTrailerController$: ValueBinding<Entity>;
   const selectedUITag$: ValueBinding<string>;
   const activeSelection$: ValueBinding<boolean>;
   const selectedInfoPosition$: ValueBinding<Number2>;
@@ -2001,7 +2214,8 @@ declare module "cs2/bindings" {
   export interface VehicleCountSection extends SelectedInfoSectionBase {
   	vehicleCount: number;
   	activeVehicles: number;
-  	vehicleCounts: Number2[];
+  	vehicleCountMin: number;
+  	vehicleCountMax: number;
   }
   export interface SelectVehiclesSection extends SelectedInfoSectionBase {
   	primaryVehicle: VehiclePrefab | null;
@@ -2160,6 +2374,7 @@ declare module "cs2/bindings" {
   	output: string | null;
   	sells: string | null;
   	stores: string | null;
+  	customers: Number2 | null;
   }
   export interface StorageSection extends SelectedInfoSectionBase {
   	stored: number;
@@ -2377,6 +2592,7 @@ declare module "cs2/bindings" {
   	name: Name;
   	color: Color;
   	entity: Entity;
+  	active: boolean;
   }
   export type LineItem = LineStop | LineVehicle;
   const LINE_STOP = "Game.UI.InGame.LineVisualizerSection+LineStop";
@@ -2443,7 +2659,8 @@ declare module "cs2/bindings" {
   export interface HouseholdSidebarItem {
   	entity: Entity;
   	name: Name;
-  	iconPath: string;
+  	familyName: Name;
+  	iconPath: string | null;
   	selected: boolean;
   	memberCount: number | null;
   }
@@ -2582,6 +2799,9 @@ declare module "cs2/bindings" {
   const brushes$: ValueBinding<Brush[]>;
   const brushSize$: ValueBinding<number>;
   const brushStrength$: ValueBinding<number>;
+  const brushHeight$: ValueBinding<number>;
+  const brushHeightMin$: ValueBinding<number>;
+  const brushHeightMax$: ValueBinding<number>;
   const brushAngle$: ValueBinding<number>;
   const brushSizeMin$: ValueBinding<number>;
   const brushSizeMax$: ValueBinding<number>;
@@ -2595,53 +2815,7 @@ declare module "cs2/bindings" {
   function setBrushSize(size: number): void;
   function setBrushStrength(strength: number): void;
   function setBrushAngle(angle: number): void;
-  export enum UISound {
-  	selectItem = "select-item",
-  	dragSlider = "drag-slider",
-  	hoverItem = "hover-item",
-  	expandPanel = "expand-panel",
-  	grabSlider = "grabSlider",
-  	selectDropdown = "select-dropdown",
-  	selectToggle = "select-toggle",
-  	focusInputField = "focus-input-field",
-  	signatureBuildingEvent = "signature-building-event",
-  	bulldoze = "bulldoze",
-  	bulldozeEnd = "bulldoze-end",
-  	relocateBuilding = "relocate-building",
-  	mapTilePurchaseMode = "map-tile-purchase-mode",
-  	mapTilePurchaseModeEnd = "map-tile-purchase-mode-end",
-  	xpEvent = "xp-event",
-  	milestoneEvent = "milestone-event",
-  	economy = "economy",
-  	chirpEvent = "chirp-event",
-  	likeChirp = "like-chirp",
-  	chirper = "chirper",
-  	purchase = "purchase",
-  	enableBuilding = "enable-building",
-  	disableBuilding = "disable-building",
-  	pauseSimulation = "pause-simulation",
-  	resumeSimulation = "resume-simulation",
-  	simulationSpeed1 = "simulation-speed-1",
-  	simulationSpeed2 = "simulation-speed-2",
-  	simulationSpeed3 = "simulation-speed-3",
-  	togglePolicy = "toggle-policy",
-  	takeLoan = "take-loan",
-  	removeItem = "remove-item",
-  	toggleInfoMode = "toggle-info-mode",
-  	takePhoto = "take-photo",
-  	tutorialTriggerCompleteEvent = "tutorial-trigger-complete-event",
-  	selectRadioNetwork = "select-radio-network",
-  	selectRadioStation = "select-radio-station",
-  	generateRandomName = "generate-random-name",
-  	decreaseElevation = "decrease-elevation",
-  	increaseElevation = "increase-elevation",
-  	selectPreviousItem = "select-previous-item",
-  	selectNextItem = "select-next-item",
-  	openPanel = "open-panel",
-  	closePanel = "close-panel",
-  	openMenu = "open-menu",
-  	closeMenu = "close-menu"
-  }
+  function setBrushHeight(angle: number): void;
   export interface ToolbarGroup {
   	entity: Entity;
   	children: ToolbarItem[];
@@ -2657,6 +2831,7 @@ declare module "cs2/bindings" {
   	highlight: boolean;
   	selectSound: UISound | string | null;
   	deselectSound: UISound | string | null;
+  	shortcut: InputActionName;
   }
   export enum ToolbarItemType {
   	asset = 0,
@@ -2675,6 +2850,7 @@ declare module "cs2/bindings" {
   	name: string;
   	icon: string;
   	dlc: string | null;
+  	theme: string | null;
   	locked: boolean;
   	uiTag: string;
   	uniquePlaced: boolean;
@@ -2693,16 +2869,26 @@ declare module "cs2/bindings" {
   	icon: string;
   	highlight: boolean;
   }
+  export enum AgeMask {
+  	Disabled = 0,
+  	Child = 1,
+  	Teen = 2,
+  	Adult = 4,
+  	Elderly = 8
+  }
   const toolbarGroups$: ValueBinding<ToolbarGroup[]>;
   const assetCategories$: MapBinding<Entity, AssetCategory[]>;
   const assets$: MapBinding<Entity, Asset$1[]>;
   const themes$$1: ValueBinding<Theme$1[]>;
   const selectedThemes$: ValueBinding<Entity[]>;
+  const vegetationAges$: ValueBinding<Theme$1[]>;
   const assetPacks$: ValueBinding<AssetPack[]>;
   const selectedAssetPacks$: ValueBinding<Entity[]>;
   const selectedAssetMenu$: ValueBinding<Entity>;
   const selectedAssetCategory$: ValueBinding<Entity>;
   const selectedAsset$: ValueBinding<Entity>;
+  const ageMask$: ValueBinding<number>;
+  const setAgeMask: (ageMask: number) => void;
   const setSelectedThemes: (themes: Entity[]) => void;
   const setSelectedAssetPacks: (packs: Entity[]) => void;
   const selectAssetMenu: (assetMenu: Entity) => void;
@@ -2803,7 +2989,7 @@ declare module "cs2/bindings" {
   const activateTutorial: (tutorial: Entity) => void;
   const activateTutorialPhase: (tutorial: Entity, phase: Entity) => void;
   const forceTutorial: (tutorial: Entity, phase: Entity, advisorActivation: boolean) => void;
-  const toggleTutorialListFocus: () => void;
+  const toggleTutorialListFocus: (state?: boolean) => void;
   const completeActiveTutorialPhase: () => void;
   const completeActiveTutorial: () => void;
   const completeIntro: (tutorialsEnabled: boolean) => void;
@@ -2832,7 +3018,7 @@ declare module "cs2/bindings" {
   	dispose: () => void;
   	update: (newValue: boolean) => void;
   };
-  function toggleAdvisorPanel(): void;
+  function toggleAdvisorPanel(state?: boolean): void;
   export interface AdvisorCategory {
   	entity: Entity;
   	name: string;
@@ -2875,6 +3061,11 @@ declare module "cs2/bindings" {
   	filters: string[] | null;
   	alternatives: Entity[] | null;
   }
+  export enum TutorialControlScheme {
+  	KeyboardAndMouse = 1,
+  	Gamepad = 2,
+  	All = 3
+  }
   export interface TutorialPhase {
   	entity: Entity;
   	name: string;
@@ -2891,6 +3082,7 @@ declare module "cs2/bindings" {
   	titleVisible: boolean;
   	descriptionVisible: boolean;
   	balloonTargets: BalloonUITarget[];
+  	controlScheme: TutorialControlScheme;
   	trigger: TutorialTrigger | null;
   }
   export interface BalloonUITarget {
@@ -2943,7 +3135,7 @@ declare module "cs2/bindings" {
   	export { focusEntity, focusedEntity$ };
   }
   export namespace chirper {
-  	export { Chirp, ChirpLink, addLike, chirpAdded$, chirps$, removeLike, selectLink };
+  	export { Chirp, ChirpLink, ChirpSender, addLike, chirpAdded$, chirps$, removeLike, selectLink };
   }
   export namespace cinematic {
   	export { CinematicCameraAsset, CinematicCameraCurveModifier, addKeyFrame, availableCloudTargets$, captureKey, cinematicCameraSequenceAssets$, deleteCinematicCameraSequence, getControllerDelta, getControllerPanDelta, getControllerZoomDelta, group, lastLoadedCinematicCameraSequence$, loadCinematicCameraSequence, loop$, modifierAnimationCurveData$, moveKeyFrame, onAfterPlaybackDurationChange, playbackDuration$, playing$, removeCameraTransformKey, removeKeyFrame, resetCinematicCameraSequence, saveCinematicCameraSequence, selectCloudTarget, selectedCloudTarget$, setPlaybackDuration, setTimelinePosition, stopPlayback, timelineLength$, timelinePosition$, toggleCurveEditorFocus, toggleLoop, togglePlayback, transformAnimationCurveData$, useCinematicCameraBindings };
@@ -2994,7 +3186,7 @@ declare module "cs2/bindings" {
   	export { ManualUITagsConfiguration, PrefabDetails, Theme, UnlockingRequirements, emptyPrefabDetails, manualUITags$, prefabDetails$, themes$ };
   }
   export namespace prefabEffects {
-  	export { AdjustHappinessEffect, CityModifier, CityModifierEffect, CityModifierType, LeisureProviderEffect, LocalModifier, LocalModifierEffect, LocalModifierType, PrefabEffect, PrefabEffectType, PrefabEffects };
+  	export { AdjustHappinessEffect, CityModifier, CityModifierEffect, CityModifierType, LeisureProvider, LeisureProviderEffect, LeisureType, LocalModifier, LocalModifierEffect, LocalModifierType, PrefabEffect, PrefabEffectType, PrefabEffects };
   }
   export namespace prefabProperties {
   	export { CONSUMPTION_PROPERTY, ConsumptionProperty, ELECTRICITY_PROPERTY, ElectricityProperty, POLLUTION_PROPERTY, Pollution, PollutionProperty, PrefabProperties, PrefabProperty, TRANSPORT_STOP_PROPERTY, TransportStopProperty, UPKEEPNUMBER2_PROPERTY, UPKEEPNUMBER_PROPERTY, UpkeepNumber2Property, UpkeepNumberProperty, Voltage };
@@ -3018,7 +3210,7 @@ declare module "cs2/bindings" {
   	export { RadioClip, RadioNetwork, RadioProgram, RadioStation, currentSegment$, emergencyFocusable$, emergencyMessage$, emergencyMode$, focusEmergency, muted$, networks$, paused$, playNext, playPrevious, radioEnabled$, segmentChanged$, selectNetwork, selectStation, selectedNetwork$, selectedStation$, setMuted, setPaused, setSkipAds, setVolume, skipAds$, stations$, toggleMuted, togglePaused, toggleSkipAds, volume$ };
   }
   export namespace selectedInfo {
-  	export { ActionsSection, AnimalSection, AttractivenessFactor, AttractivenessSection, AverageHappinessSection, BatterySection, CapacityInfo, CargoSection, CargoTransportVehicleSection, CitizenSection, ColorSection, ComfortSection, CompanySection, DeathcareSection, DeathcareVehicleSection, DeliveryVehicleSection, DescriptionSection, DestroyedBuildingSection, DestroyedTreeSection, DeveloperSection, DeveloperSubsection, DeveloperSubsectionType, DeveloperSubsections, DispatchedVehiclesSection, District, DistrictsSection, DummyHumanSection, EducationSection, EfficiencyFactor, EfficiencySection, ElectricitySection, EmployeesSection, FireSection, FireVehicleSection, GarbageSection, GarbageVehicleSection, GenericInfo, HealthcareSection, HealthcareVehicleSection, HouseholdSidebarItem, HouseholdSidebarSection, HouseholdSidebarVariant, InfoList, Item, LINE_STOP, LINE_VEHICLE, LevelSection, Line, LineItem, LineSection, LineSegment, LineStop, LineVehicle, LineVisualizerSection, LinesSection, LoadSection, LocalServiceBuilding, LocalServicesSection, Location$1 as Location, MailSection, MailSectionType, MaintenanceVehicleSection, NotificationsSection, ParkSection, ParkingSection, PassengersSection, PoliceSection, PoliceVehicleSection, PoliciesSection, Pollution$1 as Pollution, PollutionSection, PostVehicleSection, PrisonSection, PrivateVehicleSection, ProfitabilitySection, PublicTransportVehicleSection, ResidentsSection, Resource$1 as Resource, ResourceSection, RoadSection, ScheduleSection, SectionType, SelectVehiclesSection, SelectedInfoSection, SelectedInfoSectionBase, SelectedInfoSectionProps, SelectedInfoSections, SewageSection, ShelterSection, StatusSection, StorageSection, TicketPriceSection, TitleSection, TransformerSection, Upgrade, UpgradeInfo, UpgradePropertiesSection, UpgradeType, UpgradesSection, UpkeepItem, UpkeepSection, Vehicle, VehicleCountSection, VehiclePrefab, VehicleSectionProps, VehicleWithLineSectionProps, VehiclesSection, WaterSection, activeSelection$, bottomSections$, clearSelection, developerSection$, householdSidebarSection$, lineVisualizerSection$, middleSections$, selectEntity, selectedEntity$, selectedInfoPosition$, selectedRoute$, selectedUITag$, setSelectedRoute, titleSection$, tooltipTags$, topSections$, useGeneratedTooltipParagraphs, useTooltipParagraph, useTooltipParagraphs };
+  	export { ActionsSection, AnimalSection, AttractivenessFactor, AttractivenessSection, AverageHappinessSection, BatterySection, CapacityInfo, CargoSection, CargoTransportVehicleSection, CitizenSection, ColorSection, ComfortSection, CompanySection, DeathcareSection, DeathcareVehicleSection, DeliveryVehicleSection, DescriptionSection, DestroyedBuildingSection, DestroyedTreeSection, DeveloperSection, DeveloperSubsection, DeveloperSubsectionType, DeveloperSubsections, DispatchedVehiclesSection, District, DistrictsSection, DummyHumanSection, EducationSection, EfficiencyFactor, EfficiencySection, ElectricitySection, EmployeesSection, FireSection, FireVehicleSection, GarbageSection, GarbageVehicleSection, GenericInfo, HealthcareSection, HealthcareVehicleSection, HouseholdSidebarItem, HouseholdSidebarSection, HouseholdSidebarVariant, InfoList, Item, LINE_STOP, LINE_VEHICLE, LevelSection, Line, LineItem, LineSection, LineSegment, LineStop, LineVehicle, LineVisualizerSection, LinesSection, LoadSection, LocalServiceBuilding, LocalServicesSection, Location$1 as Location, MailSection, MailSectionType, MaintenanceVehicleSection, NotificationsSection, ParkSection, ParkingSection, PassengersSection, PoliceSection, PoliceVehicleSection, PoliciesSection, Pollution$1 as Pollution, PollutionSection, PostVehicleSection, PrisonSection, PrivateVehicleSection, ProfitabilitySection, PublicTransportVehicleSection, ResidentsSection, Resource$1 as Resource, ResourceSection, RoadSection, ScheduleSection, SectionType, SelectVehiclesSection, SelectedInfoSection, SelectedInfoSectionBase, SelectedInfoSectionProps, SelectedInfoSections, SewageSection, ShelterSection, StatusSection, StorageSection, TicketPriceSection, TitleSection, TransformerSection, Upgrade, UpgradeInfo, UpgradePropertiesSection, UpgradeType, UpgradesSection, UpkeepItem, UpkeepSection, Vehicle, VehicleCountSection, VehiclePrefab, VehicleSectionProps, VehicleWithLineSectionProps, VehiclesSection, WaterSection, activeSelection$, bottomSections$, clearSelection, developerSection$, householdSidebarSection$, lineVisualizerSection$, middleSections$, selectEntity, selectedEntity$, selectedInfoPosition$, selectedRoute$, selectedTrailerController$, selectedUITag$, setSelectedRoute, titleSection$, tooltipTags$, topSections$, useGeneratedTooltipParagraphs, useTooltipParagraph, useTooltipParagraphs };
   }
   export namespace statistics {
   	export { StatCategory, StatItem, activeCategory$, activeGroup$, addStat, clearStats, removeStat, sampleCount$, sampleRange$, selectedStatistics$, setSampleRange, stacked$, statGroupsMap$, statLabels$, statUnlockingRequirements$, statisticsCategories$, statsData$, updatesPerDay$ };
@@ -3030,10 +3222,10 @@ declare module "cs2/bindings" {
   	export { LightingState, SimulationDate, SimulationDateTime, SimulationTime, TimeSettings, calculateDateFromDays, calculateDateFromTicks, calculateDateTimeFromTicks, calculateMinutesSinceMidnightFromTicks, calculateTimeFromMinutesSinceMidnight, dateEquals, day$, lightingState$, setSimulationPaused, setSimulationSpeed, simulationPaused$, simulationPausedBarrier$, simulationSpeed$, ticks$, timeSettings$ };
   }
   export namespace tool {
-  	export { AREA_TOOL, BULLDOZE_TOOL, Brush, DEFAULT_TOOL, NET_TOOL, OBJECT_TOOL, ROUTE_TOOL, SELECTION_TOOL, TERRAIN_TOOL, Tool, ToolMode, UPGRADE_TOOL, ZONE_TOOL, activeTool$, allSnapMask$, allowBrush$, availableSnapMask$, brushAngle$, brushSize$, brushSizeMax$, brushSizeMin$, brushStrength$, brushes$, bulldozeConfirmationRequested$, changeElevation, color$, colorSupported$, confirmBulldoze, elevation$, elevationDown, elevationDownDisabled$, elevationRange$, elevationScroll, elevationStep$, elevationUp, elevationUpDisabled$, isEditor$, parallelMode$, parallelModeSupported$, parallelOffset$, selectBrush, selectTool, selectToolMode, selectedBrush$, selectedSnapMask$, setBrushAngle, setBrushSize, setBrushStrength, setColor, setElevationStep, setParallelOffset, setSelectedSnapMask, setUndergroundMode, snapOptionNames$, toggleParallelMode, undergroundMode$, undergroundModeSupported$ };
+  	export { AREA_TOOL, BULLDOZE_TOOL, Brush, DEFAULT_TOOL, NET_TOOL, OBJECT_TOOL, ROUTE_TOOL, SELECTION_TOOL, TERRAIN_TOOL, Tool, ToolMode, UPGRADE_TOOL, ZONE_TOOL, activeTool$, allSnapMask$, allowBrush$, availableSnapMask$, brushAngle$, brushHeight$, brushHeightMax$, brushHeightMin$, brushSize$, brushSizeMax$, brushSizeMin$, brushStrength$, brushes$, bulldozeConfirmationRequested$, changeElevation, color$, colorSupported$, confirmBulldoze, elevation$, elevationDown, elevationDownDisabled$, elevationRange$, elevationScroll, elevationStep$, elevationUp, elevationUpDisabled$, isEditor$, parallelMode$, parallelModeSupported$, parallelOffset$, selectBrush, selectTool, selectToolMode, selectedBrush$, selectedSnapMask$, setBrushAngle, setBrushHeight, setBrushSize, setBrushStrength, setColor, setElevationStep, setParallelOffset, setSelectedSnapMask, setUndergroundMode, snapOptionNames$, toggleParallelMode, undergroundMode$, undergroundModeSupported$ };
   }
   export namespace toolbar$1 {
-  	export { Asset$1 as Asset, AssetCategory, AssetPack, Theme$1 as Theme, ToolbarGroup, ToolbarItem, ToolbarItemType, assetCategories$, assetPacks$, assets$, clearAssetSelection, selectAsset, selectAssetCategory, selectAssetMenu, selectedAsset$, selectedAssetCategory$, selectedAssetMenu$, selectedAssetPacks$, selectedThemes$, setSelectedAssetPacks, setSelectedThemes, themes$$1 as themes$, toggleToolOptions, toolbarGroups$ };
+  	export { AgeMask, Asset$1 as Asset, AssetCategory, AssetPack, Theme$1 as Theme, ToolbarGroup, ToolbarItem, ToolbarItemType, ageMask$, assetCategories$, assetPacks$, assets$, clearAssetSelection, selectAsset, selectAssetCategory, selectAssetMenu, selectedAsset$, selectedAssetCategory$, selectedAssetMenu$, selectedAssetPacks$, selectedThemes$, setAgeMask, setSelectedAssetPacks, setSelectedThemes, themes$$1 as themes$, toggleToolOptions, toolbarGroups$, vegetationAges$ };
   }
   export namespace toolbarBottom {
   	export { cityName$, money$, moneyDelta$, moneyTrendThresholds$, population$$1 as population$, populationDelta$, populationTrendThresholds$, setCityName, unlimitedMoney$ };
@@ -3042,7 +3234,7 @@ declare module "cs2/bindings" {
   	export { TransportLine, TransportLineData, TransportStop, TransportType, cargoTypes$, deleteLine, hideLine, passengerTypes$, renameLine, resetVisibility, selectLine, selectedCargoType$, selectedPassengerType$, setLineActive, setLineColor, setLineSchedule, setSelectedCargoType, setSelectedPassengerType, showLine, toggleHighlight, transportLines$ };
   }
   export namespace tutorial {
-  	export { AdvisorCategory, AdvisorItem, AdvisorItemType, BalloonUITarget, Tutorial, TutorialList, TutorialPhase, TutorialPhaseType, TutorialTrigger, activateTutorial, activateTutorialPhase, activateTutorialTag, activeTutorial$, activeTutorialList$, activeTutorialPhase$, advisorPanelVisible$, completeActiveTutorial, completeActiveTutorialPhase, completeIntro, completeListIntro, completeListOutro, forceTutorial, listIntroActive$, listOutroActive$, nextTutorial$, setTutorialListFocused, toggleAdvisorPanel, toggleTutorialListFocus, triggerTutorialTag, tutorialCategories$, tutorialGroups$, tutorialIntroActive$, tutorialListFocused$, tutorialPending$, tutorials$, tutorialsEnabled$, useTutorialTag, useTutorialTagActivation, useTutorialTagTrigger };
+  	export { AdvisorCategory, AdvisorItem, AdvisorItemType, BalloonUITarget, Tutorial, TutorialControlScheme, TutorialList, TutorialPhase, TutorialPhaseType, TutorialTrigger, activateTutorial, activateTutorialPhase, activateTutorialTag, activeTutorial$, activeTutorialList$, activeTutorialPhase$, advisorPanelVisible$, completeActiveTutorial, completeActiveTutorialPhase, completeIntro, completeListIntro, completeListOutro, forceTutorial, listIntroActive$, listOutroActive$, nextTutorial$, setTutorialListFocused, toggleAdvisorPanel, toggleTutorialListFocus, triggerTutorialTag, tutorialCategories$, tutorialGroups$, tutorialIntroActive$, tutorialListFocused$, tutorialPending$, tutorials$, tutorialsEnabled$, useTutorialTag, useTutorialTagActivation, useTutorialTagTrigger };
   }
   export namespace upgrade {
   	export { clearUpgradeSelection, selectUpgrade, selectedUpgrade$, upgradeDetails$, upgrades$, upgrading$ };

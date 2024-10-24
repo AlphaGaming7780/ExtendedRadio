@@ -51,6 +51,10 @@ declare module "cs2/input" {
   	AnyChildren = "anyChildren",
   	FocusedChild = "focusedChild"
   }
+  export enum FocusLimits {
+  	Center = "center",
+  	Bounds = "bounds"
+  }
   export export const FocusContext: import("react").Context<FocusController>;
   export export const disabledFocusController: FocusController;
   export export abstract class FocusControllerBase implements FocusController {
@@ -115,16 +119,17 @@ declare module "cs2/input" {
   	getFocusedBounds(): FocusDOMRect | null;
   	protected get debugFocusedChild(): FocusController | null;
   }
-  export export function useMultiChildFocusController(focusKey: UniqueFocusKey | null, activation: FocusActivation): MultiChildFocusController;
+  export export function useMultiChildFocusController(focusKey: UniqueFocusKey | null, activation: FocusActivation, limits: FocusLimits): MultiChildFocusController;
   export interface RefocusCallback {
   	(previousElement: FocusController | null): void;
   }
   export export class MultiChildFocusController extends FocusControllerBase {
-  	private readonly activation;
+  	readonly activation: FocusActivation;
+  	readonly limits: FocusLimits;
   	readonly children: Map<UniqueFocusKey, FocusController>;
   	private _focusedChildKey;
   	onRefocus: RefocusCallback | null;
-  	constructor(focusKey: UniqueFocusKey | null, activation: FocusActivation);
+  	constructor(focusKey: UniqueFocusKey | null, activation: FocusActivation, limits: FocusLimits);
   	get focusedChildKey(): UniqueFocusKey | null;
   	set focusedChildKey(nextFocusedChildKey: UniqueFocusKey | null);
   	has(focusKey: UniqueFocusKey): boolean;
@@ -190,7 +195,7 @@ declare module "cs2/input" {
   }
   export export function transformNavigationInput(value: Number2, dir: NavigationDirection): Number2;
   export export function getClosestKey(controller: MultiChildFocusController, pos: Number2, anchor: Number2): UniqueFocusKey | null;
-  export export function getClosestKeyInDirection(controller: MultiChildFocusController, pos: Number2, dir: Number2, anchor: Number2, ignoreKey?: UniqueFocusKey): UniqueFocusKey | null;
+  export export function getClosestKeyInDirection(controller: MultiChildFocusController, focusedElement: FocusController, dir: Number2, anchor: Number2, ignoreKey?: UniqueFocusKey): UniqueFocusKey | null;
   export export const focusAnchorCenter: Number2;
   export export const focusAnchorTop: Number2;
   export export const focusAnchorLeft: Number2;
@@ -202,15 +207,18 @@ declare module "cs2/input" {
   	initialFocused?: UniqueFocusKey | null;
   	direction?: NavigationDirection;
   	activation?: FocusActivation;
+  	limits?: FocusLimits;
   	onRefocus?: (controller: MultiChildFocusController, lastElement: FocusController | null) => UniqueFocusKey | null;
   	onChange?: (key: UniqueFocusKey | null) => void;
   	allowFocusExit?: boolean;
   	forceFocus?: UniqueFocusKey | null;
+  	debugName?: string;
+  	allowLooping?: boolean;
   }
   /**
    * Automatic navigation in lists, grids and forms.
    */
-  export export const AutoNavigationScope: ({ focusKey, initialFocused, direction, activation, children, onChange, onRefocus, allowFocusExit, forceFocus }: React$1.PropsWithChildren<AutoNavigationScopeProps>) => JSX.Element;
+  export export const AutoNavigationScope: ({ focusKey, initialFocused, direction, activation, limits, children, onChange, onRefocus, allowFocusExit, forceFocus, debugName, allowLooping }: React$1.PropsWithChildren<AutoNavigationScopeProps>) => JSX.Element;
   export interface FocusBoundaryProps {
   	disabled?: boolean;
   	onFocusChange?: FocusCallback;
@@ -334,6 +342,7 @@ declare module "cs2/input" {
   	debugName?: string;
   	focused: UniqueFocusKey | null;
   	activation?: FocusActivation;
+  	limits?: FocusLimits;
   }
   /**
    * A stateless component that allows you to control which child inside of it is focused.
@@ -345,16 +354,18 @@ declare module "cs2/input" {
    *
    * Optionally, a `focusKey` for the component itself can be set.
    */
-  export export const FocusScope: ({ focusKey, debugName, focused, activation, children }: React$1.PropsWithChildren<FocusScopeProps>) => JSX.Element;
+  export export const FocusScope: ({ focusKey, debugName, focused, activation, limits, children }: React$1.PropsWithChildren<FocusScopeProps>) => JSX.Element;
   export interface NavigationScopeProps {
   	focusKey?: FocusKey;
   	debugName?: string;
   	focused: UniqueFocusKey | null;
   	direction?: NavigationDirection;
   	activation?: FocusActivation;
+  	limits?: FocusLimits;
   	onChange: (key: UniqueFocusKey | null) => void;
   	onRefocus?: (controller: MultiChildFocusController, lastElement: FocusController | null) => UniqueFocusKey | null;
   	allowFocusExit?: boolean;
+  	allowLooping?: boolean;
   }
   /**
    * A stateless component that allows the user to navigate between multiple focusable children with a gamepad.
@@ -365,9 +376,10 @@ declare module "cs2/input" {
    *
    * Optionally, a `focusKey` for the component itself can be set.
    */
-  export export const NavigationScope: ({ focusKey, debugName, focused, direction, activation, children, onChange, onRefocus, allowFocusExit, }: React$1.PropsWithChildren<NavigationScopeProps>) => JSX.Element;
-  export export function refocusClosestKeyIfNoFocus(focusController: MultiChildFocusController, lastElement: FocusController | null): UniqueFocusKey | null;
-  export export function refocusClosestKey(focusController: MultiChildFocusController, lastElement: FocusController | null): UniqueFocusKey | null;
+  export export const NavigationScope: ({ focusKey, debugName, focused, direction, activation, limits, children, onChange, onRefocus, allowFocusExit, allowLooping }: React$1.PropsWithChildren<NavigationScopeProps>) => JSX.Element;
+  export type RefocusHandler = (focusController: MultiChildFocusController, lastElement: FocusController | null) => UniqueFocusKey | null;
+  export export const refocusClosestKeyIfNoFocus: RefocusHandler;
+  export export const refocusClosestKey: RefocusHandler;
   export interface SelectableFocusBoundaryProps {
   	onSelectedStateChanged?: (selected: boolean) => void;
   }
@@ -393,6 +405,7 @@ declare module "cs2/input" {
   }
   export interface ControlPath {
   	name: string;
+  	device: string;
   	displayName?: string;
   }
   export enum GamepadType {
@@ -410,9 +423,11 @@ declare module "cs2/input" {
   	"Change Slider Value": Action1D;
   	"Change Tool Option": Action1D;
   	"Change Value": Action1D;
+  	"Change Line Schedule": Action1D;
   	"Move Vertical": Action1D;
   	"Switch Radio Station": Action1D;
   	"Scroll Vertical": Action1D;
+  	"Scroll Assets": Action1D;
   	"Select": Action;
   	"Purchase Dev Tree Node": Action;
   	"Select Chirp Sender": Action;
@@ -431,15 +446,21 @@ declare module "cs2/input" {
   	"Toggle Tool Color Picker": Action;
   	"Cinematic Mode": Action;
   	"Photo Mode": Action;
+  	"Focus Citizen": Action;
+  	"Unfocus Citizen": Action;
+  	"Close": Action;
   	"Back": Action;
   	"Leave Underground Mode": Action;
   	"Leave Info View": Action;
+  	"Leave Map Tile View": Action;
   	"Switch Tab": Action1D;
+  	"Switch Option Section": Action1D;
   	"Switch DLC": Action1D;
   	"Switch Ordering": Action1D;
   	"Switch Radio Network": Action1D;
   	"Change Time Scale": Action1D;
   	"Switch Page": Action1D;
+  	"Default Tool": Action;
   	"Tool Options": Action;
   	"Switch Toolmode": Action;
   	"Toggle Snapping": Action;
@@ -448,7 +469,10 @@ declare module "cs2/input" {
   	"Toggle Property": Action;
   	"Previous Tutorial Phase": Action;
   	"Continue Tutorial": Action;
+  	"Finish Tutorial": Action;
+  	"Close Tutorial": Action;
   	"Focus Tutorial List": Action;
+  	"Start Next Tutorial": Action;
   	"Pause Simulation": Action;
   	"Resume Simulation": Action;
   	"Switch Speed": Action;
@@ -456,25 +480,36 @@ declare module "cs2/input" {
   	"Speed 2": Action;
   	"Speed 3": Action;
   	"Bulldozer": Action;
+  	"Exit Underground Mode": Action;
+  	"Enter Underground Mode": Action;
+  	"Increase Elevation": Action;
+  	"Decrease Elevation": Action;
   	"Change Elevation": Action1D;
   	"Advisor": Action;
   	"Quicksave": Action;
   	"Quickload": Action;
   	"Focus Selected Object": Action;
   	"Hide UI": Action;
-  	"Map tile Purchase Panel": Action;
+  	"Map Tile Purchase Panel": Action;
   	"Info View": Action;
   	"Progression Panel": Action;
   	"Economy Panel": Action;
   	"City Information Panel": Action;
   	"Statistic Panel": Action;
   	"Transportation Overview Panel": Action;
+  	"Notification Panel": Action;
   	"Chirper Panel": Action;
   	"Lifepath Panel": Action;
   	"Event Journal Panel": Action;
   	"Radio Panel": Action;
   	"Photo Mode Panel": Action;
   	"Take Photo": Action;
+  	"Relocate Selected Object": Action;
+  	"Toggle Selected Object Active": Action;
+  	"Delete Selected Object": Action;
+  	"Toggle Selected Object Emptying": Action;
+  	"Toggle Selected Lot Edit": Action;
+  	"Toggle Follow Selected Citizen": Action;
   	"Pause Menu": Action;
   	"Load Game": Action;
   	"Start Game": Action;
@@ -483,6 +518,11 @@ declare module "cs2/input" {
   	"Unset Binding": Action;
   	"Reset Binding": Action;
   	"Switch Savegame Location": Action1D;
+  	"Show Advanced": Action;
+  	"Hide Advanced": Action;
+  	"Select Directory": Action;
+  	"Search Options": Action;
+  	"Clear Search": Action;
   	"Debug UI": Action;
   	"Debug Prefab Tool": Action;
   	"Debug Change Field": Action1D;
@@ -494,6 +534,7 @@ declare module "cs2/input" {
   };
   export interface ButtonTheme {
   	button: string;
+  	hint: string;
   }
   export interface ButtonSounds {
   	select?: UISound | string | null;
@@ -509,9 +550,14 @@ declare module "cs2/input" {
   	selectAction?: InputAction;
   	selectSound?: UISound | string | null;
   	tooltipLabel?: React$1.ReactNode;
+  	disableHint?: boolean;
   	/** When the button is clicked or the SELECT button on a gamepad is pressed */
   	onSelect?: () => void;
   	as?: "button" | "div";
+  	hintAction?: InputAction;
+  	forceHint?: boolean;
+  	shortcut?: InputAction;
+  	allowFocusableChildren?: boolean;
   }
   export enum ShortInputPathOption {
   	FallbackToLong = 1,
@@ -520,13 +566,15 @@ declare module "cs2/input" {
   export interface InputActionHintsProps extends ClassProps {
   	disabled?: boolean;
   	specifiedActions?: string[];
+  	excludedActions?: string[];
   	labels?: boolean;
   	buttonAs?: ButtonProps["as"];
+  	delay?: number;
+  	delayIgnoreCounter?: number;
   }
-  export export const InputActionHints: React$1.FC<InputActionHintsProps>;
+  export export const InputActionHints: (props: InputActionHintsProps & React$1.RefAttributes<HTMLDivElement>) => React$1.ReactElement<any, string | React$1.JSXElementConstructor<any>> | null;
   export interface ControlIconProps extends ClassProps {
   	binding: ControlPath;
-  	group: string;
   	modifier: boolean;
   	shortName?: ShortInputPathOption;
   	style?: React$1.CSSProperties;
@@ -535,7 +583,7 @@ declare module "cs2/input" {
   }
   export export const ControlIcon: React$1.FC<ControlIconProps>;
   export export const ActionHintLayout: ({ children, className, ...props }: ButtonProps) => JSX.Element;
-  export export function useInputControlIcon(binding: ControlPath, group: string): string | null;
+  export export function useInputControlIcon(binding: ControlPath): string | null;
   export export function useGamepadType(): GamepadType;
   export enum GamepadButton$1 {
   	buttonSouth = 0,
@@ -579,22 +627,24 @@ declare module "cs2/input" {
   export interface InputActionConsumerProps {
   	actions: InputActions | null;
   	disabled?: boolean;
+  	ignoreFocusState?: boolean;
   }
   export export const InputActionConsumer: React$1.NamedExoticComponent<React$1.PropsWithChildren<InputActionConsumerProps>>;
   export interface SingleActionConsumerProps {
+  	action: string;
   	disabled?: boolean;
   	onAction?: () => void;
   }
   /** When the Gamepad "A" button is pressed */
-  export export const SelectConsumer: ({ disabled, children, onAction }: React$1.PropsWithChildren<SingleActionConsumerProps>) => JSX.Element;
-  export interface ExpandConsumerProps extends SingleActionConsumerProps {
+  export export const SelectConsumer: ({ action, ...props }: React$1.PropsWithChildren<Partial<SingleActionConsumerProps>>) => JSX.Element;
+  /** When the Keyboard "ESC" or Gamepad "B" button is pressed */
+  export export const BackConsumer: ({ action, ...props }: React$1.PropsWithChildren<Partial<SingleActionConsumerProps>>) => JSX.Element;
+  export interface ExpandConsumerProps extends Omit<SingleActionConsumerProps, "action"> {
   	expanded: boolean;
   	expandable: boolean;
   }
   /** When the Gamepad "X" button is pressed */
   export export const ExpandConsumer: ({ expanded, expandable, disabled, children, onAction }: React$1.PropsWithChildren<ExpandConsumerProps>) => JSX.Element;
-  /** When the Keyboard "ESC" or Gamepad "B" button is pressed */
-  export export const BackConsumer: ({ disabled, children, onAction }: React$1.PropsWithChildren<SingleActionConsumerProps>) => JSX.Element;
   export interface InputActionEvent {
   	action: InputAction;
   	value: null | number | Number2;
@@ -627,7 +677,12 @@ declare module "cs2/input" {
   export export const defaultInputController: InputController;
   export export const InputContext: React$1.Context<InputController>;
   export type InputStackTransformer = (stack: InputStack) => void;
-  export export function useInputController(enabled: boolean, transformer: InputStackTransformer | null): InputController;
+  export enum InputControllerState {
+  	Disabled = 0,
+  	ActiveOnFocus = 1,
+  	AlwaysActive = 2
+  }
+  export export function useInputController(state: InputControllerState, transformer: InputStackTransformer | null): InputController;
   export export class InputControllerImpl implements InputController {
   	private _parent;
   	private _child;

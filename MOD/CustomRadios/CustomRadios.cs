@@ -72,11 +72,6 @@ namespace ExtendedRadio
 			ExtendedRadio.radioTravers.Field("m_RadioChannels").SetValue(m_RadioChannels);
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
 
-            if (ExtendedRadioMod.s_setting.SaveLastRadio && ExtendedRadioMod.s_setting.LastRadio != null && m_RadioChannels.TryGetValue(ExtendedRadioMod.s_setting.LastRadio, out RuntimeRadioChannel channel))
-            {
-                ExtendedRadio.radio.currentChannel = channel;
-            }
-
         }
 
 		//internal static IEnumerator SearchForCustomRadiosFolder(List<string> ModsFolderPaths) {

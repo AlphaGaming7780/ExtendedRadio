@@ -17,6 +17,7 @@ using Unity.Jobs;
 using Game.Triggers;
 using System.IO;
 using System.Threading.Tasks;
+using Game.Simulation;
 
 namespace ExtendedRadio.Patches
 {
@@ -31,6 +32,26 @@ namespace ExtendedRadio.Patches
 
                 ExtendedRadio.OnLoadRadio(__instance);
 
+            }
+        }
+
+        [HarmonyPatch(typeof(Radio), "Enable")]
+        class Radio_Enable
+        {
+
+            static void Postfix(Radio __instance)
+            {
+
+                __instance.skipAds = ExtendedRadioMod.s_setting.DisableAdsOnStartup;
+
+                if (ExtendedRadioMod.s_setting.SaveLastRadio && ExtendedRadioMod.s_setting.LastRadio != null )
+                {
+                    RuntimeRadioChannel radio = __instance.GetRadioChannel(ExtendedRadioMod.s_setting.LastRadio);
+                    if (radio != null)
+                    {
+                        __instance.currentChannel = radio;
+                    }
+                }
             }
         }
 

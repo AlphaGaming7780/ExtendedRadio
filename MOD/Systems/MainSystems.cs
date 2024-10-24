@@ -43,12 +43,4 @@ public partial class MainSystem : GameSystemBase
         if (_volumeUpRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetVolume", [typeof(float)]).GetValue(SharedSettings.instance.audio.radioVolume + 0.05f);
         if (_volumeDownRadioBinding.WasPerformedThisFrame() && ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) _radioUISystemTraverse.Method("SetVolume", [typeof(float)]).GetValue(SharedSettings.instance.audio.radioVolume - 0.05f);
     }
-
-	protected override void OnGameLoadingComplete(Purpose purpose, GameMode mode)
-	{
-		if(purpose == Purpose.LoadGame && mode == GameMode.Game)
-		{
-            _radioUISystemTraverse.Method("SetSkipAds", [typeof(bool)])?.GetValue(ExtendedRadioMod.s_setting.DisableAdsOnStartup);
-        }
-	}
 }

@@ -4,6 +4,7 @@
     border-bottom-color: var(--menuControlBorder);
     border-left-color: var(--menuControlBorder);
     border-right-color: var(--menuControlBorder);
+    margin-right: 5rem;
 }
 
 .toggle {
@@ -11,4 +12,8 @@
     width: var(--toggleSize);
     height: var(--toggleSize);
     margin-left: var(--foldoutPadding);
+}
+
+.FoldoutItemHeaderSpan {
+    align-items: center
 }

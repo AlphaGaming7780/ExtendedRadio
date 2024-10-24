@@ -17,14 +17,18 @@ export type PropsFoldoutItem = {
 }
 
 export type PropsFoldoutItemHeader = {
-    icon: JSX.Element,
-    children: JSX.Element,
+    //icon: JSX.Element,
+    children?: JSX.Element,
+    onClick?: Function,
+    onFocusChange?: Function,
 }
 
+const FoldoutItemModule = getModule(path$, "FoldoutItem")
 export function FoldoutItem(propsFoldoutItem: PropsFoldoutItem): JSX.Element {
-    return getModule(path$, "FoldoutItem")(propsFoldoutItem)
+    return <FoldoutItemModule {...propsFoldoutItem} />
 }
 
+const FoldoutItemHeaderModule = getModule(path$, "FoldoutItemHeader")
 export function FoldoutItemHeader(propsFoldoutItemHeader: PropsFoldoutItemHeader): JSX.Element {
-    return getModule(path$, "FoldoutItemHeader")(propsFoldoutItemHeader)
+    return <FoldoutItemHeaderModule {...propsFoldoutItemHeader} />
 }

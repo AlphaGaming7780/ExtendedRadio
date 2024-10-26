@@ -3,9 +3,9 @@
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "Główne",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "Jakość życia",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Wyłącz reklamy przy uruchamianiu",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Wyłącz reklamy podczas wczytywania gry. /!\\ Ta funkcja jest teraz częścią gry. Jednak zachowałem to tutaj, ponieważ gra nie zapisuje tego poprawnie dla mnie. Zalecam wyłączenie i ponowne włączenie, jeśli nie zapisuje się poprawnie.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Disable the ads when you load into a game. ! This feature is now part of the base game. However, I’ve kept it here because the game isn’t saving it properly for me. I recommend disabling and re-enabling it if the game doesn't save it correctly.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Wczytaj ostatnio wybrane radio przy uruchamianiu",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Wybierz ostatnią wybraną stację podczas wczytywania gry. /!\\ Ta funkcja jest teraz częścią gry. Jednak zachowałem to tutaj, ponieważ gra nie zapisuje tego poprawnie dla mnie. Zalecam wyłączenie i ponowne włączenie, jeśli nie zapisuje się poprawnie.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Select the last selected radio when you load into a game. ! This feature is now part of the base game. However, the game setup doesn't support modded radio.",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "Narzędzia",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "Przeładuj radia",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "Przeładuj radia, możesz zaktualizować swoje radio, jeśli wprowadziłeś do niego zmiany. Może również spowodować zawieszenie się gry.",
@@ -38,5 +38,13 @@
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeDownRadioBinding]": "Skrót klawiaturowy do zwiększenia głośność radia.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeUpRadioBinding]": "Zmniejsz głośność",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod/VolumeUpRadioBinding/binding]": "Zmniejsz głośność",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeUpRadioBinding]": "Skrót klawiaturowy do zmniejszenia głośność radia."
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeUpRadioBinding]": "Skrót klawiaturowy do zmniejszenia głośność radia.",
+  "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.AudioFormatSupport]": "Audio Format Support",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWarning]": "The default audio format supported by the game is OGG. Please try to avoid using formats other than OGG.",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Support for MP3 files",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Enable the support for the MP3 files, need to restart the game to be effective.",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Support for WAV files",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Enable the support for the WAV files, need to restart the game to be effective.",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Support for FLAC files",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Enable the support for the FLAC files, need to restart the game to be effective."
 }

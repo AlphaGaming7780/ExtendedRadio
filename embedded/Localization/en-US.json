@@ -64,12 +64,12 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWarning]": "The default audio format supported by the game is OGG. Please try to avoid using formats other than OGG.",
 
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Support for MP3 files",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Enable the support for the MP3 files, need to restart the game to be effective.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Enable support for MP3 files; the game must be restarted.",
 
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Support for WAV files",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Enable the support for the WAV files, need to restart the game to be effective.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Enable support for MP3 files; the game must be restarted.",
 
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Support for FLAC files",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Enable the support for the FLAC files, need to restart the game to be effective."
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Enable support for MP3 files; the game must be restarted."
 
 }

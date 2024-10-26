@@ -29,8 +29,6 @@ namespace ExtendedRadio
 
 		public static AudioAsset LoadAudioFile(string audioFilePath, SegmentType segmentType, string programName, string radioChannelName, string networkName) {
 
-			Debug.Log("NewFile");
-
             audioFilePath = audioFilePath.Replace("\\", "/");
 
 			JsonAudioAsset jsAudioAsset;
@@ -200,8 +198,7 @@ namespace ExtendedRadio
                 newAudioFilePath = $"{fileInfo.DirectoryName}\\{newFileName}{fileInfo.Extension}";
 
                 if (ogFileName != newFileName)
-                {
-                    Debug.Log(audioFilePath + " => " + newAudioFilePath);
+                {;
                     fileInfo.MoveTo(newAudioFilePath);
                     if (File.Exists(jsonFilePath))
                     {

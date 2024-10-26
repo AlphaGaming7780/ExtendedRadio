@@ -41,17 +41,7 @@ namespace ExtendedRadio.Patches
 
             static void Postfix(Radio __instance)
             {
-
                 __instance.skipAds = ExtendedRadioMod.s_setting.DisableAdsOnStartup;
-
-                if (ExtendedRadioMod.s_setting.SaveLastRadio && ExtendedRadioMod.s_setting.LastRadio != null )
-                {
-                    RuntimeRadioChannel radio = __instance.GetRadioChannel(ExtendedRadioMod.s_setting.LastRadio);
-                    if (radio != null)
-                    {
-                        __instance.currentChannel = radio;
-                    }
-                }
             }
         }
 
@@ -119,7 +109,7 @@ namespace ExtendedRadio.Patches
         {
             static bool Prefix(AudioAsset __instance, ref Task<AudioClip> __result, bool useCached = true, AudioType audioType = AudioType.OGGVORBIS)
             {
-                __result = __instance.LoadAsyncFile(useCached, MusicLoader.GetClipFormatFromFileExtension(Path.GetExtension(__instance.path)));
+                __result = __instance.LoadAsyncFile(useCached, MusicLoader.GetClipFormatFromFileExtension( Path.GetExtension(__instance.path) ) );
                 return false;
             }
         }

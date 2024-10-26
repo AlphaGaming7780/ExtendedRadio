@@ -4,7 +4,6 @@ using System.IO;
 using ATL;
 using Colossal.IO.AssetDatabase;
 using Colossal.Json;
-using Colossal.UI;
 using HarmonyLib;
 using UnityEngine;
 using static Colossal.IO.AssetDatabase.AudioAsset;

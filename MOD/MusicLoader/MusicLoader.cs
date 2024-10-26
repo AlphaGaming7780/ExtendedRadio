@@ -30,8 +30,9 @@ namespace ExtendedRadio
 
 		public static AudioAsset LoadAudioFile(string audioFilePath, SegmentType segmentType, string programName, string radioChannelName, string networkName) {
 
-
 			Debug.Log("NewFile");
+
+            audioFilePath = audioFilePath.Replace("\\", "/");
 
 			JsonAudioAsset jsAudioAsset;
 
@@ -60,7 +61,7 @@ namespace ExtendedRadio
             //         }
 
 
-            AudioAsset audioAsset = LoadAudioAsset(audioFilePath, out audioFilePath, out string jsonFilePath);
+            AudioAsset audioAsset = LoadAudioAsset(audioFilePath, segmentType, out string jsonFilePath);
 
 
             if (File.Exists(jsonFilePath)) {
@@ -180,28 +181,36 @@ namespace ExtendedRadio
 			return null;
 		}
 
-		private static AudioAsset LoadAudioAsset(string audioFilePath, out string newAudioFilePath, out string jsonFilePath)
+		private static AudioAsset LoadAudioAsset(string audioFilePath, SegmentType segmentType, out string jsonFilePath)
 		{
             FileInfo fileInfo = new(audioFilePath);
+            string newAudioFilePath = audioFilePath;
             string ogFileName = Path.GetFileNameWithoutExtension(fileInfo.FullName);
             string newFileName = ogFileName;
             jsonFilePath = $"{fileInfo.DirectoryName}\\{ogFileName}.json";
             int x = 0;
 
-            while (AssetDatabase.global.TryGetAsset<AudioAsset>(SearchFilter<AudioAsset>.ByCondition( (audioAsset) => { return audioAsset.path != audioFilePath && audioAsset.name == newFileName; } ), out AudioAsset a)) 
-			{
-                newFileName = ogFileName + $"_{x}";
-                x++;
-            }
-
-            newAudioFilePath = $"{fileInfo.DirectoryName}\\{newFileName}{fileInfo.Extension}";
-            Debug.Log(audioFilePath + " => " + newAudioFilePath);
-
-            if(ogFileName != newFileName)
+            if (segmentType == SegmentType.Commercial)
             {
-                //fileInfo.MoveTo(audioFilePath);
-                //File.Move(jsonFilePath, $"{fileInfo.DirectoryName}\\{newFileName}.json");
-                //jsonFilePath = $"{fileInfo.DirectoryName}\\{newFileName}.json";
+                while (AssetDatabase.global.TryGetAsset<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((audioAsset) => { return audioAsset.path != audioFilePath && audioAsset.name == newFileName; }), out AudioAsset a))
+                {
+                    newFileName = ogFileName + $"_{x}";
+                    x++;
+                }
+
+                newAudioFilePath = $"{fileInfo.DirectoryName}\\{newFileName}{fileInfo.Extension}";
+
+                if (ogFileName != newFileName)
+                {
+                    Debug.Log(audioFilePath + " => " + newAudioFilePath);
+                    fileInfo.MoveTo(newAudioFilePath);
+                    if (File.Exists(jsonFilePath))
+                    {
+                        File.Move(jsonFilePath, $"{fileInfo.DirectoryName}\\{newFileName}.json");
+                    }
+                    jsonFilePath = $"{fileInfo.DirectoryName}\\{newFileName}.json";
+                }
+
             }
 
             if (AssetDatabase.global.TryGetAsset<AudioAsset>(
@@ -216,12 +225,12 @@ namespace ExtendedRadio
 			{
 				if(ogFileName != newFileName)
 				{
-                    //audioAsset.Delete();
-                    //audioAsset = LoadAudioAssetFromFile(newAudioFilePath);
+                    audioAsset.Delete();
+                    audioAsset = LoadAudioAssetFromFile(newAudioFilePath);
                 }
             } else
 			{
-				audioAsset = LoadAudioAssetFromFile(ogFileName);
+				audioAsset = LoadAudioAssetFromFile(audioFilePath);
             }
 
 			return audioAsset;

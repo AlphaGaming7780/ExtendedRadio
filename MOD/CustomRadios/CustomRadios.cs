@@ -4,6 +4,7 @@ using Colossal.Json;
 using static Game.Audio.Radio.Radio;
 using HarmonyLib;
 using ExtendedRadio.UI;
+using static Game.Rendering.Debug.RenderPrefabRenderer;
 
 namespace ExtendedRadio
 {
@@ -71,6 +72,11 @@ namespace ExtendedRadio
             ExtendedRadio.radioTravers.Field("m_Networks").SetValue(m_Networks);
 			ExtendedRadio.radioTravers.Field("m_RadioChannels").SetValue(m_RadioChannels);
 			ExtendedRadio.radioTravers.Field("m_CachedRadioChannelDescriptors").SetValue(null);
+
+            if (ExtendedRadioMod.s_setting.SaveLastRadio && ExtendedRadioMod.s_setting.LastRadio != null && m_RadioChannels.TryGetValue(ExtendedRadioMod.s_setting.LastRadio, out RuntimeRadioChannel channel))
+            {
+                ExtendedRadio.radio.currentChannel = channel;
+            }
 
         }
 

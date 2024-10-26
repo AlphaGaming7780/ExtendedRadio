@@ -79,7 +79,26 @@ public class Setting(IMod mod) : ModSetting(mod)
     [SettingsUIKeyboardBinding(BindingKeyboard.PageDown, actionName: nameof(VolumeUpRadioBinding), alt: true)]
     public ProxyBinding VolumeUpRadioBinding { get; set; }
 
+
+    public const string kAudioFormatSection = "AudioFormatSupport";
+
+    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+    [SettingsUIMultilineText]
+    public string AudioFormatWarning => string.Empty;
+
+    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+    public bool AudioFormatMP3 { get; set; } = false;
+
+    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+    public bool AudioFormatWAV { get; set; } = false;
+
+    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+    public bool AudioFormatFLAC { get; set; } = false;
+
+
+
     public string LastRadio = null;
+
 
     public override void SetDefaults()
 	{	

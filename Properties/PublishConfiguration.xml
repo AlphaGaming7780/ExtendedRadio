@@ -57,6 +57,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
   <Screenshot Value="Properties/Screenshot/SettingsMain.png" />
   <Screenshot Value="Properties/Screenshot/SettingsMixNetwork.png" />
   <Screenshot Value="Properties/Screenshot/SettingsKeybinds.png" />
+  <Screenshot Value="Properties/Screenshot/SettingsAudioFormatSupport.png" />
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
@@ -80,6 +81,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 ## Fixes
 - Various UI bugs (bug 1.1.10f1)
 - Fixed FPS issue caused by the radio (bug 1.1.10f1)
+
+*Note: The mod will now rename audio files for ads if another ad file has the same name, regardless of the radio station it is in.*
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

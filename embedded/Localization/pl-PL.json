@@ -44,7 +44,7 @@
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Obsługa plików MP3",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Włącz obsługę plików MP3; gra musi zostać uruchomiona ponownie.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Obsługa plików WAV",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Włącz obsługę plików WAV; gra musi zostać uruchomiona ponownie.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Enable support for WAV files; the game must be restarted.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Obsługa plików FLAC",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Włącz obsługę plików FLAC; gra musi zostać uruchomiona ponownie."
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Enable support for FLAC files; the game must be restarted."
 }

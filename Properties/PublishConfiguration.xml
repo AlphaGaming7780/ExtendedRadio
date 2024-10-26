@@ -70,18 +70,16 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# 1.4.2
-## New features
-- ExtendedRadio can now load other audio file type, but you need to enable the support for them in the settings.
+# Version 1.4.2
+## New Features
+- ExtendedRadio can now load other audio file types, but support for them must be enabled in the settings.
 
-## Improvement
-- The Audio loader now take the audio from the database that have already been loaded by the game instead of readding them to the database.
+## Improvements
+- The audio loader now uses audio files already in the game's database instead of re-adding them.
 
 ## Fixes
-- Various UI bugs (1.1.10f1 bug)
-- FPS destroyer radio (1.1.10f1 bug)
-
-
+- Various UI bugs (bug 1.1.10f1)
+- Fixed FPS issue caused by the radio (bug 1.1.10f1)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

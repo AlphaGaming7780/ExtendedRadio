@@ -3,9 +3,9 @@
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "메인",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "삶의 개선",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "시작시 광고 비활성화",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Disable the ads when you load into a game. /!\\ This feature is now part of the base game. However, I’ve kept it here because the game isn’t saving it properly for me. I recommend disabling and re-enabling it if the game doesn't save it correctly.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Disable the ads when you load into a game. ! This feature is now part of the base game. However, I’ve kept it here because the game isn’t saving it properly for me. I recommend disabling and re-enabling it if the game doesn't save it correctly.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "시작시 최근 채널 불러옴",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Select the last selected radio when you load into a game. /!\\ This feature is now part of the base game. However, I’ve kept it here because the game isn’t saving it properly for me. I recommend disabling and re-enabling it if the game doesn't save it correctly.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Select the last selected radio when you load into a game. ! This feature is now part of the base game. However, the game setup doesn't support modded radio.",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "유틸리티",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "라디오 다시 불러오기",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.ReloadRadio]": "라디오 채널들을 다시 불러오며 여러분이 만든 채널들을 다시 불러 올 수 있습니다. 다만 게임이 깨질 수 있습니다.",
@@ -38,5 +38,13 @@
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeDownRadioBinding]": "라디오 볼륨을 높일 때 사용 할 단축키입니다.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeUpRadioBinding]": "볼륨 낮추기",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod/VolumeUpRadioBinding/binding]": "볼륨 감소 단축키",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeUpRadioBinding]": "라디오 볼륨을 낮출 때 사용 할 단축키입니다."
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.VolumeUpRadioBinding]": "라디오 볼륨을 낮출 때 사용 할 단축키입니다.",
+  "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.AudioFormatSupport]": "Audio Format Support",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWarning]": "The default audio format supported by the game is OGG. Please try to avoid using formats other than OGG.",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Support for MP3 files",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatMP3]": "Enable the support for the MP3 files, need to restart the game to be effective.",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Support for WAV files",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatWAV]": "Enable the support for the WAV files, need to restart the game to be effective.",
+  "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Support for FLAC files",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.AudioFormatFLAC]": "Enable the support for the FLAC files, need to restart the game to be effective."
 }

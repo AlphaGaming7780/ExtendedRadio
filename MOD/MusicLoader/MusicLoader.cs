@@ -4,6 +4,7 @@ using System.IO;
 using ATL;
 using Colossal.IO.AssetDatabase;
 using Colossal.Json;
+using Colossal.UI;
 using HarmonyLib;
 using UnityEngine;
 using static Colossal.IO.AssetDatabase.AudioAsset;
@@ -29,37 +30,67 @@ namespace ExtendedRadio
 
 		public static AudioAsset LoadAudioFile(string audioFilePath, SegmentType segmentType, string programName, string radioChannelName, string networkName) {
 
+
+			Debug.Log("NewFile");
+
 			JsonAudioAsset jsAudioAsset;
 
-			FileInfo fileInfo = new(audioFilePath);
-			string JsonFile = $"{fileInfo.DirectoryName}\\{Path.GetFileNameWithoutExtension(fileInfo.FullName)}.json";
+            //FileInfo fileInfo = new(audioFilePath);
+            //string ogFileName = Path.GetFileNameWithoutExtension(fileInfo.FullName);
+            //string newFileName = ogFileName;
+            //         string JsonFile = $"{fileInfo.DirectoryName}\\{ogFileName}.json";
+            //         int x = 0;
 
-			if(File.Exists(JsonFile)) {
-				jsAudioAsset = Decoder.Decode(File.ReadAllText(JsonFile)).Make<JsonAudioAsset>();
+
+
+
+            //while (AssetDatabase.global.TryGetAsset(SearchFilter<AudioAsset>.ByCondition((e) => { return e.name == newFileName; }), out AudioAsset audioAsset2))
+            //{
+            //	newFileName = ogFileName + $"_{x}";
+            //	x++;
+            //}
+
+            //if(newFileName != ogFileName)
+            //{
+            //	string newaudioFilePath = $"{fileInfo.DirectoryName}\\{newFileName}{fileInfo.Extension}";
+            //	Debug.Log(audioFilePath + " => " + newaudioFilePath);
+            //             //fileInfo.MoveTo(audioFilePath);
+            //             //File.Move(JsonFile, $"{fileInfo.DirectoryName}\\{newFileName}.json");
+            //	//JsonFile = $"{fileInfo.DirectoryName}\\{newFileName}.json";
+            //         }
+
+
+            AudioAsset audioAsset = LoadAudioAsset(audioFilePath, out audioFilePath, out string jsonFilePath);
+
+
+            if (File.Exists(jsonFilePath)) {
+				jsAudioAsset = Decoder.Decode(File.ReadAllText(jsonFilePath)).Make<JsonAudioAsset>();
 			} else {
 				jsAudioAsset = new();
 			}
 
-            AudioAsset audioAsset;
-            AssetDataPath assetDataPath = AssetDataPath.Create(audioFilePath, EscapeStrategy.None);
-            try
-            {
-                IAssetData assetData = AssetDatabase.game.AddAsset(assetDataPath);
-				if(assetData is AudioAsset audioAsset1)
-				{
-					audioAsset = audioAsset1;
-                }
-				else
-				{
-					return null;
-				}
+			
 
-            }
-            catch (Exception e)
-            {
-                ExtendedRadioMod.log.Warn(e);
-				return null;
-            }
+    //        AudioAsset audioAsset;
+    //        AssetDataPath assetDataPath = AssetDataPath.Create(audioFilePath, EscapeStrategy.None);
+    //        try
+    //        {
+    //            IAssetData assetData = AssetDatabase.game.AddAsset(assetDataPath);
+				//if(assetData is AudioAsset audioAsset1)
+				//{
+				//	audioAsset = audioAsset1;
+    //            }
+				//else
+				//{
+				//	return null;
+				//}
+
+    //        }
+    //        catch (Exception e)
+    //        {
+    //            ExtendedRadioMod.log.Warn(e);
+				//return null;
+    //        }
 
             //Track track = new(audioFilePath, true);
 
@@ -148,6 +179,76 @@ namespace ExtendedRadio
 
 			return null;
 		}
+
+		private static AudioAsset LoadAudioAsset(string audioFilePath, out string newAudioFilePath, out string jsonFilePath)
+		{
+            FileInfo fileInfo = new(audioFilePath);
+            string ogFileName = Path.GetFileNameWithoutExtension(fileInfo.FullName);
+            string newFileName = ogFileName;
+            jsonFilePath = $"{fileInfo.DirectoryName}\\{ogFileName}.json";
+            int x = 0;
+
+            while (AssetDatabase.global.TryGetAsset<AudioAsset>(SearchFilter<AudioAsset>.ByCondition( (audioAsset) => { return audioAsset.path != audioFilePath && audioAsset.name == newFileName; } ), out AudioAsset a)) 
+			{
+                newFileName = ogFileName + $"_{x}";
+                x++;
+            }
+
+            newAudioFilePath = $"{fileInfo.DirectoryName}\\{newFileName}{fileInfo.Extension}";
+            Debug.Log(audioFilePath + " => " + newAudioFilePath);
+
+            if(ogFileName != newFileName)
+            {
+                //fileInfo.MoveTo(audioFilePath);
+                //File.Move(jsonFilePath, $"{fileInfo.DirectoryName}\\{newFileName}.json");
+                //jsonFilePath = $"{fileInfo.DirectoryName}\\{newFileName}.json";
+            }
+
+            if (AssetDatabase.global.TryGetAsset<AudioAsset>(
+				SearchFilter<AudioAsset>.ByCondition( 
+					(audioAsset) => 
+					{
+						return audioAsset.name == ogFileName && audioAsset.path == audioFilePath;
+					}
+				), 
+				out AudioAsset audioAsset)
+			)
+			{
+				if(ogFileName != newFileName)
+				{
+                    //audioAsset.Delete();
+                    //audioAsset = LoadAudioAssetFromFile(newAudioFilePath);
+                }
+            } else
+			{
+				audioAsset = LoadAudioAssetFromFile(ogFileName);
+            }
+
+			return audioAsset;
+		}
+
+		private static AudioAsset LoadAudioAssetFromFile(string audioFilePath)
+		{
+            AssetDataPath assetDataPath = AssetDataPath.Create(audioFilePath, EscapeStrategy.None);
+            try
+            {
+                IAssetData assetData = AssetDatabase.game.AddAsset(assetDataPath);
+                if (assetData is AudioAsset audioAsset1)
+                {
+                    return audioAsset1;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception e)
+            {
+                ExtendedRadioMod.log.Warn(e);
+                return null;
+            }
+        }
 
 		//internal static string GetClipPathFromAudiAsset(AudioAsset audioAsset) {
 

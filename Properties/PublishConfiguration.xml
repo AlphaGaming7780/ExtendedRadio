@@ -24,17 +24,17 @@ This mod aims to add features and improve existing ones for the game's radio pla
 
 ## Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ✔️French 100% : aricoseco, Morgan Touverey Quilling (mtouverey), khallmark
+- ✔️French 100% : aricoseco, Morgan Touverey Quilling (mtouverey), khallmark, Triton Supreme
 - ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS), jslxxgyy, GuaGua_ua
-- ⚠️Chinese Traditional 3% : KAI (kai0211)
-- ✔️German 100% : Speedster McRainbow (RainbowSpeedy), Ben0884 (Ben84), Lorenz Fiedrich (GuysLetsPlay)
-- ⚠️Italian 80% : Carmelo B. (b.carmelo.92)
-- ⚠️Japanese 93% : つちのこ (main1108)
-- ✔️Korean 100% : TwotoolusFLY_LSh.st
+- ⚠️Chinese Traditional 2% : KAI (kai0211)
+- ⚠️German 58% : Speedster McRainbow (RainbowSpeedy), Ben0884 (Ben84), Lorenz Fiedrich (GuysLetsPlay)
+- ⚠️Italian 46% : Carmelo B. (b.carmelo.92)
+- ⚠️Japanese 58% : つちのこ (main1108)
+- ⚠️Korean 58% : TwotoolusFLY_LSh.st
 - ✔️Polish 100% : Lisek, karmel68
 - ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
-- ⚠️Portuguese, Brazilian 94% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
-- ⚠️Russian 36% : Lek0ms
+- ⚠️Portuguese, Brazilian 58% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
+- ⚠️Russian 17% : Lek0ms
 - ✔️Spanish 100% : elGendo87
 
 # Acknowledgment
@@ -63,7 +63,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.4.1" />
+	<ModVersion Value="1.4.2" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -81,8 +81,15 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 ## Fixes
 - Various UI bugs (bug 1.1.10f1)
 - Fixed FPS issue caused by the radio (bug 1.1.10f1)
-
 *Note: The mod will now rename audio files for ads if another ad file has the same name, regardless of the radio station it is in.*
+
+## Translations update
+- French : Triton Supreme
+- Chinese Simplified : RilkeXS(无手文) (RilkeXS)
+- Korean : TwotoolusFLY_LSh.st
+- Polish : karmel68
+- Portuguese : Tiago Correia (ti4go)
+- Spanish : elGendo87
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

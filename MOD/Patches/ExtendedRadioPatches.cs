@@ -18,11 +18,14 @@ using Game.Triggers;
 using System.IO;
 using System.Threading.Tasks;
 using Game.Simulation;
+using UnityEngine.Networking;
 
 namespace ExtendedRadio.Patches
 {
     class ExtendedRadioPatch
     {
+        static bool DataBaseConditionCheck(AudioAsset asset, SegmentType segmentType) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segmentType)) && MixNetwork.s_enabledTags.ContainsKey(segmentType) && MixNetwork.s_enabledTags[segmentType].Any(new Func<string, bool>(asset.ContainsTag));
+
         [HarmonyPatch(typeof(Radio), "LoadRadio")]
         class Radio_LoadRadio
         {
@@ -121,7 +124,8 @@ namespace ExtendedRadio.Patches
             static bool Prefix(Radio __instance, RuntimeSegment segment)
             {
                 if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
-                IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition((AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags.ContainsKey(segment.type) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag))));
+
+                IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition( (AudioAsset asset) => DataBaseConditionCheck(asset, segment.type) ) );
                 List<AudioAsset> list = [.. assets];
                 segment.clipsCap = assets.Count() > 10 ? 10 : assets.Count();
                 System.Random rnd = new();
@@ -150,8 +154,7 @@ namespace ExtendedRadio.Patches
                 {
                     WeightedRandom<AudioAsset> weightedRandom = [];
                     Dictionary<string, List<AudioAsset>> dictionary = [];
-                    bool check(AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag));
-                    IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets(SearchFilter<AudioAsset>.ByCondition(check));
+                    IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets(SearchFilter<AudioAsset>.ByCondition( (AudioAsset asset) => DataBaseConditionCheck(asset, segment.type) ) );
                     segment.clipsCap = audioAssetList.Count() > 1 ? 1 : audioAssetList.Count();
                     foreach (AudioAsset audioAsset in audioAssetList)
                     {
@@ -236,8 +239,7 @@ namespace ExtendedRadio.Patches
             while (list.Count < segment.clipsCap && existingSystemManaged.TryPopEvent(segment.type, newestFirst, out RadioTag radioTag))
             {
                 list2.Clear();
-                bool check(AudioAsset asset) => asset.ContainsTag(CustomRadios.FormatTagSegmentType(segment.type)) && MixNetwork.s_enabledTags[segment.type].Any(new Func<string, bool>(asset.ContainsTag));
-                IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition(check));
+                IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition( (AudioAsset asset) => DataBaseConditionCheck(asset, segment.type) ) );
                 segment.clipsCap = audioAssetList.Count() > 1 ? 1 : audioAssetList.Count();
                 foreach (AudioAsset audioAsset in audioAssetList)
                 {

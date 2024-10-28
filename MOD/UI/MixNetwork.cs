@@ -256,8 +256,8 @@ namespace ExtendedRadio
                         RadioTag programTag = new(runtimeProgram.name, CustomRadios.FormatTagRadioProgram(runtimeProgram.name), runtimeSegment.type);
                         RadioTag segmentTypeTag = new(CustomRadios.SegmentTypeToTypeTag(runtimeSegment.type), CustomRadios.FormatTagSegmentType(runtimeSegment.type), runtimeSegment.type);
 
-                        networkTag.RadioTags.Add(channelTag);
                         if (channel.schedule.Length > 1) channelTag.RadioTags.Add(programTag);
+                        networkTag.RadioTags.Add(channelTag);
                         segmentTypeTag.RadioTags.Add(networkTag);
                         
 

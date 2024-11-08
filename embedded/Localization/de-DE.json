@@ -3,7 +3,7 @@
   "Options.TAB[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Main]": "Hauptseite",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.QOL]": "Allgemeine Verbesserungen",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Deaktiviere Werbemeldungen beim Start",
-  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Disable the ads when you load into a game. ! This feature is now part of the base game. However, I’ve kept it here because the game isn’t saving it properly for me. I recommend disabling and re-enabling it if the game doesn't save it correctly.",
+  "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.DisableAdsOnStartup]": "Deaktiviere die Werbung, wenn du ins Spiel lädst! Diese Funktion ist jetzt Teil des Basisspiels. Aber ich habe es hier aufbewahrt, weil das Spiel es für mich nicht ordentlich speichert. Ich empfehle es zu deaktivieren und wieder zu aktivieren, wenn das Spiel es nicht richtig speichert.",
   "Options.OPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Zuletzt gehörtes Radio beim Start laden",
   "Options.OPTION_DESCRIPTION[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Setting.SaveLastRadio]": "Select the last selected radio when you load into a game. ! This feature is now part of the base game. However, the game setup doesn't support modded radio.",
   "Options.GROUP[ExtendedRadio.ExtendedRadio.ExtendedRadioMod.Utility]": "Werkzeuge",

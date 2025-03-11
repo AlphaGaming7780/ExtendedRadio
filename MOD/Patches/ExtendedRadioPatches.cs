@@ -167,7 +167,7 @@ namespace ExtendedRadio.Patches
                         }
                         else
                         {
-                            ExtendedRadioMod.log.ErrorFormat("Asset {0} ({1}) does not contain a brand metatag (for Commercial segment)", audioAsset.guid, audioAsset.GetMetaTag(AudioAsset.Metatag.Title) ?? "<No title>");
+                            ExtendedRadioMod.log.ErrorFormat("Asset {0} ({1}) does not contain a brand metatag (for Commercial segment)", audioAsset.id.guid, audioAsset.GetMetaTag(AudioAsset.Metatag.Title) ?? "<No title>");
                         }
                     }
                     NativeList<BrandPopularitySystem.BrandPopularity> brandPopularity = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<BrandPopularitySystem>().ReadBrandPopularity(out JobHandle jobHandle);

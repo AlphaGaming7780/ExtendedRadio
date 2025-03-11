@@ -7,7 +7,8 @@ using static Game.Audio.Radio.Radio;
 
 namespace ExtendedRadio;
 
-[FileLocation($"ModsSettings\\{nameof(ExtendedRadio)}\\settings")]
+//[FileLocation($"ModsSettings\\{nameof(ExtendedRadio)}\\settings")]
+[FileLocation($"ExtendedRadio")]
 [SettingsUIGroupOrder(kQOLGroup, kUtilityGroup)]
 [SettingsUIShowGroupName(kQOLGroup, kUtilityGroup)]
 public class Setting(IMod mod) : ModSetting(mod)

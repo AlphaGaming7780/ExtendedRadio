@@ -96,7 +96,7 @@ namespace ExtendedRadio
             {
                 Dictionary<Metatag, string> m_Metatags = [];
                 Traverse audioAssetTravers = Traverse.Create(audioAsset);
-                Track track = new(writeStream, audioAsset.database.GetMeta(audioAsset.guid).mimeType, null);
+                Track track = new(writeStream, audioAsset.database.GetMeta(audioAsset.id.guid).mimeType, null);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Title, string.IsNullOrEmpty(jsAudioAsset.Title) ? track.Title : jsAudioAsset.Title);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Album, string.IsNullOrEmpty(jsAudioAsset.Album) ? track.Album : jsAudioAsset.Album);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Artist, string.IsNullOrEmpty(jsAudioAsset.Artist) ? track.Artist : jsAudioAsset.Artist);

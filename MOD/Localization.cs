@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace ExtendedRadio;
 
@@ -13,8 +14,13 @@ public class Localization
 {
     public static void LoadLocalization() 
 	{
-		try
-		{
+        Task.Run(LoadLocalization_impl);
+	}
+
+    private static void LoadLocalization_impl()
+    {
+        try
+        {
             foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
@@ -29,8 +35,10 @@ public class Localization
 
                 GameManager.instance.localizationManager.AddSource(localeID, new MemorySource(localization));
             }
-        } catch (Exception ex) { ExtendedRadioMod.log.Error(ex); }
-	}
+        }
+        catch (Exception ex) { ExtendedRadioMod.log.Error(ex); }
+    }
+
 }
 
 //[Serializable]

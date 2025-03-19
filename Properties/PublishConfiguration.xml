@@ -63,7 +63,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.4.3" />
+	<ModVersion Value="1.4.4" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.2.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -71,15 +71,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# Version 1.4.3
-
-## Fixes
-- Fixe issue related to game update (1.2.4f1)
-
-## Translations update
-- ✔️German 100% : Fuchs23
-- ✔️Japanese 100% : つちのこ (main1108)
-- ✔️Korean 100% : TwotoolusFLY_LSh.st
+# Version 1.4.4
+## Improvements
+- Multi-threaded the loading of the localization, this should save ~2 sec of loading time on startup.
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

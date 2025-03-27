@@ -20,7 +20,8 @@ namespace ExtendedRadio
             foreach (string format in formats) {
                 foreach (string audioAssetFile in Directory.GetFiles(directory, $"*{format}"))
                 {
-                    audioAssets = audioAssets.AddToArray(LoadAudioFile(audioAssetFile, segmentType, programName, radioChannelName, radioNetworkName));
+                    AudioAsset audioAsset = LoadAudioFile(audioAssetFile, segmentType, programName, radioChannelName, radioNetworkName);
+                    if(audioAsset != null) audioAssets = audioAssets.AddToArray(audioAsset);
                 }
             }
 
@@ -60,6 +61,7 @@ namespace ExtendedRadio
 
             AudioAsset audioAsset = LoadAudioAsset(audioFilePath, segmentType, out string jsonFilePath);
 
+            if (audioAsset == null) return null;
 
             if (File.Exists(jsonFilePath)) {
 				jsAudioAsset = Decoder.Decode(File.ReadAllText(jsonFilePath)).Make<JsonAudioAsset>();
@@ -234,10 +236,11 @@ namespace ExtendedRadio
 
 		private static AudioAsset LoadAudioAssetFromFile(string audioFilePath)
 		{
-            AssetDataPath assetDataPath = AssetDataPath.Create(audioFilePath, EscapeStrategy.None);
+            FileInfo fileInfo = new(audioFilePath);
+            AssetDataPath assetDataPath = AssetDataPath.Create(fileInfo.DirectoryName, fileInfo.Name, EscapeStrategy.None);
             try
             {
-                IAssetData assetData = AssetDatabase.game.AddAsset(assetDataPath);
+                IAssetData assetData = AssetDatabase.user.AddAsset(assetDataPath);
                 if (assetData is AudioAsset audioAsset1)
                 {
                     return audioAsset1;

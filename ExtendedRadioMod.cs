@@ -68,6 +68,11 @@ namespace ExtendedRadio
             if (s_setting.AudioFormatWAV)	DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".wav", false);
             if (s_setting.AudioFormatFLAC)	DefaultAssetFactory.instance.MapSupportedExtension<AudioAsset>(".flac", false);
 
+			foreach ( string s in DefaultAssetFactory.instance.GetSupportedExtensions())
+			{
+				log.Info(s);
+			}
+
             harmony = new($"{nameof(ExtendedRadio)}.{nameof(ExtendedRadioMod)}");
 			harmony.PatchAll(typeof(ExtendedRadioMod).Assembly);
 			var patchedMethods = harmony.GetPatchedMethods().ToArray();

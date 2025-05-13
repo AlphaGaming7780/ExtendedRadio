@@ -4,7 +4,7 @@
 		<OutputType>Library</OutputType>
 		<TargetFramework>net472</TargetFramework>
 		<Configurations>Debug;Release</Configurations>
-		<langVersion>latest</langVersion>
+		<!--<langVersion>latest</langVersion>-->
     <Authors>Triton Supreme</Authors>
 		
 		<!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
@@ -40,7 +40,7 @@
 	
 	<ItemGroup>
 		<PackageReference Include="Lib.Harmony" Version="2.2.2" />
-		<PackageReference Include="UnityEngine.Modules" Version="2022.3.7" IncludeAssets="compile" />
+		<!--<PackageReference Include="UnityEngine.Modules" Version="2022.3.7" IncludeAssets="compile" />-->
 	</ItemGroup>
 
 	<ItemGroup>

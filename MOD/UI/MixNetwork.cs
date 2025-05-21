@@ -1,4 +1,5 @@
-﻿using Colossal.UI.Binding;
+﻿using Colossal.IO.AssetDatabase;
+using Colossal.UI.Binding;
 using ExtendedRadio.Extension;
 using ExtendedRadio.UI;
 using Game.UI;
@@ -21,7 +22,7 @@ namespace ExtendedRadio
             public string Name;
             public string Tag;
             public SegmentType Type = SegmentType.Playlist;
-            public List<RadioTag> RadioTags = [];
+            public List<RadioTag> RadioTags = new();
 
             public RadioTag(string name, string tag, SegmentType segmentType)
             {
@@ -106,14 +107,14 @@ namespace ExtendedRadio
         private static ValueBinding<List<RadioTag>> VB_radioTags;
         private static ValueBinding<Dictionary<SegmentType, List<string>>> VB_enabledTags;
 
-        private static Dictionary<string, RadioNetwork> s_networks = [];
-        private static Dictionary<string, RuntimeRadioChannel> s_radioChannels = [];
+        private static Dictionary<string, RadioNetwork> s_networks = new();
+        private static Dictionary<string, RuntimeRadioChannel> s_radioChannels = new();
         internal static Dictionary<SegmentType, List<string>> s_enabledTags = ExtendedRadioMod.s_setting.EnabledTags;
-        private static readonly List<RadioTag> s_radiosTags = [];
+        private static readonly List<RadioTag> s_radiosTags = new();
 
         protected override void OnCreate()
         {
-            if(s_enabledTags.Count <= 0) s_enabledTags.Add(SegmentType.Playlist, [CustomRadios.FormatTagSegmentType(SegmentType.Playlist)]);
+            if(s_enabledTags.Count <= 0) s_enabledTags.Add(SegmentType.Playlist, new() { CustomRadios.FormatTagSegmentType(SegmentType.Playlist)  });
             base.OnCreate();
             AddBinding(VB_radioTags = new ValueBinding<List<RadioTag>>("extended_radio_mix", "radiotags", s_radiosTags, new ListWriter<RadioTag>(new ValueWriter<RadioTag>())));
             AddBinding(VB_enabledTags = new ValueBinding<Dictionary<SegmentType, List<string>>>("extended_radio_mix", "enabledtags", s_enabledTags, new DictionaryWriter<SegmentType, List<string>>( new EnumNameWriter<SegmentType>(), new ListWriter<string>())));
@@ -131,7 +132,7 @@ namespace ExtendedRadio
                 return;
             }
 
-            if (!s_enabledTags.ContainsKey(segmentType)) s_enabledTags.Add(segmentType, [tag]);
+            if (!s_enabledTags.ContainsKey(segmentType)) s_enabledTags.Add(segmentType, new() { tag });
             else s_enabledTags[segmentType].Add(tag);
             UpdateTagsAndRadio();
         }
@@ -164,7 +165,7 @@ namespace ExtendedRadio
                     ExtendedRadio.radioTravers.Method("FinishCurrentClip").GetValue();
                 }
                 ExtendedRadio.radioTravers.Method("SetupOrSkipSegment").GetValue();
-                ExtendedRadio.radioTravers.Method("ClearQueue", [typeof(bool)]).GetValue(false);
+                ExtendedRadio.radioTravers.Method("ClearQueue", new[] { typeof(bool) }).GetValue(false);
                 ExtendedRadio.radioTravers.Field("m_ReplayIndex").SetValue(0);
             }
 
@@ -199,16 +200,16 @@ namespace ExtendedRadio
                 loopProgram = true,
                 icon = Icons.MixNetworkIcon,
                 pairIntroOutro = false,
-                segments = []
+                segments = new Segment[0]
             };
 
             foreach (SegmentType segmentType in Enum.GetValues(typeof(SegmentType)))
             {
                 Segment segment = new()
                 {
-                    clips = [],
+                    clips = new AudioAsset[0],
                     clipsCap = 1,
-                    tags = [],
+                    tags = new string[0],
                     type = segmentType,
                 };
                 mixProgram.segments = mixProgram.segments.AddItem(segment).ToArray();
@@ -222,7 +223,7 @@ namespace ExtendedRadio
                 icon = Icons.MixNetworkIcon,
                 uiPriority = 0,
                 network = mixNetwork.name,
-                programs = [mixProgram]
+                programs = new[] { mixProgram }
             };
 
             s_networks.Add(mixNetwork.name, mixNetwork);

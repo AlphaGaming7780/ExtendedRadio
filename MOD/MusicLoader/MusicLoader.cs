@@ -15,7 +15,7 @@ namespace ExtendedRadio
 	{
 		public static AudioAsset[] LoadAudioFiles(string directory, SegmentType segmentType, string programName, string radioChannelName, string radioNetworkName)
 		{
-			AudioAsset[] audioAssets = [];
+			AudioAsset[] audioAssets = new AudioAsset[0];
             DefaultAssetFactory.instance.GetAssetMimes(typeof(AudioAsset), out IReadOnlyList<string> formats);
             foreach (string format in formats) {
                 foreach (string audioAssetFile in Directory.GetFiles(directory, $"*{format}"))
@@ -96,9 +96,9 @@ namespace ExtendedRadio
 
             using (Stream writeStream = audioAsset.GetReadStream())
             {
-                Dictionary<Metatag, string> m_Metatags = [];
+                Dictionary<Metatag, string> m_Metatags = new();
                 Traverse audioAssetTravers = Traverse.Create(audioAsset);
-                Track track = new(writeStream, audioAsset.database.GetMeta(audioAsset.id.guid).mimeType, null);
+                Track track = new(writeStream, audioAsset.database.GetMeta(audioAsset.id.guid).extension, null);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Title, string.IsNullOrEmpty(jsAudioAsset.Title) ? track.Title : jsAudioAsset.Title);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Album, string.IsNullOrEmpty(jsAudioAsset.Album) ? track.Album : jsAudioAsset.Album);
                 AddMetaTag(audioAsset, m_Metatags, Metatag.Artist, string.IsNullOrEmpty(jsAudioAsset.Artist) ? track.Artist : jsAudioAsset.Artist);

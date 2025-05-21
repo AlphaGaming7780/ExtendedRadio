@@ -6,7 +6,7 @@ namespace ExtendedRadio
 {
 	public class RadioAddons
 	{
-		private static readonly List<string> addonsDirectories = [];
+		private static readonly List<string> addonsDirectories = new();
 		internal static void LoadRadioAddons() {
 			foreach(string radioAddonsFolder in addonsDirectories ) {
 				foreach(string folder in Directory.GetDirectories(radioAddonsFolder)) {

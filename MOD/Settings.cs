@@ -5,107 +5,111 @@ using Game.Settings;
 using System.Collections.Generic;
 using static Game.Audio.Radio.Radio;
 
-namespace ExtendedRadio;
-
-//[FileLocation($"ModsSettings\\{nameof(ExtendedRadio)}\\settings")]
-[FileLocation($"ExtendedRadio")]
-[SettingsUIGroupOrder(kQOLGroup, kUtilityGroup)]
-[SettingsUIShowGroupName(kQOLGroup, kUtilityGroup)]
-public class Setting(IMod mod) : ModSetting(mod)
+namespace ExtendedRadio
 {
-	public const string kMainSection = "Main";
-    public const string kQOLGroup = "QOL";
-    public const string kUtilityGroup = "Utility";
+    //[FileLocation($"ModsSettings\\{nameof(ExtendedRadio)}\\settings")]
+    [FileLocation("ExtendedRadio")]
+    [SettingsUIGroupOrder(kQOLGroup, kUtilityGroup)]
+    [SettingsUIShowGroupName(kQOLGroup, kUtilityGroup)]
+    public class Setting : ModSetting
+    {
+        public Setting(IMod mod) : base(mod) { }
 
-    [SettingsUISection(kMainSection, kQOLGroup)]
-	public bool DisableAdsOnStartup { get; set; } = false;
+        public const string kMainSection = "Main";
+        public const string kQOLGroup = "QOL";
+        public const string kUtilityGroup = "Utility";
 
-	[SettingsUISection(kMainSection, kQOLGroup)]
-	public bool SaveLastRadio { get; set; } = true;
+        [SettingsUISection(kMainSection, kQOLGroup)]
+        public bool DisableAdsOnStartup { get; set; } = false;
 
-    [SettingsUIButton]
-    [SettingsUISection(kMainSection, kUtilityGroup)]
-    public bool ReloadRadio { set {if(ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) ExtendedRadio.radio.Reload(true);} }
+        [SettingsUISection(kMainSection, kQOLGroup)]
+        public bool SaveLastRadio { get; set; } = true;
 
-    [SettingsUIButton]
-    [SettingsUIConfirmation]
-    [SettingsUISection(kMainSection, kUtilityGroup)]
-    public bool ResetSettings { set {SetDefaults();} }
+        [SettingsUIButton]
+        [SettingsUISection(kMainSection, kUtilityGroup)]
+        public bool ReloadRadio { set { if (ExtendedRadio.radio != null && ExtendedRadio.radio.isEnabled) ExtendedRadio.radio.Reload(true); } }
 
-
-
-    public const string kMixNetworkSection = "MixNetwork";
-    public const string kMixNetworkGroup = "MixNetwork";
-    [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
-    public bool MixNetworkEnabled { get; set; } = true;
-
-    [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
-    [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkClearQueue))]
-    public bool MixNetworkClearQueue { get; set; } = true;
-    public bool DisableCondition_MixNetworkClearQueue => !MixNetworkEnabled;
-
-    [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
-    [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkFinishCurrentClip))]
-    public bool MixNetworkFinishCurrentClip { get; set; } = true;
-    public bool DisableCondition_MixNetworkFinishCurrentClip => !MixNetworkEnabled || !MixNetworkClearQueue;
-
-    public Dictionary<SegmentType, List<string>> EnabledTags = [];
-
-
-    public const string kKeybindsSection = "Keybinds";
-    public const string kRadioControlsGroup = "RadioControls";
-
-    [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(BindingKeyboard.Home, actionName: nameof(PauseRadioBinding), alt: true)]
-    public ProxyBinding PauseRadioBinding { get; set; }
-
-    [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(BindingKeyboard.End, actionName: nameof(MuteRadioBinding), alt: true)]
-    public ProxyBinding MuteRadioBinding { get; set; }
-
-    [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(BindingKeyboard.PageUp, actionName: nameof(NextSongRadioBinding), alt: true)]
-    public ProxyBinding NextSongRadioBinding { get; set; }
-
-    // I wish the INSERT key was in
-    [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(BindingKeyboard.None, actionName: nameof(PrevSongRadioBinding), alt: true)]
-    public ProxyBinding PrevSongRadioBinding { get; set; }
-
-    [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(BindingKeyboard.Delete, actionName: nameof(VolumeDownRadioBinding), alt: true)]
-    public ProxyBinding VolumeDownRadioBinding { get; set; }
-
-    [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
-    [SettingsUIKeyboardBinding(BindingKeyboard.PageDown, actionName: nameof(VolumeUpRadioBinding), alt: true)]
-    public ProxyBinding VolumeUpRadioBinding { get; set; }
-
-
-    public const string kAudioFormatSection = "AudioFormatSupport";
-
-    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
-    [SettingsUIMultilineText]
-    public string AudioFormatWarning => string.Empty;
-
-    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
-    public bool AudioFormatMP3 { get; set; } = false;
-
-    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
-    public bool AudioFormatWAV { get; set; } = false;
-
-    [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
-    public bool AudioFormatFLAC { get; set; } = false;
+        [SettingsUIButton]
+        [SettingsUIConfirmation]
+        [SettingsUISection(kMainSection, kUtilityGroup)]
+        public bool ResetSettings { set { SetDefaults(); } }
 
 
 
-    public string LastRadio = null;
+        public const string kMixNetworkSection = "MixNetwork";
+        public const string kMixNetworkGroup = "MixNetwork";
+        [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
+        public bool MixNetworkEnabled { get; set; } = true;
+
+        [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
+        [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkClearQueue))]
+        public bool MixNetworkClearQueue { get; set; } = true;
+        public bool DisableCondition_MixNetworkClearQueue => !MixNetworkEnabled;
+
+        [SettingsUISection(kMixNetworkSection, kMixNetworkGroup)]
+        [SettingsUIDisableByConditionAttribute(typeof(Setting), nameof(DisableCondition_MixNetworkFinishCurrentClip))]
+        public bool MixNetworkFinishCurrentClip { get; set; } = true;
+        public bool DisableCondition_MixNetworkFinishCurrentClip => !MixNetworkEnabled || !MixNetworkClearQueue;
+
+        public Dictionary<SegmentType, List<string>> EnabledTags = new();
 
 
-    public override void SetDefaults()
-	{	
-		DisableAdsOnStartup = false;
-		SaveLastRadio = true;
-		LastRadio = null;
-        ResetKeyBindings();
+        public const string kKeybindsSection = "Keybinds";
+        public const string kRadioControlsGroup = "RadioControls";
+
+        [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.Home, actionName: nameof(PauseRadioBinding), alt: true)]
+        public ProxyBinding PauseRadioBinding { get; set; }
+
+        [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.End, actionName: nameof(MuteRadioBinding), alt: true)]
+        public ProxyBinding MuteRadioBinding { get; set; }
+
+        [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.PageUp, actionName: nameof(NextSongRadioBinding), alt: true)]
+        public ProxyBinding NextSongRadioBinding { get; set; }
+
+        // I wish the INSERT key was in
+        [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.None, actionName: nameof(PrevSongRadioBinding), alt: true)]
+        public ProxyBinding PrevSongRadioBinding { get; set; }
+
+        [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.Delete, actionName: nameof(VolumeDownRadioBinding), alt: true)]
+        public ProxyBinding VolumeDownRadioBinding { get; set; }
+
+        [SettingsUISection(kKeybindsSection, kRadioControlsGroup)]
+        [SettingsUIKeyboardBinding(BindingKeyboard.PageDown, actionName: nameof(VolumeUpRadioBinding), alt: true)]
+        public ProxyBinding VolumeUpRadioBinding { get; set; }
+
+
+        public const string kAudioFormatSection = "AudioFormatSupport";
+
+        [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+        [SettingsUIMultilineText]
+        public string AudioFormatWarning => string.Empty;
+
+        [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+        public bool AudioFormatMP3 { get; set; } = false;
+
+        [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+        public bool AudioFormatWAV { get; set; } = false;
+
+        [SettingsUISection(kAudioFormatSection, kAudioFormatSection)]
+        public bool AudioFormatFLAC { get; set; } = false;
+
+
+
+        public string LastRadio = null;
+
+
+        public override void SetDefaults()
+        {
+            DisableAdsOnStartup = false;
+            SaveLastRadio = true;
+            LastRadio = null;
+            ResetKeyBindings();
+        }
     }
 }
+

@@ -1,13 +1,14 @@
 ﻿using Colossal.UI.Binding;
 using System;
 
-namespace ExtendedRadio.Extension;
-
-public class EnumNameReader<T> : IReader<T> where T : Enum
+namespace ExtendedRadio.Extension
 {
-    public void Read(IJsonReader reader, out T value)
+    public class EnumNameReader<T> : IReader<T> where T : Enum
     {
-        reader.Read(out string value2);
-        value = (T)Enum.Parse(typeof(T), value2);
+        public void Read(IJsonReader reader, out T value)
+        {
+            reader.Read(out string value2);
+            value = (T)Enum.Parse(typeof(T), value2);
+        }
     }
 }

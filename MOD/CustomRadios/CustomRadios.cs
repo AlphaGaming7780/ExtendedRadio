@@ -12,11 +12,11 @@ namespace ExtendedRadio
 	/// <summary>This is the main class for the CustomRadios feature.</summary>
 	public class CustomRadios
 	{
-		private static readonly List<string> radioDirectories = [];
-		internal static List<string> customeRadioChannelsName = [];
-		private static readonly List<string> customeNetworksName = [];
-		private static Dictionary<string, RadioNetwork> m_Networks = [];
-		private static Dictionary<string, RuntimeRadioChannel> m_RadioChannels = [];
+		private static readonly List<string> radioDirectories = new();
+		internal static List<string> customeRadioChannelsName = new();
+		private static readonly List<string> customeNetworksName = new();
+		private static Dictionary<string, RadioNetwork> m_Networks = new();
+		private static Dictionary<string, RuntimeRadioChannel> m_RadioChannels = new();
 		private static int radioNetworkIndex;
 		static internal void LoadCustomRadios() {
 
@@ -214,7 +214,7 @@ namespace ExtendedRadio
 						} else {
 							segment = new() {
 								type = StringToSegmentType(new DirectoryInfo(radioNetwork).Name),
-								tags = [],
+								tags = new string[0],
 								clipsCap = 0,
 							};
 						}
@@ -287,7 +287,7 @@ namespace ExtendedRadio
 			{
 				type = SegmentType.Playlist,
 				clipsCap = 0,
-				clips = [],
+				clips = new Colossal.IO.AssetDatabase.AudioAsset[0],
 				tags = FormatTags(SegmentType.Playlist, program.name, radioChannel.name, radioChannel.network)
 			};
 
@@ -295,7 +295,7 @@ namespace ExtendedRadio
                 segment.clips = segment.clips.AddRangeToArray(MusicLoader.LoadAudioFiles(audioAssetDirectory, segment.type, program.name, radioChannel.name, radioChannel.network));
             }
 
-			program.segments = [segment];
+			program.segments = new Segment[] { segment };
 			radioChannel.programs = radioChannel.programs.AddToArray(program);
 
 
@@ -371,7 +371,7 @@ namespace ExtendedRadio
 
         public static string[] FormatTags(SegmentType segmentType, string radioProgram, string radioChannel, string radioNetwork)
 		{
-			return [FormatTagSegmentType(segmentType), FormatTagRadioProgram(radioProgram), FormatTagRadioChannel(radioChannel), FormatTagRadioNetwork(radioNetwork)];
+			return new string[] { FormatTagSegmentType(segmentType), FormatTagRadioProgram(radioProgram), FormatTagRadioChannel(radioChannel), FormatTagRadioNetwork(radioNetwork) };
 		}
 
 		/// <summary>Convert a string to a SegmentType.</summary>

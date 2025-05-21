@@ -119,7 +119,7 @@ namespace ExtendedRadio.Patches
                     __result = __instance.LoadAsyncFile(useCached);
                 } else
                 {
-                    __result = __instance.LoadAsyncFile(useCached, MusicLoader.GetClipFormatFromFileExtension(extension));
+                    __result = __instance.LoadAsyncFile(useCached, true, MusicLoader.GetClipFormatFromFileExtension(extension));
                 }
                     
                 return false;
@@ -135,7 +135,7 @@ namespace ExtendedRadio.Patches
                 if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
 
                 IEnumerable<AudioAsset> assets = AssetDatabase.global.GetAssets<AudioAsset>(SearchFilter<AudioAsset>.ByCondition( (AudioAsset asset) => DataBaseConditionCheck(asset, segment.type) ) );
-                List<AudioAsset> list = [.. assets];
+                List<AudioAsset> list = assets.ToList();
                 segment.clipsCap = assets.Count() > 10 ? 10 : assets.Count();
                 System.Random rnd = new();
                 List<int> list2 = (from x in Enumerable.Range(0, list.Count)
@@ -158,11 +158,11 @@ namespace ExtendedRadio.Patches
             {
                 if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
                 Dictionary<string, RadioNetwork> m_Networks = ExtendedRadio.radioTravers.Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
-                segment.clips = [];
+                segment.clips = new List<AudioAsset>();
                 if (m_Networks.TryGetValue(__instance.currentChannel.network, out RadioNetwork radioNetwork) && radioNetwork.allowAds && MixNetwork.s_enabledTags.ContainsKey(segment.type))
                 {
-                    WeightedRandom<AudioAsset> weightedRandom = [];
-                    Dictionary<string, List<AudioAsset>> dictionary = [];
+                    WeightedRandom<AudioAsset> weightedRandom = new();
+                    Dictionary<string, List<AudioAsset>> dictionary = new();
                     IEnumerable<AudioAsset> audioAssetList = AssetDatabase.global.GetAssets(SearchFilter<AudioAsset>.ByCondition( (AudioAsset asset) => DataBaseConditionCheck(asset, segment.type) ) );
                     segment.clipsCap = audioAssetList.Count() > 1 ? 1 : audioAssetList.Count();
                     foreach (AudioAsset audioAsset in audioAssetList)
@@ -172,7 +172,7 @@ namespace ExtendedRadio.Patches
                         {
                             if (!dictionary.TryGetValue(metaTag, out List<AudioAsset> list))
                             {
-                                list = [];
+                                list = new List<AudioAsset>();
                                 dictionary.Add(metaTag, list);
                             }
                             list.Add(audioAsset);
@@ -195,7 +195,7 @@ namespace ExtendedRadio.Patches
                             catch {}
                         }
                     }
-                    List<AudioAsset> list2 = [];
+                    List<AudioAsset> list2 = new();
                     for (int j = 0; j < segment.clipsCap; j++)
                     {
                         AudioAsset audioAsset2 = weightedRandom.NextAndRemove();
@@ -218,7 +218,7 @@ namespace ExtendedRadio.Patches
             {
                 if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
                 Dictionary<string, RadioNetwork> m_Networks = ExtendedRadio.radioTravers.Field("m_Networks").GetValue<Dictionary<string, RadioNetwork>>();
-                segment.clips = [];
+                segment.clips = new List<AudioAsset>();
                 if (m_Networks.TryGetValue(__instance.currentChannel.network, out RadioNetwork radioNetwork) && !radioNetwork.allowAds && MixNetwork.s_enabledTags.ContainsKey(segment.type))
                 {
                     segment.clips = GetEventClips(__instance, segment, AudioAsset.Metatag.PSAType, false, false);
@@ -234,7 +234,7 @@ namespace ExtendedRadio.Patches
             static bool Prefix(Radio __instance, ref List<AudioAsset> __result, RuntimeSegment segment, AudioAsset.Metatag metatag, bool newestFirst = false, bool flush = false)
             {
                 if (__instance.currentChannel.network != MixNetwork.MixNetworkName) return true;
-                __result = MixNetwork.s_enabledTags.ContainsKey(segment.type) ? GetEventClips(__instance, segment, metatag, newestFirst, flush) : [];
+                __result = MixNetwork.s_enabledTags.ContainsKey(segment.type) ? GetEventClips(__instance, segment, metatag, newestFirst, flush) : new();
                 return false;
             }
         }
@@ -243,8 +243,8 @@ namespace ExtendedRadio.Patches
         {
             RadioTagSystem existingSystemManaged = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<RadioTagSystem>();
             PrefabSystem orCreateSystemManaged = World.DefaultGameObjectInjectionWorld.GetOrCreateSystemManaged<PrefabSystem>();
-            List<AudioAsset> list = [];
-            List<AudioAsset> list2 = [];
+            List<AudioAsset> list = new();
+            List<AudioAsset> list2 = new();
             while (list.Count < segment.clipsCap && existingSystemManaged.TryPopEvent(segment.type, newestFirst, out RadioTag radioTag))
             {
                 list2.Clear();

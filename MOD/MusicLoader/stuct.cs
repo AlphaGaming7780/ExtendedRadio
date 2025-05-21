@@ -23,7 +23,7 @@ namespace ExtendedRadio
 		//public double loopEnd = -1;
 		//public double alternativeStart = -1;
 		//public float fadeoutTime = 1f;
-		public string[] tags = [];
+		public string[] tags = new string[0];
 	}
 }
  

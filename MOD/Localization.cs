@@ -8,48 +8,50 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace ExtendedRadio;
-
-public class Localization
+namespace ExtendedRadio
 {
-    public static void LoadLocalization() 
-	{
-        Task.Run(LoadLocalization_impl);
-	}
-
-    private static void LoadLocalization_impl()
+    public class Localization
     {
-        try
+        public static void LoadLocalization()
         {
-            foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                Dictionary<string, string> localization;
-
-                if (assembly.GetManifestResourceNames().Contains($"{assembly.GetName().Name}.embedded.Localization.{localeID}.json"))
-                    localization = Decoder.Decode(new StreamReader(assembly.GetManifestResourceStream($"{assembly.GetName().Name}.embedded.Localization.{localeID}.json")).ReadToEnd()).Make<Dictionary<string, string>>();
-                else
-                {
-                    localization = Decoder.Decode(new StreamReader(assembly.GetManifestResourceStream($"{assembly.GetName().Name}.embedded.Localization.en-US.json")).ReadToEnd()).Make<Dictionary<string, string>>();
-                }
-
-                GameManager.instance.localizationManager.AddSource(localeID, new MemorySource(localization));
-            }
+            //Task.Run(LoadLocalization_impl);
+            LoadLocalization_impl();
         }
-        catch (Exception ex) { ExtendedRadioMod.log.Error(ex); }
+
+        private static void LoadLocalization_impl()
+        {
+            try
+            {
+                foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    Dictionary<string, string> localization;
+
+                    if (assembly.GetManifestResourceNames().Contains($"{assembly.GetName().Name}.embedded.Localization.{localeID}.json"))
+                        localization = Decoder.Decode(new StreamReader(assembly.GetManifestResourceStream($"{assembly.GetName().Name}.embedded.Localization.{localeID}.json")).ReadToEnd()).Make<Dictionary<string, string>>();
+                    else
+                    {
+                        localization = Decoder.Decode(new StreamReader(assembly.GetManifestResourceStream($"{assembly.GetName().Name}.embedded.Localization.en-US.json")).ReadToEnd()).Make<Dictionary<string, string>>();
+                    }
+
+                    GameManager.instance.localizationManager.AddSource(localeID, new MemorySource(localization));
+                }
+            }
+            catch (Exception ex) { ExtendedRadioMod.log.Error(ex); }
+        }
+
     }
 
+    //[Serializable]
+    //internal class GlobaleLocalizationJS
+    //{
+    //	public Dictionary<string, Dictionary<string, string>> Localization = [];
+
+    //}
+
+    //[Serializable]
+    //internal class LocalLocalizationJS
+    //{
+    //	public Dictionary<string, string> Localization = [];
+    //}
 }
-
-//[Serializable]
-//internal class GlobaleLocalizationJS
-//{
-//	public Dictionary<string, Dictionary<string, string>> Localization = [];
-
-//}
-
-//[Serializable]
-//internal class LocalLocalizationJS
-//{
-//	public Dictionary<string, string> Localization = [];
-//}

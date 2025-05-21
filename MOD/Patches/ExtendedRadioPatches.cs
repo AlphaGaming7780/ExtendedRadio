@@ -112,7 +112,16 @@ namespace ExtendedRadio.Patches
         {
             static bool Prefix(AudioAsset __instance, ref Task<AudioClip> __result, bool useCached = true, AudioType audioType = AudioType.OGGVORBIS)
             {
-                __result = __instance.LoadAsyncFile(useCached, MusicLoader.GetClipFormatFromFileExtension( Path.GetExtension(__instance.path) ) );
+                string extension = Path.GetExtension(__instance.path);
+                if(extension == null)
+                {
+                    ExtendedRadioMod.log.Warn($"Extension was null, instance path: {__instance.path}.");
+                    __result = __instance.LoadAsyncFile(useCached);
+                } else
+                {
+                    __result = __instance.LoadAsyncFile(useCached, MusicLoader.GetClipFormatFromFileExtension(extension));
+                }
+                    
                 return false;
             }
         }
@@ -170,7 +179,7 @@ namespace ExtendedRadio.Patches
                         }
                         else
                         {
-                            ExtendedRadioMod.log.ErrorFormat("Asset {0} ({1}) does not contain a brand metatag (for Commercial segment)", audioAsset.guid, audioAsset.GetMetaTag(AudioAsset.Metatag.Title) ?? "<No title>");
+                            ExtendedRadioMod.log.ErrorFormat("Asset {0} ({1}) does not contain a brand metatag (for Commercial segment)", audioAsset.id.guid, audioAsset.GetMetaTag(AudioAsset.Metatag.Title) ?? "<No title>");
                         }
                     }
                     NativeList<BrandPopularitySystem.BrandPopularity> brandPopularity = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<BrandPopularitySystem>().ReadBrandPopularity(out JobHandle jobHandle);

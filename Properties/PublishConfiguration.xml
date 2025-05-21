@@ -26,11 +26,11 @@ This mod aims to add features and improve existing ones for the game's radio pla
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
 - ✔️French 100% : aricoseco, Morgan Touverey Quilling (mtouverey), khallmark, Triton Supreme
 - ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS), jslxxgyy, GuaGua_ua
-- ⚠️Chinese Traditional 2% : KAI (kai0211)
-- ⚠️German 58% : Speedster McRainbow (RainbowSpeedy), Ben0884 (Ben84), Lorenz Fiedrich (GuysLetsPlay)
+- ✔️Chinese Traditional 100% : KAI (kai0211), Source Design (source_design)
+- ✔️German 100% : Speedster McRainbow (RainbowSpeedy), Ben0884 (Ben84), Lorenz Fiedrich (GuysLetsPlay), Fuchs23
 - ⚠️Italian 46% : Carmelo B. (b.carmelo.92)
-- ⚠️Japanese 58% : つちのこ (main1108)
-- ⚠️Korean 58% : TwotoolusFLY_LSh.st
+- ✔️Japanese 100% : つちのこ (main1108)
+- ✔️Korean 100% : TwotoolusFLY_LSh.st
 - ✔️Polish 100% : Lisek, karmel68
 - ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
 - ⚠️Portuguese, Brazilian 58% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
@@ -63,33 +63,19 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.4.2" />
+	<ModVersion Value="1.4.5" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.1.*" />
+	<GameVersion Value="1.2.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# Version 1.4.2
-## New Features
-- ExtendedRadio can now load other audio file types, but support for them must be enabled in the settings.
-
-## Improvements
-- The audio loader now uses audio files already in the game's database instead of re-adding them.
-
-## Fixes
-- Various UI bugs (bug 1.1.10f1)
-- Fixed FPS issue caused by the radio (bug 1.1.10f1)
-*Note: The mod will now rename audio files for ads if another ad file has the same name, regardless of the radio station it is in.*
-
-## Translations update
-- French : Triton Supreme
-- Chinese Simplified : RilkeXS(无手文) (RilkeXS)
-- Korean : TwotoolusFLY_LSh.st
-- Polish : karmel68
-- Portuguese : Tiago Correia (ti4go)
-- Spanish : elGendo87
+## Fixes  
+- Fixed an error that disabled the radio system when a null audio asset was loaded.
+- Fixed an error that caused a null audio asset when loading a non-OGG audio file.
+## Translation
+- ✔️Chinese Traditional 100% : Source Design (source_design)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

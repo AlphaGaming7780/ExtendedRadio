@@ -23,13 +23,10 @@ namespace ExtendedRadio
         public static event onRadioPreviousSong OnRadioPreviousSong;
         public static event onRadioVolumeChanged OnRadioVolumeChanged;
         public static event onRadioStationChanged OnRadioStationChanged;
-        internal static readonly Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<SegmentType, List<AudioAsset>>>>> audioDataBase = [];
 		public static Traverse radioTravers;
 		public static Radio radio;
 
 		static internal void OnLoadRadio(Radio __instance) { 
-
-			audioDataBase.Clear();
 
 			radio = __instance;
 			radioTravers = Traverse.Create(__instance);

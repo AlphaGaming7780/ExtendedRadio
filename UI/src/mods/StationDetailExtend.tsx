@@ -83,7 +83,7 @@ export const StationDetailExtend: ModuleRegistryExtend = (Component: any) => {
 		}
 
 		if (selectedNetwork === "Mix Network") {
-			return <div className={StationDetailSCSS.stationDetail} style={{ width: "585.25rem", height: "100%",  }}>
+			return <div className={StationDetailSCSS.stationDetail} style={{ width: "685.25rem", height: "100%",  }}>
 				<Scrollable>
 					{
 						radioTags.map((radioTag: RadioTag) => {

@@ -63,7 +63,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.4.5" />
+	<ModVersion Value="1.4.6" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.2.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -71,11 +71,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-## Fixes  
-- Fixed an error that disabled the radio system when a null audio asset was loaded.
-- Fixed an error that caused a null audio asset when loading a non-OGG audio file.
-## Translation
-- ✔️Chinese Traditional 100% : Source Design (source_design)
+### Fixes  
+- Update for 1.3.3f1.
+- Fix UI issues.
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

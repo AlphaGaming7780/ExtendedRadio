@@ -56,7 +56,7 @@ namespace ExtendedRadio
 							RadioChannel radioChannel;
 
 							if(!File.Exists(radioStation + "//RadioChannel.json")) {
-								radioChannel =CreateRadioFromPath(radioStation, network.name);
+								radioChannel = CreateRadioFromPath(radioStation, network.name);
 							} else {
 								radioChannel = JsonToRadio(radioStation, network.name);
 							}
@@ -291,7 +291,9 @@ namespace ExtendedRadio
 				tags = FormatTags(SegmentType.Playlist, program.name, radioChannel.name, radioChannel.network)
 			};
 
-			foreach(string audioAssetDirectory in Directory.GetDirectories( path )) {
+			segment.clips = segment.clips.AddRangeToArray(MusicLoader.LoadAudioFiles(path, segment.type, program.name, radioChannel.name, radioChannel.network));
+
+            foreach (string audioAssetDirectory in Directory.GetDirectories( path )) {
                 segment.clips = segment.clips.AddRangeToArray(MusicLoader.LoadAudioFiles(audioAssetDirectory, segment.type, program.name, radioChannel.name, radioChannel.network));
             }
 

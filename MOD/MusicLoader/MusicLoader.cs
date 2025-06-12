@@ -61,6 +61,8 @@ namespace ExtendedRadio
 
             AudioAsset audioAsset = LoadAudioAsset(audioFilePath, segmentType, out string jsonFilePath);
 
+            ExtendedRadioMod.log.Info($"Loading audio asset from file: {audioFilePath}, is audioAsset null : {audioAsset == null}.");
+
             if (audioAsset == null) return null;
 
             if (File.Exists(jsonFilePath)) {
@@ -237,6 +239,7 @@ namespace ExtendedRadio
 		private static AudioAsset LoadAudioAssetFromFile(string audioFilePath)
 		{
             FileInfo fileInfo = new(audioFilePath);
+            ExtendedRadioMod.log.Debug($"Loading audio asset from file: {audioFilePath}");
             AssetDataPath assetDataPath = AssetDataPath.Create(fileInfo.DirectoryName, fileInfo.Name, EscapeStrategy.None);
             try
             {

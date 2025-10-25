@@ -16,6 +16,7 @@ const {
 	getChunkFilenameTemplate
 } = require("../javascript/JavascriptModulesPlugin");
 const { updateHashForEntryStartup } = require("../javascript/StartupHelpers");
+const { getUndoPath } = require("../util/identifier");
 
 /** @typedef {import("../Chunk")} Chunk */
 /** @typedef {import("../Compiler")} Compiler */
@@ -55,15 +56,19 @@ class ModuleChunkFormatPlugin {
 								"HMR is not implemented for module chunk format yet"
 							);
 						} else {
-							source.add(`export const id = ${JSON.stringify(chunk.id)};\n`);
-							source.add(`export const ids = ${JSON.stringify(chunk.ids)};\n`);
-							source.add(`export const modules = `);
+							source.add(
+								`export const __webpack_id__ = ${JSON.stringify(chunk.id)};\n`
+							);
+							source.add(
+								`export const __webpack_ids__ = ${JSON.stringify(chunk.ids)};\n`
+							);
+							source.add("export const __webpack_modules__ = ");
 							source.add(modules);
-							source.add(`;\n`);
+							source.add(";\n");
 							const runtimeModules =
 								chunkGraph.getChunkRuntimeModulesInOrder(chunk);
 							if (runtimeModules.length > 0) {
-								source.add("export const runtime =\n");
+								source.add("export const __webpack_runtime__ =\n");
 								source.add(
 									Template.renderChunkRuntimeModules(
 										runtimeModules,
@@ -86,10 +91,8 @@ class ModuleChunkFormatPlugin {
 											contentHashType: "javascript"
 										}
 									)
+									.replace(/^\/+/g, "")
 									.split("/");
-
-								// remove filename, we only need the directory
-								currentOutputName.pop();
 
 								/**
 								 * @param {Chunk} chunk the chunk
@@ -104,26 +107,26 @@ class ModuleChunkFormatPlugin {
 												compilation.outputOptions
 											),
 											{
-												chunk: chunk,
+												chunk,
 												contentHashType: "javascript"
 											}
 										)
+										.replace(/^\/+/g, "")
 										.split("/");
 
-									// remove common parts
+									// remove common parts except filename
 									while (
-										baseOutputName.length > 0 &&
-										chunkOutputName.length > 0 &&
+										baseOutputName.length > 1 &&
+										chunkOutputName.length > 1 &&
 										baseOutputName[0] === chunkOutputName[0]
 									) {
 										baseOutputName.shift();
 										chunkOutputName.shift();
 									}
+									const last = chunkOutputName.join("/");
 									// create final path
 									return (
-										(baseOutputName.length > 0
-											? "../".repeat(baseOutputName.length)
-											: "./") + chunkOutputName.join("/")
+										getUndoPath(baseOutputName.join("/"), last, true) + last
 									);
 								};
 

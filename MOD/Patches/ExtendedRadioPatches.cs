@@ -56,7 +56,6 @@ namespace ExtendedRadio.Patches
                 if (ExtendedRadioMod.s_setting.SaveLastRadio)
                 {
                     ExtendedRadioMod.s_setting.LastRadio = name;
-                    ExtendedRadioMod.s_setting.ApplyAndSave();
                 }
                 ExtendedRadio.RadioStationChanged(name);
             }

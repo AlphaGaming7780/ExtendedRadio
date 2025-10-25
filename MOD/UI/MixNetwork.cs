@@ -170,7 +170,6 @@ namespace ExtendedRadio
             }
 
             ExtendedRadioMod.s_setting.EnabledTags = s_enabledTags;
-            ExtendedRadioMod.s_setting.ApplyAndSave();
         }
 
         internal static void CreateMixNetwork()

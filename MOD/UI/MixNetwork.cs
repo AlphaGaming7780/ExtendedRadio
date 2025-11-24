@@ -120,7 +120,8 @@ namespace ExtendedRadio
             AddBinding(VB_enabledTags = new ValueBinding<Dictionary<SegmentType, List<string>>>("extended_radio_mix", "enabledtags", s_enabledTags, new DictionaryWriter<SegmentType, List<string>>( new EnumNameWriter<SegmentType>(), new ListWriter<string>())));
             AddBinding(new TriggerBinding<string, SegmentType > ("extended_radio_mix", "addtag", new Action<string, SegmentType>(Addtag), reader2: new EnumNameReader<SegmentType>()));
             AddBinding(new TriggerBinding<string, SegmentType > ("extended_radio_mix", "removetag", new Action<string, SegmentType>(RemoveTag), reader2: new EnumNameReader<SegmentType>()));
-            VB_enabledTags.Update(s_enabledTags);
+            VB_enabledTags.TriggerUpdate();
+            VB_radioTags.TriggerUpdate();
         }
 
         private void Addtag(string tag, SegmentType segmentType)

@@ -33,7 +33,7 @@ This mod aims to add features and improve existing ones for the game's radio pla
 - ✔️Korean 100% : TwotoolusFLY_LSh.st
 - ✔️Polish 100% : Lisek, karmel68
 - ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
-- ⚠️Portuguese, Brazilian 58% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98)
+- ✔️Portuguese, Brazilian 100% : Miguel Pereira Campos (mpcamposz), Leonardo Pinzon (leonardopinzon98), Matheus Bernardes da Rocha Reis (matheusbreis10)
 - ⚠️Russian 17% : Lek0ms
 - ✔️Spanish 100% : elGendo87
 
@@ -63,16 +63,20 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extendedradio.1644751/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.4.8" />
+	<ModVersion Value="1.4.9" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.4.*" />
+	<GameVersion Value="1.5.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
 ### Fixes  
-- Fixed an issue where the UI would disappear after opening the radio panel.
+- Fix for v1.5.2f1 game update
+
+### Translation
+- ✔️French 100% : Morgan Touverey Quilling (mtouverey)
+- ✔️Portuguese, Brazilian 100% : Matheus Bernardes da Rocha Reis (matheusbreis10)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extendedradio" />

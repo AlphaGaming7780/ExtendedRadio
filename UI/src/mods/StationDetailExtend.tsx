@@ -35,8 +35,6 @@ export const StationDetailExtend: ModuleRegistryExtend = (Component: any) => {
 			return enabledTags[radioTag.Type] && enabledTags[radioTag.Type].includes(radioTag.Tag, 0)
 		}
 
-		console.log(enabledTags)
-
 		function FoldoutRadioItemHeader(radioTag: RadioTag, parentChecked: boolean): JSX.Element {
 
 			function onCheckBoxChange(value : boolean) {

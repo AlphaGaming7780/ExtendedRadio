@@ -1,5 +1,5 @@
 import { ModuleRegistryExtend } from "cs2/modding";
-import { RadioNetwork, prefab, radio } from "cs2/bindings";
+import { RadioNetwork, UISound, prefab, radio } from "cs2/bindings";
 import { trigger, useValue } from "cs2/api";
 import { StationsMenuSCSS } from "../../game-ui/game/components/radio/radio-panel/stations-menu/stations-menu.module.scss";
 import classNames from "classnames";
@@ -8,7 +8,6 @@ import { Scrollable, Tooltip } from "cs2/ui";
 import { TooltipLayout } from "../../game-ui/common/tooltip/description-tooltip/description-tooltip";
 import { useLocalization } from "cs2/l10n";
 import { IconButton } from "../../game-ui/common/input/button/icon-button";
-import { UISound } from "../../game-ui/common/data-binding/audio-bindings";
 import ExtendedStationsMenuSCSS from "./Styles/StationsMenu.module.scss";
 
 export const StationsMenuExtend: ModuleRegistryExtend = (Component: any) => {
@@ -34,8 +33,8 @@ export const StationsMenuExtend: ModuleRegistryExtend = (Component: any) => {
 					<IconButton
 						src={radioNetwork.icon}
 						className={classNames(StationsMenuSCSS.networkItem, ExtendedStationsMenuSCSS.networkItem)}
-						selectSound={selected ? null : UISound.selectRadioNetwork}
-						onSelect={selected ? null : OnSelect}
+						selectSound={UISound?.selectRadioNetwork}
+						onSelect={OnSelect}
 						selected={selected}
 					/>
 				}
@@ -44,7 +43,7 @@ export const StationsMenuExtend: ModuleRegistryExtend = (Component: any) => {
 		
 		if (selectedNetwork === "Mix Network") {
 			return <div className={classNames(StationsMenuSCSS.stationsMenu, otherProps.className, ExtendedStationsMenuSCSS.stationsMenu)} style={{ width: "74.75rem" }} >
-				<TutorialTarget {...{ uiTag: manualUITags?.radioPanelNetworks }} >
+				<TutorialTarget uiTag={manualUITags?.radioPanelNetworks} >
 					<div className={classNames(StationsMenuSCSS.networks, ExtendedStationsMenuSCSS.networks)} >
 						{
 							networks.map((radioNetwork) => { return Fse(radioNetwork, radioNetwork.name === selectedNetwork) })

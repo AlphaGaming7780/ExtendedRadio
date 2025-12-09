@@ -93,7 +93,7 @@ export const StationDetailExtend: ModuleRegistryExtend = (Component: any) => {
 				</Scrollable>
 			</div> 
 		} else {
-			return <Component classNames={props.className}> </Component>
+			return <Component {...props}> </Component>
 		}
 	};
 }

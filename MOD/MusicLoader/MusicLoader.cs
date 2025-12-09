@@ -16,7 +16,7 @@ namespace ExtendedRadio
 		public static AudioAsset[] LoadAudioFiles(string directory, SegmentType segmentType, string programName, string radioChannelName, string radioNetworkName)
 		{
 			AudioAsset[] audioAssets = new AudioAsset[0];
-            DefaultAssetFactory.instance.GetAssetMimes(typeof(AudioAsset), out IReadOnlyList<string> formats);
+            DefaultAssetFactory.instance.GetAssetExtensions(typeof(AudioAsset), out IReadOnlyList<string> formats);
             foreach (string format in formats) {
                 foreach (string audioAssetFile in Directory.GetFiles(directory, $"*{format}"))
                 {

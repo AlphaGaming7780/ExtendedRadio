@@ -27,7 +27,9 @@ export type PropsTextInput = {
     onMouseUp?: (value: Event) => void,
 }
 
+const TextInputModule = getModule(path$, "TextInput");
+
 export function TextInput(propsTextInput: PropsTextInput) : JSX.Element
 {
-    return getModule(path$, "TextInput").render(propsTextInput)
+    return < TextInputModule {... propsTextInput } />
 }

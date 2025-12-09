@@ -30,10 +30,10 @@ export type PropsSlider = {
 export type SliderSounds = {dragStart: string, drag: string, scaleDragVolume: boolean}
 export enum SliderValueTransformer { floatTransformer, intTransformer = getModule(path$, "intTransformer"), useStepTransformer = getModule(path$, "useStepTransformer") }
 
+const SliderModule = getModule(path$, "Slider");
+
 export function Slider(propsSlider: PropsSlider) : JSX.Element
 {
 	if(propsSlider.valueTransformer == SliderValueTransformer.floatTransformer) propsSlider.valueTransformer = undefined
-
-	return getModule(path$, "Slider").render(propsSlider)
-
+	return <SliderModule {...propsSlider} />
 }

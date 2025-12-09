@@ -1,14 +1,19 @@
+import React, { ReactElement } from "react"
 import { getModule } from "cs2/modding"
 
-const path$ = "game-ui/game/components/tutorials/tutorial-target/tutorial-target.tsx"
+const PATH = "game-ui/game/components/tutorials/tutorial-target/tutorial-target.tsx"
 
-export type PropsTutorialTarget = {
-    uiTag: string | undefined,
-    active?: any,
-    disableBlinking?: any,
-    children: any
-}
+export type TutorialTargetProps = {
+    uiTag?: string;
+    active?: boolean;
+    disableBlinking?: boolean;
+    editor?: boolean;
+    children: React.ReactElement;
+};
 
-export function TutorialTarget(propsTutorialTarget: PropsTutorialTarget): JSX.Element {
-    return getModule(path$, "TutorialTarget")(propsTutorialTarget)
-}
+export const TutorialTarget = getModule(
+    PATH,
+    "TutorialTarget"
+) as React.ForwardRefExoticComponent<
+    TutorialTargetProps & React.RefAttributes<HTMLElement>
+>;

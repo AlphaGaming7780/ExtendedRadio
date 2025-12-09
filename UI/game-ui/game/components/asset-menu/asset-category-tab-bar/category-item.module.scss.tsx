@@ -8,6 +8,7 @@ export const CategoryItemSCSS = {
 	locked: getModule(path$, "classes").locked,
 	itemInner: getModule(path$, "classes").itemInner,
 	highlight: getModule(path$, "classes").highlight,
-	lock: getModule(path$, "classes").lock
+	lock: getModule(path$, "classes").lock,
+	singleTab: getModule(path$, "classes").singleTab
 }
 

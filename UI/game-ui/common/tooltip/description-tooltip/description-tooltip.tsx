@@ -16,8 +16,8 @@ export type PropsTooltipLayout = {
     className?: string
 }
 
-export function DescriptionTooltip(propsDescriptionTooltip: PropsDescriptionTooltip): JSX.Element {
-    return getModule(path$, "DescriptionTooltip")(propsDescriptionTooltip)
+export function TypedListRenderer(propsDescriptionTooltip: PropsDescriptionTooltip): JSX.Element {
+    return getModule(path$, "TypedListRenderer")(propsDescriptionTooltip)
 }
 
 export function TooltipLayout(propsTooltipLayout: PropsTooltipLayout): JSX.Element {

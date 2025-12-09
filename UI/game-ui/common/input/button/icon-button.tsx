@@ -4,12 +4,13 @@ const path$ = "game-ui/common/input/button/icon-button.tsx"
 
 export type PropsIconButton = {
     src: string,
-    tinted?: string,
+    tinted?: boolean,
     theme?: any,
     className?: string,
-    children?: JSX.Element,
+    children?: any,
     [key: string]: any;
 }
+
 
 const IconButtonModule = getModule(path$, "IconButton");
 
